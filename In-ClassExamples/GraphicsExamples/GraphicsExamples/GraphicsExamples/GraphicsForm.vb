@@ -7,6 +7,24 @@ Public Class GraphicsForm
         'TODO
     End Sub
 
+    'TODO
+    '[ ] log each drawing segment to a sequential file
+    '[ ] make file records look like:
+    '   <startX>, <startY>, <endX>, <endY>, <color>, <time stamp to millisecond>
+    '   0,104,236,205,"Black", "20250203094534123"
+
+    Sub LogToFile(startX%, startY%, endX%, endY%)
+
+        FileOpen(1, "log.log", OpenMode.Append)
+        Write(1, startX)
+        Write(1, startY)
+        Write(1, endX)
+        Write(1, endY)
+        Write(1, Color.Black)
+        Write(1, "timestamp")
+
+    End Sub
+
     Sub DrawLine(x%, y%, oldX%, oldY%)
         Dim g As Graphics = DrawPictureBox.CreateGraphics
         Dim pen As New Pen(Color.Black)
@@ -48,6 +66,7 @@ Public Class GraphicsForm
         CoordinatesStatusLabel.Text = $"({e.X.ToString.PadLeft(4)},{e.Y.ToString.PadLeft(4)})"
         If e.Button = MouseButtons.Left Then
             DrawLine(e.X, e.Y, oldX, oldY)
+            'log to file
         End If
 
         oldX = e.X
