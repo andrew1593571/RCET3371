@@ -26,12 +26,16 @@ Partial Class GraphicsForm
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.DrawButton = New System.Windows.Forms.Button()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.CoordinatesStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.DrawPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'DrawPictureBox
         '
         Me.DrawPictureBox.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.DrawPictureBox.Cursor = System.Windows.Forms.Cursors.Cross
         Me.DrawPictureBox.Location = New System.Drawing.Point(12, 12)
         Me.DrawPictureBox.Name = "DrawPictureBox"
         Me.DrawPictureBox.Size = New System.Drawing.Size(471, 258)
@@ -66,13 +70,29 @@ Partial Class GraphicsForm
         Me.DrawButton.Text = "&Draw"
         Me.DrawButton.UseVisualStyleBackColor = True
         '
+        'StatusStrip
+        '
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CoordinatesStatusLabel})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 322)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(495, 22)
+        Me.StatusStrip.TabIndex = 4
+        Me.StatusStrip.Text = "StatusStrip1"
+        '
+        'CoordinatesStatusLabel
+        '
+        Me.CoordinatesStatusLabel.Name = "CoordinatesStatusLabel"
+        Me.CoordinatesStatusLabel.Size = New System.Drawing.Size(29, 17)
+        Me.CoordinatesStatusLabel.Text = "(x,y)"
+        '
         'GraphicsForm
         '
         Me.AcceptButton = Me.DrawButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ExitButton
-        Me.ClientSize = New System.Drawing.Size(495, 323)
+        Me.ClientSize = New System.Drawing.Size(495, 344)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.DrawButton)
         Me.Controls.Add(Me.ClearButton)
         Me.Controls.Add(Me.ExitButton)
@@ -80,7 +100,10 @@ Partial Class GraphicsForm
         Me.Name = "GraphicsForm"
         Me.Text = "Graphics!"
         CType(Me.DrawPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -88,4 +111,6 @@ Partial Class GraphicsForm
     Friend WithEvents ExitButton As Button
     Friend WithEvents ClearButton As Button
     Friend WithEvents DrawButton As Button
+    Friend WithEvents StatusStrip As StatusStrip
+    Friend WithEvents CoordinatesStatusLabel As ToolStripStatusLabel
 End Class

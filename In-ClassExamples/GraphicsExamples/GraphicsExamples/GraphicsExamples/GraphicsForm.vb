@@ -7,7 +7,7 @@ Public Class GraphicsForm
         'TODO
     End Sub
 
-    Sub DrawLine()
+    Sub DrawLine(x%, y%, oldX%, oldY%)
         Dim g As Graphics = DrawPictureBox.CreateGraphics
         Dim pen As New Pen(Color.Black)
         Dim scaleX!, scaleY!
@@ -19,10 +19,13 @@ Public Class GraphicsForm
         deltaX = 0
         deltaY = CSng(DrawPictureBox.Height / 2)
 
-        g.TranslateTransform(deltaX, deltaY)
-        g.ScaleTransform(scaleX, scaleY)
+        'g.TranslateTransform(deltaX, deltaY)
+        'g.ScaleTransform(scaleX, scaleY)
 
-        g.DrawLine(pen, 5, 0, 95, 95)
+        g.DrawLine(pen, oldX, oldY, x, y)
+
+        oldX = x
+        oldY = y
 
         g.Dispose()
         pen.Dispose()
@@ -37,6 +40,17 @@ Public Class GraphicsForm
     End Sub
 
     Private Sub DrawButton_Click(sender As Object, e As EventArgs) Handles DrawButton.Click
-        DrawLine()
+        DrawLine(95, 95, 0, 5)
+    End Sub
+
+    Private Sub DrawPictureBox_MouseMove(sender As Object, e As MouseEventArgs) Handles DrawPictureBox.MouseMove
+        Static oldX%, oldY%
+        CoordinatesStatusLabel.Text = $"({e.X.ToString.PadLeft(4)},{e.Y.ToString.PadLeft(4)})"
+        If e.Button = MouseButtons.Left Then
+            DrawLine(e.X, e.Y, oldX, oldY)
+        End If
+
+        oldX = e.X
+        oldY = e.Y
     End Sub
 End Class
