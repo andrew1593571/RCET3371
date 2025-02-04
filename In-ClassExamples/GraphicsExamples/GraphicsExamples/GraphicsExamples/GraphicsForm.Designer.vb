@@ -22,21 +22,21 @@ Partial Class GraphicsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.DrawPictureBox = New System.Windows.Forms.PictureBox()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.DrawButton = New System.Windows.Forms.Button()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DrawPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'PictureBox1
+        'DrawPictureBox
         '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(471, 258)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.DrawPictureBox.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.DrawPictureBox.Location = New System.Drawing.Point(12, 12)
+        Me.DrawPictureBox.Name = "DrawPictureBox"
+        Me.DrawPictureBox.Size = New System.Drawing.Size(471, 258)
+        Me.DrawPictureBox.TabIndex = 0
+        Me.DrawPictureBox.TabStop = False
         '
         'ExitButton
         '
@@ -76,15 +76,15 @@ Partial Class GraphicsForm
         Me.Controls.Add(Me.DrawButton)
         Me.Controls.Add(Me.ClearButton)
         Me.Controls.Add(Me.ExitButton)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.DrawPictureBox)
         Me.Name = "GraphicsForm"
         Me.Text = "Graphics!"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DrawPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents DrawPictureBox As PictureBox
     Friend WithEvents ExitButton As Button
     Friend WithEvents ClearButton As Button
     Friend WithEvents DrawButton As Button
