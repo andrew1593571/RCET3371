@@ -22,9 +22,29 @@ Partial Class SplashForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
+        Me.SplashTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.SuspendLayout()
+        '
+        'SplashTimer
+        '
+        Me.SplashTimer.Interval = 3000
+        '
+        'SplashForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImage = Global.DartGame.My.Resources.Resources.splash
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "Form1"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Name = "SplashForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Splash"
+        Me.TopMost = True
+        Me.ResumeLayout(False)
+
     End Sub
+
+    Friend WithEvents SplashTimer As Timer
 End Class
