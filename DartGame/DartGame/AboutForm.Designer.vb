@@ -55,6 +55,7 @@ Partial Class AboutForm
         Me.ClientSize = New System.Drawing.Size(253, 137)
         Me.Controls.Add(Me.OkButton)
         Me.Controls.Add(Me.AboutLabel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "AboutForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AboutForm"

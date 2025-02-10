@@ -8,7 +8,15 @@ Option Explicit On
 'https://github.com/andrew1593571/RCET3371.git
 
 Public Class DartGameForm
-    Private Sub AboutTopMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
+    Private Sub AboutMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click, AboutContextMenuItem.Click
         AboutForm.Show()
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs)
+
     End Sub
 End Class
