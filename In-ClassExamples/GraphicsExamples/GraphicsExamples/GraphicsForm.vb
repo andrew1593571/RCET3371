@@ -29,9 +29,9 @@ Public Class GraphicsForm
 
     End Sub
 
-    Sub DrawLine(x%, y%, oldX%, oldY%)
+    Sub DrawLine(x%, y%, oldX%, oldY%, color As Color)
         Dim g As Graphics = DrawPictureBox.CreateGraphics
-        Dim pen As New Pen(Color.Black)
+        Dim pen As New Pen(color)
         Dim scaleX!, scaleY!
         Dim deltaY!, deltaX!
 
@@ -53,6 +53,33 @@ Public Class GraphicsForm
         pen.Dispose()
     End Sub
 
+    Function ShiftArray(y%, Optional shift As Boolean = False) As Integer()
+        Static graphY(DrawPictureBox.Width) As Integer
+
+        If shift Then
+            For x = LBound(graphY) To UBound(graphY) - 1
+                graphY(x) = graphY(x + 1)
+            Next
+
+        End If
+
+        If y <> -1 Then
+            graphY(UBound(graphY)) = y
+        End If
+
+        Return graphY
+    End Function
+
+    Sub PlotArray()
+        Dim temp() = ShiftArray(0)
+
+        For x = LBound(temp) To UBound(temp) - 1
+            DrawLine(x + 1, LBound(temp), x + 1, UBound(temp), Color.Blue)
+            DrawLine(x, temp(x), x + 1, temp(x + 1), Color.Black)
+        Next
+
+    End Sub
+
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         Me.Close()
     End Sub
@@ -62,21 +89,26 @@ Public Class GraphicsForm
     End Sub
 
     Private Sub DrawButton_Click(sender As Object, e As EventArgs) Handles DrawButton.Click
-        DrawLine(95, 95, 0, 5)
+        DrawLine(95, 95, 0, 5, Color.Black)
     End Sub
 
     Private Sub DrawPictureBox_MouseMove(sender As Object, e As MouseEventArgs) Handles DrawPictureBox.MouseMove
         Static oldX%, oldY%
         CoordinatesStatusLabel.Text = $"({e.X.ToString.PadLeft(4)},{e.Y.ToString.PadLeft(4)})"
         If e.Button = MouseButtons.Left Then
-            DrawLine(e.X, e.Y, oldX, oldY)
+            DrawLine(e.X, e.Y, oldX, oldY, Color.Black)
             'log to file
             LogToFile(oldX, oldY, e.X, e.Y)
-            'send new data to array
-            'TODO
         End If
+        'send new data to array
+        ShiftArray(e.Y, False)
 
         oldX = e.X
         oldY = e.Y
+    End Sub
+
+    Private Sub PlotTimer_Tick(sender As Object, e As EventArgs) Handles PlotTimer.Tick
+        ShiftArray(-1, True)
+        PlotArray()
     End Sub
 End Class

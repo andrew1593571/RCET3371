@@ -22,12 +22,14 @@ Partial Class GraphicsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.DrawPictureBox = New System.Windows.Forms.PictureBox()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.DrawButton = New System.Windows.Forms.Button()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.CoordinatesStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.PlotTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DrawPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -85,6 +87,11 @@ Partial Class GraphicsForm
         Me.CoordinatesStatusLabel.Size = New System.Drawing.Size(29, 17)
         Me.CoordinatesStatusLabel.Text = "(x,y)"
         '
+        'PlotTimer
+        '
+        Me.PlotTimer.Enabled = True
+        Me.PlotTimer.Interval = 10
+        '
         'GraphicsForm
         '
         Me.AcceptButton = Me.DrawButton
@@ -113,4 +120,5 @@ Partial Class GraphicsForm
     Friend WithEvents DrawButton As Button
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents CoordinatesStatusLabel As ToolStripStatusLabel
+    Friend WithEvents PlotTimer As Timer
 End Class
