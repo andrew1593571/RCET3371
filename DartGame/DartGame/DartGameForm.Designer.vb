@@ -35,14 +35,14 @@ Partial Class DartGameForm
         Me.AboutContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoardPictureBox = New System.Windows.Forms.PictureBox()
         Me.TurnGroupBox = New System.Windows.Forms.GroupBox()
-        Me.TurnLabel = New System.Windows.Forms.Label()
-        Me.TurnNumberLabel = New System.Windows.Forms.Label()
-        Me.TurnOfLabel = New System.Windows.Forms.Label()
-        Me.TotalTurnLabel = New System.Windows.Forms.Label()
         Me.DartTotalLabel = New System.Windows.Forms.Label()
         Me.DartOfLabel = New System.Windows.Forms.Label()
         Me.DartNumberLabel = New System.Windows.Forms.Label()
         Me.DartLabel = New System.Windows.Forms.Label()
+        Me.TotalTurnLabel = New System.Windows.Forms.Label()
+        Me.TurnOfLabel = New System.Windows.Forms.Label()
+        Me.TurnNumberLabel = New System.Windows.Forms.Label()
+        Me.TurnLabel = New System.Windows.Forms.Label()
         Me.ThrowButton = New System.Windows.Forms.Button()
         Me.TopMenuStrip.SuspendLayout()
         Me.ContextMenuStrip.SuspendLayout()
@@ -144,46 +144,6 @@ Partial Class DartGameForm
         Me.TurnGroupBox.TabIndex = 2
         Me.TurnGroupBox.TabStop = False
         '
-        'TurnLabel
-        '
-        Me.TurnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TurnLabel.Location = New System.Drawing.Point(6, 16)
-        Me.TurnLabel.Name = "TurnLabel"
-        Me.TurnLabel.Size = New System.Drawing.Size(48, 23)
-        Me.TurnLabel.TabIndex = 3
-        Me.TurnLabel.Text = "Turn: "
-        Me.TurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TurnNumberLabel
-        '
-        Me.TurnNumberLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TurnNumberLabel.Location = New System.Drawing.Point(60, 16)
-        Me.TurnNumberLabel.Name = "TurnNumberLabel"
-        Me.TurnNumberLabel.Size = New System.Drawing.Size(37, 23)
-        Me.TurnNumberLabel.TabIndex = 4
-        Me.TurnNumberLabel.Text = "000"
-        Me.TurnNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TurnOfLabel
-        '
-        Me.TurnOfLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TurnOfLabel.Location = New System.Drawing.Point(103, 16)
-        Me.TurnOfLabel.Name = "TurnOfLabel"
-        Me.TurnOfLabel.Size = New System.Drawing.Size(26, 23)
-        Me.TurnOfLabel.TabIndex = 5
-        Me.TurnOfLabel.Text = "of"
-        Me.TurnOfLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TotalTurnLabel
-        '
-        Me.TotalTurnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TotalTurnLabel.Location = New System.Drawing.Point(135, 16)
-        Me.TotalTurnLabel.Name = "TotalTurnLabel"
-        Me.TotalTurnLabel.Size = New System.Drawing.Size(48, 23)
-        Me.TotalTurnLabel.TabIndex = 6
-        Me.TotalTurnLabel.Text = "000"
-        Me.TotalTurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'DartTotalLabel
         '
         Me.DartTotalLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -224,6 +184,46 @@ Partial Class DartGameForm
         Me.DartLabel.Text = "Dart: "
         Me.DartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'TotalTurnLabel
+        '
+        Me.TotalTurnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalTurnLabel.Location = New System.Drawing.Point(135, 16)
+        Me.TotalTurnLabel.Name = "TotalTurnLabel"
+        Me.TotalTurnLabel.Size = New System.Drawing.Size(48, 23)
+        Me.TotalTurnLabel.TabIndex = 6
+        Me.TotalTurnLabel.Text = "000"
+        Me.TotalTurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TurnOfLabel
+        '
+        Me.TurnOfLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TurnOfLabel.Location = New System.Drawing.Point(103, 16)
+        Me.TurnOfLabel.Name = "TurnOfLabel"
+        Me.TurnOfLabel.Size = New System.Drawing.Size(26, 23)
+        Me.TurnOfLabel.TabIndex = 5
+        Me.TurnOfLabel.Text = "of"
+        Me.TurnOfLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TurnNumberLabel
+        '
+        Me.TurnNumberLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TurnNumberLabel.Location = New System.Drawing.Point(60, 16)
+        Me.TurnNumberLabel.Name = "TurnNumberLabel"
+        Me.TurnNumberLabel.Size = New System.Drawing.Size(37, 23)
+        Me.TurnNumberLabel.TabIndex = 4
+        Me.TurnNumberLabel.Text = "000"
+        Me.TurnNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TurnLabel
+        '
+        Me.TurnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TurnLabel.Location = New System.Drawing.Point(6, 16)
+        Me.TurnLabel.Name = "TurnLabel"
+        Me.TurnLabel.Size = New System.Drawing.Size(48, 23)
+        Me.TurnLabel.TabIndex = 3
+        Me.TurnLabel.Text = "Turn: "
+        Me.TurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'ThrowButton
         '
         Me.ThrowButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -239,12 +239,12 @@ Partial Class DartGameForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(722, 418)
-        Me.ContextMenuStrip = Me.ContextMenuStrip
         Me.Controls.Add(Me.ThrowButton)
         Me.Controls.Add(Me.TurnGroupBox)
         Me.Controls.Add(Me.BoardPictureBox)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.TopMenuStrip
         Me.Name = "DartGameForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
