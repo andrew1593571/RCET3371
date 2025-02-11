@@ -12,16 +12,20 @@ Public Class GraphicsForm
     '[ ] make file records look like:
     '   <startX>, <startY>, <endX>, <endY>, <color>, <time stamp to millisecond>
     '   0,104,236,205,"Black", "20250203094534123"
+    '[ ] get actual color for the log
 
     Sub LogToFile(startX%, startY%, endX%, endY%)
 
-        FileOpen(1, "log.log", OpenMode.Append)
+        FileOpen(1, $"lines-{DateTime.Now.ToString("yyyyMMddhh")}.log", OpenMode.Append)
+        Write(1, DateTime.Now.ToString("yyyy-MM-dd;hh:mm:ss:fff"))
         Write(1, startX)
         Write(1, startY)
         Write(1, endX)
         Write(1, endY)
-        Write(1, Color.Black)
-        Write(1, "timestamp")
+        Write(1, Color.Black.ToString)
+        WriteLine(1)
+
+        FileClose(1)
 
     End Sub
 
@@ -67,6 +71,9 @@ Public Class GraphicsForm
         If e.Button = MouseButtons.Left Then
             DrawLine(e.X, e.Y, oldX, oldY)
             'log to file
+            LogToFile(oldX, oldY, e.X, e.Y)
+            'send new data to array
+            'TODO
         End If
 
         oldX = e.X
