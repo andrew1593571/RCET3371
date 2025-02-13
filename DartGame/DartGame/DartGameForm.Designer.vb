@@ -24,15 +24,15 @@ Partial Class DartGameForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewHistoryContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHistoryTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewHistoryContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoardPictureBox = New System.Windows.Forms.PictureBox()
         Me.TurnGroupBox = New System.Windows.Forms.GroupBox()
         Me.DartTotalLabel = New System.Windows.Forms.Label()
@@ -60,38 +60,6 @@ Partial Class DartGameForm
         Me.TopMenuStrip.TabIndex = 0
         Me.TopMenuStrip.Text = "MenuStrip1"
         '
-        'FileTopMenuItem
-        '
-        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHistoryTopMenuItem, Me.ResetTopMenuItem})
-        Me.FileTopMenuItem.Name = "FileTopMenuItem"
-        Me.FileTopMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileTopMenuItem.Text = "&File"
-        '
-        'ViewHistoryTopMenuItem
-        '
-        Me.ViewHistoryTopMenuItem.Name = "ViewHistoryTopMenuItem"
-        Me.ViewHistoryTopMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ViewHistoryTopMenuItem.Text = "&View History"
-        '
-        'ResetTopMenuItem
-        '
-        Me.ResetTopMenuItem.Name = "ResetTopMenuItem"
-        Me.ResetTopMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ResetTopMenuItem.Text = "&Reset"
-        '
-        'HelpTopMenuItem
-        '
-        Me.HelpTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutTopMenuItem})
-        Me.HelpTopMenuItem.Name = "HelpTopMenuItem"
-        Me.HelpTopMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.HelpTopMenuItem.Text = "&Help"
-        '
-        'AboutTopMenuItem
-        '
-        Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
-        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.AboutTopMenuItem.Text = "&About"
-        '
         'ContextMenuStrip
         '
         Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHistoryContextMenuItem, Me.ResetContextMenuItem, Me.AboutContextMenuItem})
@@ -107,14 +75,46 @@ Partial Class DartGameForm
         'ResetContextMenuItem
         '
         Me.ResetContextMenuItem.Name = "ResetContextMenuItem"
-        Me.ResetContextMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.ResetContextMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.ResetContextMenuItem.Text = "&Reset"
         '
         'AboutContextMenuItem
         '
         Me.AboutContextMenuItem.Name = "AboutContextMenuItem"
-        Me.AboutContextMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.AboutContextMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.AboutContextMenuItem.Text = "&About"
+        '
+        'FileTopMenuItem
+        '
+        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHistoryTopMenuItem, Me.ResetTopMenuItem})
+        Me.FileTopMenuItem.Name = "FileTopMenuItem"
+        Me.FileTopMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileTopMenuItem.Text = "&File"
+        '
+        'ViewHistoryTopMenuItem
+        '
+        Me.ViewHistoryTopMenuItem.Name = "ViewHistoryTopMenuItem"
+        Me.ViewHistoryTopMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.ViewHistoryTopMenuItem.Text = "&View History"
+        '
+        'ResetTopMenuItem
+        '
+        Me.ResetTopMenuItem.Name = "ResetTopMenuItem"
+        Me.ResetTopMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.ResetTopMenuItem.Text = "&Reset"
+        '
+        'HelpTopMenuItem
+        '
+        Me.HelpTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutTopMenuItem})
+        Me.HelpTopMenuItem.Name = "HelpTopMenuItem"
+        Me.HelpTopMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpTopMenuItem.Text = "&Help"
+        '
+        'AboutTopMenuItem
+        '
+        Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutTopMenuItem.Text = "&About"
         '
         'BoardPictureBox
         '
@@ -251,7 +251,6 @@ Partial Class DartGameForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(722, 418)
-        Me.ContextMenuStrip = Me.ContextMenuStrip
         Me.Controls.Add(Me.ThrowButton)
         Me.Controls.Add(Me.TurnGroupBox)
         Me.Controls.Add(Me.BoardPictureBox)
