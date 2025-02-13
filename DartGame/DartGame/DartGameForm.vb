@@ -62,7 +62,7 @@ Public Class DartGameForm
 
         g.FillEllipse(brush, dartX - 15, dartY - 15, 30, 30) 'draws a 30 by 30 ellipse centered on dartX and dartY
 
-        FileOpen(1, "Throws.Log", OpenMode.Append)
+        FileOpen(1, "Throws.log", OpenMode.Append)
         Write(1, TurnNumber())
         Write(1, DartNumber())
         Write(1, dartX)
@@ -106,9 +106,22 @@ Public Class DartGameForm
     End Sub
 
     Private Sub DartGameForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim lastLine As String
+        Dim lastTurn As Integer
+
+        FileOpen(1, "Throws.log", OpenMode.Input)
+        'scan the throws.log file until End of File, retrieves last line
+        Do Until EOF(1)
+            lastLine = LineInput(1)
+        Loop
+
+        FileClose(1)
+
+        'retrieve last turn from the last line of the file
+        lastTurn = CInt(Split(lastLine, ",")(0))
 
         'Set the turn number to the next turn number pulled from file
-        TurnNumber(False, 1)
+        TurnNumber(False, lastTurn + 1)
         'Set the DartNumber to 0
         DartNumber(False, 0)
 
