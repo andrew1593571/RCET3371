@@ -60,7 +60,15 @@ Public Class DartGameForm
 
         DartNumber(True)
 
-        g.FillEllipse(brush, dartX - 15, dartY - 15, 30, 30)
+        g.FillEllipse(brush, dartX - 15, dartY - 15, 30, 30) 'draws a 30 by 30 ellipse centered on dartX and dartY
+
+        FileOpen(1, "Throws.Log", OpenMode.Append)
+        Write(1, TurnNumber())
+        Write(1, DartNumber())
+        Write(1, dartX)
+        Write(1, dartY)
+        WriteLine(1)
+        FileClose(1)
 
         g.Dispose()
         brush.Dispose()
