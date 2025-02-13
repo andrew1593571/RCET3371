@@ -10,7 +10,7 @@ Option Explicit On
 Public Class DartGameForm
 
     ''' <summary>
-    ''' Stores the current turn number and calls the store sub if a new turn is called
+    ''' Stores the current turn number and calls the store sub if a new turn is called, used to set a new turn number at load
     ''' </summary>
     ''' <param name="newTurn"></param>
     ''' <param name="setTurn"></param>
@@ -31,6 +31,12 @@ Public Class DartGameForm
         Return _turnNumber
     End Function
 
+    ''' <summary>
+    ''' Stores the current dart number. Calls for a new turn number if the darts exceed 3 and resets the board
+    ''' </summary>
+    ''' <param name="newDart"></param>
+    ''' <param name="setDart"></param>
+    ''' <returns></returns>
     Function DartNumber(Optional newDart As Boolean = False, Optional setDart As Integer = 0) As Integer
         Static _dartNumber As Integer
 
@@ -52,6 +58,9 @@ Public Class DartGameForm
         Return _dartNumber
     End Function
 
+    ''' <summary>
+    ''' Throws a dart onto a random location of the board and appends the turn and dart information to file.
+    ''' </summary>
     Sub ThrowDart()
         Dim g As Graphics = BoardPictureBox.CreateGraphics
         Dim brush As New SolidBrush(Color.Red)
@@ -91,6 +100,9 @@ Public Class DartGameForm
         Return randomNumber
     End Function
 
+    '-------------------------
+    '      EVENT HANDLERS
+    '-------------------------
     Private Sub AboutMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click, AboutContextMenuItem.Click
         AboutForm.Show()
     End Sub
@@ -101,6 +113,7 @@ Public Class DartGameForm
             MsgBox("Test")
         End If
     End Sub
+
     Private Sub ThrowButton_Click(sender As Object, e As EventArgs) Handles ThrowButton.Click
         ThrowDart()
     End Sub

@@ -86,6 +86,12 @@
       <DependentUpon>DartGameForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HistoryForm.Designer.vb">
+      <DependentUpon>HistoryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SplashForm.Designer.vb">
       <DependentUpon>SplashForm.vb</DependentUpon>
     </Compile>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DartGameForm.resx">
       <DependentUpon>DartGameForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryForm.resx">
+      <DependentUpon>HistoryForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
