@@ -139,7 +139,7 @@ Public Class DartGameForm
 
     End Sub
 
-    Private Sub ViewHistoryTopMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHistoryTopMenuItem.Click
+    Private Sub ViewHistoryTopMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHistoryTopMenuItem.Click, ViewHistoryContextMenuItem.Click
         HistoryForm.Show()
         Me.Hide()
     End Sub

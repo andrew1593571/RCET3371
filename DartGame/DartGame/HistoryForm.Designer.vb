@@ -22,31 +22,34 @@ Partial Class HistoryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackToGameTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TurnGroupBox = New System.Windows.Forms.GroupBox()
-        Me.DartTotalLabel = New System.Windows.Forms.Label()
-        Me.DartOfLabel = New System.Windows.Forms.Label()
-        Me.DartNumberLabel = New System.Windows.Forms.Label()
-        Me.DartLabel = New System.Windows.Forms.Label()
         Me.TotalTurnLabel = New System.Windows.Forms.Label()
         Me.TurnOfLabel = New System.Windows.Forms.Label()
         Me.TurnNumberLabel = New System.Windows.Forms.Label()
         Me.TurnLabel = New System.Windows.Forms.Label()
-        Me.BoardPictureBox = New System.Windows.Forms.PictureBox()
+        Me.HistoryPictureBox = New System.Windows.Forms.PictureBox()
         Me.BackButton = New System.Windows.Forms.Button()
         Me.NextButton = New System.Windows.Forms.Button()
         Me.PreviousButton = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BackToGameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TopMenuStrip.SuspendLayout()
         Me.TurnGroupBox.SuspendLayout()
-        CType(Me.BoardPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HistoryPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'TopMenuStrip
         '
+        Me.TopMenuStrip.ContextMenuStrip = Me.ContextMenuStrip
         Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTopMenuItem, Me.HelpTopMenuItem})
         Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.TopMenuStrip.Name = "TopMenuStrip"
@@ -78,64 +81,21 @@ Partial Class HistoryForm
         'AboutTopMenuItem
         '
         Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
-        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutTopMenuItem.Text = "&About"
         '
         'TurnGroupBox
         '
-        Me.TurnGroupBox.Controls.Add(Me.DartTotalLabel)
-        Me.TurnGroupBox.Controls.Add(Me.DartOfLabel)
-        Me.TurnGroupBox.Controls.Add(Me.DartNumberLabel)
-        Me.TurnGroupBox.Controls.Add(Me.DartLabel)
+        Me.TurnGroupBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.TurnGroupBox.Controls.Add(Me.TotalTurnLabel)
         Me.TurnGroupBox.Controls.Add(Me.TurnOfLabel)
         Me.TurnGroupBox.Controls.Add(Me.TurnNumberLabel)
         Me.TurnGroupBox.Controls.Add(Me.TurnLabel)
         Me.TurnGroupBox.Location = New System.Drawing.Point(12, 27)
         Me.TurnGroupBox.Name = "TurnGroupBox"
-        Me.TurnGroupBox.Size = New System.Drawing.Size(192, 80)
+        Me.TurnGroupBox.Size = New System.Drawing.Size(192, 54)
         Me.TurnGroupBox.TabIndex = 3
         Me.TurnGroupBox.TabStop = False
-        '
-        'DartTotalLabel
-        '
-        Me.DartTotalLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DartTotalLabel.Location = New System.Drawing.Point(135, 39)
-        Me.DartTotalLabel.Name = "DartTotalLabel"
-        Me.DartTotalLabel.Size = New System.Drawing.Size(48, 23)
-        Me.DartTotalLabel.TabIndex = 10
-        Me.DartTotalLabel.Text = "3"
-        Me.DartTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DartOfLabel
-        '
-        Me.DartOfLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DartOfLabel.Location = New System.Drawing.Point(103, 39)
-        Me.DartOfLabel.Name = "DartOfLabel"
-        Me.DartOfLabel.Size = New System.Drawing.Size(26, 23)
-        Me.DartOfLabel.TabIndex = 9
-        Me.DartOfLabel.Text = "of"
-        Me.DartOfLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'DartNumberLabel
-        '
-        Me.DartNumberLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DartNumberLabel.Location = New System.Drawing.Point(60, 39)
-        Me.DartNumberLabel.Name = "DartNumberLabel"
-        Me.DartNumberLabel.Size = New System.Drawing.Size(37, 23)
-        Me.DartNumberLabel.TabIndex = 8
-        Me.DartNumberLabel.Text = "0"
-        Me.DartNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'DartLabel
-        '
-        Me.DartLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DartLabel.Location = New System.Drawing.Point(6, 39)
-        Me.DartLabel.Name = "DartLabel"
-        Me.DartLabel.Size = New System.Drawing.Size(48, 23)
-        Me.DartLabel.TabIndex = 7
-        Me.DartLabel.Text = "Dart: "
-        Me.DartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'TotalTurnLabel
         '
@@ -177,21 +137,23 @@ Partial Class HistoryForm
         Me.TurnLabel.Text = "Turn: "
         Me.TurnLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'BoardPictureBox
+        'HistoryPictureBox
         '
-        Me.BoardPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.HistoryPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BoardPictureBox.BackgroundImage = Global.DartGame.My.Resources.Resources.dartboard
-        Me.BoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BoardPictureBox.Location = New System.Drawing.Point(210, 27)
-        Me.BoardPictureBox.Name = "BoardPictureBox"
-        Me.BoardPictureBox.Size = New System.Drawing.Size(500, 375)
-        Me.BoardPictureBox.TabIndex = 4
-        Me.BoardPictureBox.TabStop = False
+        Me.HistoryPictureBox.BackgroundImage = Global.DartGame.My.Resources.Resources.dartboard
+        Me.HistoryPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.HistoryPictureBox.ContextMenuStrip = Me.ContextMenuStrip
+        Me.HistoryPictureBox.Location = New System.Drawing.Point(210, 27)
+        Me.HistoryPictureBox.Name = "HistoryPictureBox"
+        Me.HistoryPictureBox.Size = New System.Drawing.Size(500, 375)
+        Me.HistoryPictureBox.TabIndex = 4
+        Me.HistoryPictureBox.TabStop = False
         '
         'BackButton
         '
+        Me.BackButton.ContextMenuStrip = Me.ContextMenuStrip
         Me.BackButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BackButton.Location = New System.Drawing.Point(12, 321)
         Me.BackButton.Name = "BackButton"
@@ -202,6 +164,7 @@ Partial Class HistoryForm
         '
         'NextButton
         '
+        Me.NextButton.ContextMenuStrip = Me.ContextMenuStrip
         Me.NextButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NextButton.Location = New System.Drawing.Point(12, 234)
         Me.NextButton.Name = "NextButton"
@@ -212,6 +175,7 @@ Partial Class HistoryForm
         '
         'PreviousButton
         '
+        Me.PreviousButton.ContextMenuStrip = Me.ContextMenuStrip
         Me.PreviousButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PreviousButton.Location = New System.Drawing.Point(12, 147)
         Me.PreviousButton.Name = "PreviousButton"
@@ -219,6 +183,27 @@ Partial Class HistoryForm
         Me.PreviousButton.TabIndex = 7
         Me.PreviousButton.Text = "&Previous Turn"
         Me.PreviousButton.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStrip
+        '
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackToGameToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.ContextMenuStrip.Name = "ContextMenuStrip"
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(148, 48)
+        '
+        'BackToGameToolStripMenuItem
+        '
+        Me.BackToGameToolStripMenuItem.Name = "BackToGameToolStripMenuItem"
+        Me.BackToGameToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.BackToGameToolStripMenuItem.Text = "&Back to Game"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.AboutToolStripMenuItem.Text = "&About"
+        '
+        'LoadTimer
+        '
         '
         'HistoryForm
         '
@@ -228,7 +213,7 @@ Partial Class HistoryForm
         Me.Controls.Add(Me.PreviousButton)
         Me.Controls.Add(Me.NextButton)
         Me.Controls.Add(Me.BackButton)
-        Me.Controls.Add(Me.BoardPictureBox)
+        Me.Controls.Add(Me.HistoryPictureBox)
         Me.Controls.Add(Me.TurnGroupBox)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.Name = "HistoryForm"
@@ -237,7 +222,8 @@ Partial Class HistoryForm
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
         Me.TurnGroupBox.ResumeLayout(False)
-        CType(Me.BoardPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HistoryPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -249,16 +235,16 @@ Partial Class HistoryForm
     Friend WithEvents HelpTopMenuItem As ToolStripMenuItem
     Friend WithEvents AboutTopMenuItem As ToolStripMenuItem
     Friend WithEvents TurnGroupBox As GroupBox
-    Friend WithEvents DartTotalLabel As Label
-    Friend WithEvents DartOfLabel As Label
-    Friend WithEvents DartNumberLabel As Label
-    Friend WithEvents DartLabel As Label
     Friend WithEvents TotalTurnLabel As Label
     Friend WithEvents TurnOfLabel As Label
     Friend WithEvents TurnNumberLabel As Label
     Friend WithEvents TurnLabel As Label
-    Friend WithEvents BoardPictureBox As PictureBox
+    Friend WithEvents HistoryPictureBox As PictureBox
     Friend WithEvents BackButton As Button
     Friend WithEvents NextButton As Button
     Friend WithEvents PreviousButton As Button
+    Friend WithEvents ContextMenuStrip As ContextMenuStrip
+    Friend WithEvents BackToGameToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoadTimer As Timer
 End Class
