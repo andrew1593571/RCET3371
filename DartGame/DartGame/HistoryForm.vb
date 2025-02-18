@@ -24,6 +24,9 @@
         Loop
         FileClose(1)
 
+        TotalTurnLabel.Text = Split(lastLine, ",")(0)
+
+
         'retrieve last turn from the last line of the file
         Return CInt(Split(lastLine, ",")(0))
     End Function
@@ -35,5 +38,9 @@
     Private Sub PreviousButton_Click(sender As Object, e As EventArgs) Handles PreviousButton.Click
 
 
+    End Sub
+
+    Private Sub HistoryForm_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        DartGameForm.Show()
     End Sub
 End Class

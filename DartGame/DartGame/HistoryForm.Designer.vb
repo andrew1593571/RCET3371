@@ -64,7 +64,7 @@ Partial Class HistoryForm
         'BackToGameTopMenuItem
         '
         Me.BackToGameTopMenuItem.Name = "BackToGameTopMenuItem"
-        Me.BackToGameTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BackToGameTopMenuItem.Size = New System.Drawing.Size(147, 22)
         Me.BackToGameTopMenuItem.Text = "&Back to Game"
         Me.BackToGameTopMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
@@ -78,7 +78,7 @@ Partial Class HistoryForm
         'AboutTopMenuItem
         '
         Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
-        Me.AboutTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.AboutTopMenuItem.Text = "&About"
         '
         'TurnGroupBox
@@ -232,7 +232,8 @@ Partial Class HistoryForm
         Me.Controls.Add(Me.TurnGroupBox)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.Name = "HistoryForm"
-        Me.Text = "HistoryForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "View History"
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
         Me.TurnGroupBox.ResumeLayout(False)

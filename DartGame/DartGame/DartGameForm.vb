@@ -127,7 +127,6 @@ Public Class DartGameForm
         Do Until EOF(1)
             lastLine = LineInput(1)
         Loop
-
         FileClose(1)
 
         'retrieve last turn from the last line of the file
@@ -140,4 +139,8 @@ Public Class DartGameForm
 
     End Sub
 
+    Private Sub ViewHistoryTopMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHistoryTopMenuItem.Click
+        HistoryForm.Show()
+        Me.Hide()
+    End Sub
 End Class
