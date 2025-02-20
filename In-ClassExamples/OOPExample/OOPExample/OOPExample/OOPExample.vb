@@ -10,7 +10,9 @@ Option Strict On
 Module OOPExample
 
     Sub Main()
-
+        Andrew.TestingClass.SomeSub()
+        CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
+        CircuitSolver.ParallelSolver.SolveParallelCircuit()
     End Sub
 
 End Module

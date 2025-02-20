@@ -69,6 +69,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Solver\ParallelSolver.vb" />
+    <Compile Include="Solver\SeriesCircuit.vb" />
     <Compile Include="TestingClass.vb" />
     <Compile Include="OOPExample.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
