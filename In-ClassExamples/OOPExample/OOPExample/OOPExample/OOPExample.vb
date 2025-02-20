@@ -1,5 +1,8 @@
 ﻿Option Explicit On
 Option Strict On
+Imports OOPExample.Libs
+
+
 
 'Andrew Keller
 'RCET3371
@@ -13,6 +16,7 @@ Module OOPExample
         Andrew.TestingClass.SomeSub()
         CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
         CircuitSolver.ParallelSolver.SolveParallelCircuit()
+        Console.WriteLine(Libs.UsefulStuffLib.LuckyNumber())
     End Sub
 
 End Module
