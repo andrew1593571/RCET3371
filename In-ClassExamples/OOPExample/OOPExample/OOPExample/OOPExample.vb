@@ -17,6 +17,15 @@ Module OOPExample
         CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
         CircuitSolver.ParallelSolver.SolveParallelCircuit()
         Console.WriteLine(Libs.UsefulStuffLib.LuckyNumber())
+
+        Dim Deck As New CardGame.DeckOfCards("Bill")
+        Dim DeckTwo As New CardGame.DeckOfCards("Frank")
+        Dim OtherDeck As New CardGame.DeckOfCards("Mary")
+
+        Console.WriteLine(Deck.Name)
+        Console.WriteLine(DeckTwo.Name)
+        Console.WriteLine(OtherDeck.Name)    kjjh3
+
     End Sub
 
 End Module
