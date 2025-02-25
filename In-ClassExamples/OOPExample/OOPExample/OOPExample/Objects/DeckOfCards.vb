@@ -1,4 +1,14 @@
-﻿Namespace CardGame
+﻿Option Explicit On
+Option Strict On
+Imports OOPExample.Libs
+
+'Andrew Keller
+'RCET3371
+'Spring 2025
+'OOP Example
+'https://github.com/andrew1593571/RCET3371.git
+
+Namespace CardGame
 
     Public Class DeckOfCards
         'properties

@@ -24,7 +24,7 @@ Module OOPExample
 
         Console.WriteLine(Deck.Name)
         Console.WriteLine(DeckTwo.Name)
-        Console.WriteLine(OtherDeck.Name)    kjjh3
+        Console.WriteLine(OtherDeck.Name)
 
     End Sub
 

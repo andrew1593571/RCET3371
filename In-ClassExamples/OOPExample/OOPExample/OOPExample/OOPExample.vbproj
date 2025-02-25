@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Libs\UsefulStuffLib.vb" />
     <Compile Include="Objects\DeckOfCards.vb" />
+    <Compile Include="Objects\PlayingCard.vb" />
     <Compile Include="Solver\ParallelSolver.vb" />
     <Compile Include="Solver\SeriesCircuit.vb" />
     <Compile Include="TestingClass.vb" />
