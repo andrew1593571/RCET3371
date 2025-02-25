@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 Option Strict On
+Imports OOPExample.CardGame
 Imports OOPExample.Libs
 
 
@@ -13,6 +14,7 @@ Imports OOPExample.Libs
 Module OOPExample
 
     Sub Main()
+        Dim card As PlayingCard
         Andrew.TestingClass.SomeSub()
         CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
         CircuitSolver.ParallelSolver.SolveParallelCircuit()
@@ -22,9 +24,21 @@ Module OOPExample
         Dim DeckTwo As New CardGame.DeckOfCards("Frank")
         Dim OtherDeck As New CardGame.DeckOfCards("Mary")
 
+        Deck.Shuffle()
+
+        For i = 1 To 52
+            If Deck.Remaining <> 0 Then
+                card = Deck.Deal()
+            End If
+
+            Console.WriteLine($"{Deck.Remaining} - {card.PrettyName}")
+        Next
+
         Console.WriteLine(Deck.Name)
         Console.WriteLine(DeckTwo.Name)
         Console.WriteLine(OtherDeck.Name)
+
+        Console.Read()
 
     End Sub
 
