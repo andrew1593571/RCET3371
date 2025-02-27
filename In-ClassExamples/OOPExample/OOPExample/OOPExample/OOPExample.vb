@@ -15,7 +15,8 @@ Module OOPExample
 
     Sub Main()
         Dim card As PlayingCard
-        Dim temp As Object
+        Dim mainForm As New MainForm
+
         Andrew.TestingClass.SomeSub()
         CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
         CircuitSolver.ParallelSolver.SolveParallelCircuit()
@@ -38,7 +39,10 @@ Module OOPExample
         Console.WriteLine(DeckTwo.Name)
         Console.WriteLine(OtherDeck.Name)
 
-        Console.Read()
+        'Console.Read()
+        mainForm.Show()
+
+        Console.ReadLine()
 
     End Sub
 
