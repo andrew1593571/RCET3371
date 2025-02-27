@@ -89,6 +89,57 @@ Namespace CardGame
             Return $"{Me.PrettyValue} of {Me.PrettySuit}"
         End Function
 
+        ''' <summary>
+        ''' Returns the shorthand name of the card.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function ShortName() As String
+            Dim _shortName As String
+            Select Case Me.Value
+                Case 1
+                    _shortName = "A"
+                Case 2
+                    _shortName = "2"
+                Case 3
+                    _shortName = "3"
+                Case 4
+                    _shortName = "4"
+                Case 5
+                    _shortName = "5"
+                Case 6
+                    _shortName = "6"
+                Case 7
+                    _shortName = "7"
+                Case 8
+                    _shortName = "8"
+                Case 9
+                    _shortName = "9"
+                Case 10
+                    _shortName = "10"
+                Case 11
+                    _shortName = "J"
+                Case 12
+                    _shortName = "Q"
+                Case 13
+                    _shortName = "K"
+                Case Else
+                    _shortName = ""
+            End Select
+            Select Case Me.Suit
+                Case 1
+                    _shortName &= "S"
+                Case 2
+                    _shortName &= "C"
+                Case 3
+                    _shortName &= "D"
+                Case 4
+                    _shortName &= "H"
+                Case Else
+                    _shortName &= ""
+            End Select
+            Return _shortName
+        End Function
+
     End Class
 
 End Namespace
