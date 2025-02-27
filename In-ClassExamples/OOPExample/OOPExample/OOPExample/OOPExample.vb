@@ -15,6 +15,7 @@ Module OOPExample
 
     Sub Main()
         Dim card As PlayingCard
+        Dim temp As Object
         Andrew.TestingClass.SomeSub()
         CircuitSolver.SeriesCircuit.SolveSeriesCircuit()
         CircuitSolver.ParallelSolver.SolveParallelCircuit()
@@ -27,11 +28,10 @@ Module OOPExample
         Deck.Shuffle()
 
         For i = 1 To 52
-            If Deck.Remaining <> 0 Then
-                card = Deck.Deal()
+            card = Deck.Deal()
+            If card IsNot Nothing Then
+                Console.WriteLine($"{Deck.Remaining} - {card.PrettyName}")
             End If
-
-            Console.WriteLine($"{Deck.Remaining} - {card.PrettyName}")
         Next
 
         Console.WriteLine(Deck.Name)
