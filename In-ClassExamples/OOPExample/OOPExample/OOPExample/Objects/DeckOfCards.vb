@@ -33,7 +33,7 @@ Namespace CardGame
 
         Private _deck As New Stack(Of PlayingCard)
 
-        Sub New(name As String)
+        Sub New(Optional name As String = "")
             Me.Name = name
         End Sub
 
