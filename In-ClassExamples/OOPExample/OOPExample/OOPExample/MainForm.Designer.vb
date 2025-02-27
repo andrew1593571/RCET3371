@@ -22,9 +22,31 @@ Partial Class MainForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.DisplayPictureBox = New System.Windows.Forms.PictureBox()
+        CType(Me.DisplayPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'DisplayPictureBox
+        '
+        Me.DisplayPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.DisplayPictureBox.Location = New System.Drawing.Point(164, 12)
+        Me.DisplayPictureBox.Name = "DisplayPictureBox"
+        Me.DisplayPictureBox.Size = New System.Drawing.Size(402, 354)
+        Me.DisplayPictureBox.TabIndex = 0
+        Me.DisplayPictureBox.TabStop = False
+        '
+        'MainForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.DisplayPictureBox)
+        Me.Name = "MainForm"
         Me.Text = "MainForm"
+        CType(Me.DisplayPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
     End Sub
+
+    Friend WithEvents DisplayPictureBox As Windows.Forms.PictureBox
 End Class
