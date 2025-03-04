@@ -22,10 +22,28 @@ Partial Class SerialComForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.components = New System.ComponentModel.Container()
+        Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
+        Me.CheckAnalogTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.SuspendLayout()
+        '
+        'SerialPort
+        '
+        '
+        'CheckAnalogTimer
+        '
+        '
+        'SerialComForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Name = "SerialComForm"
         Me.Text = "Form1"
+        Me.ResumeLayout(False)
+
     End Sub
 
+    Friend WithEvents SerialPort As IO.Ports.SerialPort
+    Friend WithEvents CheckAnalogTimer As Timer
 End Class
