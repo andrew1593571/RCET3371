@@ -66,6 +66,18 @@ Public Class DeckOfCards
     End Sub
 
     ''' <summary>
+    ''' Deals the card at the top of the stack. Returns nothing if the stack is empty
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function Deal() As PlayingCard
+        If Me._deck.Count > 0 Then
+            Return Me._deck.Pop()
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    ''' <summary>
     ''' Returns a random number in the specified range
     ''' </summary>
     ''' <param name="Max"></param>
