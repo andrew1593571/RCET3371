@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardGameClasses\DeckOfCards.vb" />
     <Compile Include="CardGameClasses\PlayingCard.vb" />
     <Compile Include="GameOfWarForm.vb">
       <SubType>Form</SubType>
