@@ -56,12 +56,16 @@ Partial Class EtchASketchForm
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
         Me.SerialPortRefreshTimer = New System.Windows.Forms.Timer(Me.components)
         Me.COMTimeoutTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.ControlSelectGroupBox = New System.Windows.Forms.GroupBox()
+        Me.BoardRadioButton = New System.Windows.Forms.RadioButton()
+        Me.MouseRadioButton = New System.Windows.Forms.RadioButton()
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         Me.ControlsGroupBox.SuspendLayout()
         CType(Me.PenSizeTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TopMenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
+        Me.ControlSelectGroupBox.SuspendLayout()
         Me.SuspendLayout()
         '
         'DrawingPictureBox
@@ -107,16 +111,16 @@ Partial Class EtchASketchForm
         Me.ControlsGroupBox.Controls.Add(Me.WaveButton)
         Me.ControlsGroupBox.Controls.Add(Me.ClearButton)
         Me.ControlsGroupBox.Controls.Add(Me.ExitButton)
-        Me.ControlsGroupBox.Location = New System.Drawing.Point(12, 305)
+        Me.ControlsGroupBox.Location = New System.Drawing.Point(169, 305)
         Me.ControlsGroupBox.Name = "ControlsGroupBox"
-        Me.ControlsGroupBox.Size = New System.Drawing.Size(788, 100)
+        Me.ControlsGroupBox.Size = New System.Drawing.Size(631, 100)
         Me.ControlsGroupBox.TabIndex = 1
         Me.ControlsGroupBox.TabStop = False
         '
         'PenSizeLabel
         '
         Me.PenSizeLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PenSizeLabel.Location = New System.Drawing.Point(249, 19)
+        Me.PenSizeLabel.Location = New System.Drawing.Point(92, 19)
         Me.PenSizeLabel.Name = "PenSizeLabel"
         Me.PenSizeLabel.Size = New System.Drawing.Size(131, 27)
         Me.PenSizeLabel.TabIndex = 4
@@ -127,7 +131,7 @@ Partial Class EtchASketchForm
         'PenSizeTrackBar
         '
         Me.PenSizeTrackBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PenSizeTrackBar.Location = New System.Drawing.Point(252, 49)
+        Me.PenSizeTrackBar.Location = New System.Drawing.Point(95, 49)
         Me.PenSizeTrackBar.Minimum = 1
         Me.PenSizeTrackBar.Name = "PenSizeTrackBar"
         Me.PenSizeTrackBar.Size = New System.Drawing.Size(128, 45)
@@ -139,7 +143,7 @@ Partial Class EtchASketchForm
         'WaveButton
         '
         Me.WaveButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WaveButton.Location = New System.Drawing.Point(386, 19)
+        Me.WaveButton.Location = New System.Drawing.Point(229, 19)
         Me.WaveButton.Name = "WaveButton"
         Me.WaveButton.Size = New System.Drawing.Size(128, 75)
         Me.WaveButton.TabIndex = 1
@@ -152,7 +156,7 @@ Partial Class EtchASketchForm
         '
         Me.ClearButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ClearButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.ClearButton.Location = New System.Drawing.Point(520, 19)
+        Me.ClearButton.Location = New System.Drawing.Point(363, 19)
         Me.ClearButton.Name = "ClearButton"
         Me.ClearButton.Size = New System.Drawing.Size(128, 75)
         Me.ClearButton.TabIndex = 2
@@ -163,7 +167,7 @@ Partial Class EtchASketchForm
         'ExitButton
         '
         Me.ExitButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ExitButton.Location = New System.Drawing.Point(654, 19)
+        Me.ExitButton.Location = New System.Drawing.Point(497, 19)
         Me.ExitButton.Name = "ExitButton"
         Me.ExitButton.Size = New System.Drawing.Size(128, 75)
         Me.ExitButton.TabIndex = 3
@@ -302,6 +306,41 @@ Partial Class EtchASketchForm
         '
         Me.COMTimeoutTimer.Interval = 2000
         '
+        'ControlSelectGroupBox
+        '
+        Me.ControlSelectGroupBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ControlSelectGroupBox.Controls.Add(Me.BoardRadioButton)
+        Me.ControlSelectGroupBox.Controls.Add(Me.MouseRadioButton)
+        Me.ControlSelectGroupBox.Location = New System.Drawing.Point(12, 305)
+        Me.ControlSelectGroupBox.Name = "ControlSelectGroupBox"
+        Me.ControlSelectGroupBox.Size = New System.Drawing.Size(151, 100)
+        Me.ControlSelectGroupBox.TabIndex = 5
+        Me.ControlSelectGroupBox.TabStop = False
+        Me.ControlSelectGroupBox.Text = "Control Mode"
+        '
+        'BoardRadioButton
+        '
+        Me.BoardRadioButton.AutoSize = True
+        Me.BoardRadioButton.Location = New System.Drawing.Point(6, 42)
+        Me.BoardRadioButton.Name = "BoardRadioButton"
+        Me.BoardRadioButton.Size = New System.Drawing.Size(130, 17)
+        Me.BoardRadioButton.TabIndex = 1
+        Me.BoardRadioButton.TabStop = True
+        Me.BoardRadioButton.Text = "Draw with Qy@ Board"
+        Me.BoardRadioButton.UseVisualStyleBackColor = True
+        '
+        'MouseRadioButton
+        '
+        Me.MouseRadioButton.AutoSize = True
+        Me.MouseRadioButton.Checked = True
+        Me.MouseRadioButton.Location = New System.Drawing.Point(6, 19)
+        Me.MouseRadioButton.Name = "MouseRadioButton"
+        Me.MouseRadioButton.Size = New System.Drawing.Size(107, 17)
+        Me.MouseRadioButton.TabIndex = 0
+        Me.MouseRadioButton.TabStop = True
+        Me.MouseRadioButton.Text = "Draw with Mouse"
+        Me.MouseRadioButton.UseVisualStyleBackColor = True
+        '
         'EtchASketchForm
         '
         Me.AcceptButton = Me.WaveButton
@@ -309,6 +348,7 @@ Partial Class EtchASketchForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ClearButton
         Me.ClientSize = New System.Drawing.Size(812, 430)
+        Me.Controls.Add(Me.ControlSelectGroupBox)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.Controls.Add(Me.ControlsGroupBox)
@@ -326,6 +366,8 @@ Partial Class EtchASketchForm
         Me.TopMenuStrip.PerformLayout()
         Me.StatusStrip.ResumeLayout(False)
         Me.StatusStrip.PerformLayout()
+        Me.ControlSelectGroupBox.ResumeLayout(False)
+        Me.ControlSelectGroupBox.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -364,4 +406,7 @@ Partial Class EtchASketchForm
     Friend WithEvents SerialPort As IO.Ports.SerialPort
     Friend WithEvents SerialPortRefreshTimer As Timer
     Friend WithEvents COMTimeoutTimer As Timer
+    Friend WithEvents ControlSelectGroupBox As GroupBox
+    Friend WithEvents MouseRadioButton As RadioButton
+    Friend WithEvents BoardRadioButton As RadioButton
 End Class

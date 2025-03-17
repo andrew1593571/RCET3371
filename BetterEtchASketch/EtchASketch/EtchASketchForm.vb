@@ -242,7 +242,7 @@ Public Class EtchASketchForm
 
         'Me.Text = $"({e.X.ToString},{e.Y.ToString}) Button: {e.Button.ToString} Color: {PenColor().Name}"
 
-        If e.Button = MouseButtons.Left Then
+        If e.Button = MouseButtons.Left And MouseRadioButton.Checked Then
             MouseDraw(oldX, oldY, e.X, e.Y)
         End If
 
@@ -434,28 +434,51 @@ Public Class EtchASketchForm
     ''' <param name="e"></param>
     Private Sub SerialPort_DataReceived(sender As Object, e As IO.Ports.SerialDataReceivedEventArgs) Handles SerialPort.DataReceived
         Dim numberOfBytes = SerialPort.BytesToRead
-        Dim bytes(numberOfBytes - 1) As Byte
+        Dim readBytes(numberOfBytes - 1) As Byte
+        Dim writeBytes(0) As Byte
+        Static oldX%, oldY%
+        Dim newX%, newY%
+
+        writeBytes(0) = &H53 'request analog inputs 1 and 2
 
         'MsgBox($"{numberOfBytes} received")
-        SerialPort.Read(bytes, 0, numberOfBytes)
+        SerialPort.Read(readBytes, 0, numberOfBytes)
 
         'If a board query was requested, verify the Qy@ board signature
         If queryBoard Then
             queryBoard = False
-            If bytes.Length = 64 Then
-                If Not (bytes(58) = &H51 And bytes(59) = &H79 And bytes(60) = &H40) Then
+            If readBytes.Length = 64 Then
+                If Not (readBytes(58) = &H51 And readBytes(59) = &H79 And readBytes(60) = &H40) Then
                     MsgBox("Incorrect Device. Please select a Qy@ Board.")
                     SerialPort.Close()
                     SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+                    Exit Sub
                 Else
+                    'Qy@ board detected, disable the timeout timer
                     COMTimeoutTimer.Enabled = False
                 End If
             Else
                 MsgBox("Incorrect Device. Please select a Qy@ Board.")
                 SerialPort.Close()
                 SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+                Exit Sub
             End If
+
+        Else
+            'if not querying board, interpret analog input data
+
+            newX = 50 'analog 1 value
+            newY = 50 'analog 2 value
+
+            If BoardRadioButton.Checked Then
+                MouseDraw(oldX, oldY, newX, newY)
+            End If
+
+            oldX = newX
+            oldY = newY
         End If
+
+        SerialPort.Write(writeBytes, 0, 1) 'request analog inputs from Qy@ board
     End Sub
 
     ''' <summary>
@@ -468,5 +491,11 @@ Public Class EtchASketchForm
         MsgBox("Qy@ board not detected on the selected COM port. Please select a different port or verify connection.")
         SerialPort.Close()
         SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+    End Sub
+
+    Private Sub BoardRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles BoardRadioButton.CheckedChanged
+        If Not SerialPort.IsOpen Then
+            MsgBox("Please select a COM port to use the Qy@ board to draw.")
+        End If
     End Sub
 End Class
