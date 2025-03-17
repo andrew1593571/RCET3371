@@ -59,6 +59,7 @@ Partial Class EtchASketchForm
         Me.ControlSelectGroupBox = New System.Windows.Forms.GroupBox()
         Me.BoardRadioButton = New System.Windows.Forms.RadioButton()
         Me.MouseRadioButton = New System.Windows.Forms.RadioButton()
+        Me.BoardDrawTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         Me.ControlsGroupBox.SuspendLayout()
@@ -341,6 +342,10 @@ Partial Class EtchASketchForm
         Me.MouseRadioButton.Text = "Draw with Mouse"
         Me.MouseRadioButton.UseVisualStyleBackColor = True
         '
+        'BoardDrawTimer
+        '
+        Me.BoardDrawTimer.Interval = 5
+        '
         'EtchASketchForm
         '
         Me.AcceptButton = Me.WaveButton
@@ -409,4 +414,5 @@ Partial Class EtchASketchForm
     Friend WithEvents ControlSelectGroupBox As GroupBox
     Friend WithEvents MouseRadioButton As RadioButton
     Friend WithEvents BoardRadioButton As RadioButton
+    Friend WithEvents BoardDrawTimer As Timer
 End Class

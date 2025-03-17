@@ -1,4 +1,5 @@
-﻿Imports System.Linq.Expressions
+﻿Imports System.ComponentModel
+Imports System.Linq.Expressions
 
 'Andrew Keller
 'RCET3371
@@ -14,6 +15,11 @@ Public Class EtchASketchForm
     ''' Stores whether or not the system requested the Qy@ board settings readout
     ''' </summary>
     Private queryBoard As Boolean
+
+    Private boardX As Integer
+    Private boardY As Integer
+    Private oldBoardX As Integer
+    Private oldBoardY As Integer
 
     ''' <summary>
     ''' Draw a line from (0,0) to (100,100)
@@ -133,6 +139,30 @@ Public Class EtchASketchForm
     End Sub
 
     ''' <summary>
+    ''' Draws a straight line from the start x and y to the end x and y
+    ''' scales the picturebox to 1023 x 1023
+    ''' </summary>
+    Sub BoardDraw()
+        Static oldX%, oldY%
+        Dim heightScale As Double, widthScale As Double
+        Dim g As Graphics = Graphics.FromImage(StoreBitmap())
+        Dim pen As New Pen(PenColor(), PenSize())
+
+        heightScale = DrawingPictureBox.Height / 1023
+        widthScale = DrawingPictureBox.Width / 1023
+        g.ScaleTransform(widthScale, heightScale)
+
+        g.DrawLine(pen, oldX, oldY, boardX, boardY)
+
+        oldX = boardX
+        oldY = boardY
+
+        g.Dispose()
+        pen.Dispose()
+        DrawingPictureBox.Image = StoreBitmap()
+    End Sub
+
+    ''' <summary>
     ''' Draws scope divisions using the MouseDraw Sub
     ''' </summary>
     Sub DrawDivisions()
@@ -196,6 +226,10 @@ Public Class EtchASketchForm
     ''' <param name="image"></param>
     ''' <returns></returns>
     Function StoreBitmap(Optional image As Image = Nothing) As Image
+        If Me.InvokeRequired Then
+            Return Me.Invoke(Sub() StoreBitmap(image))
+        End If
+
         Static bmp As Bitmap
 
         If image Is Nothing Then
@@ -436,11 +470,9 @@ Public Class EtchASketchForm
         Dim numberOfBytes = SerialPort.BytesToRead
         Dim readBytes(numberOfBytes - 1) As Byte
         Dim writeBytes(0) As Byte
-        Static oldX%, oldY%
-        Dim newX%, newY%
 
         writeBytes(0) = &H53 'request analog inputs 1 and 2
-
+        Console.WriteLine($"{numberOfBytes} received")
         'MsgBox($"{numberOfBytes} received")
         SerialPort.Read(readBytes, 0, numberOfBytes)
 
@@ -467,18 +499,20 @@ Public Class EtchASketchForm
         Else
             'if not querying board, interpret analog input data
 
-            newX = 50 'analog 1 value
-            newY = 50 'analog 2 value
+            oldBoardX = boardX
+            oldBoardY = boardY
+            Try
+                boardX = (readBytes(0) * 4)
+                boardY = (readBytes(2) * 4) 'analog 2 value
+            Catch ex As Exception
 
-            If BoardRadioButton.Checked Then
-                MouseDraw(oldX, oldY, newX, newY)
-            End If
+            End Try
 
-            oldX = newX
-            oldY = newY
+        End If
+        If SerialPort.IsOpen Then
+            SerialPort.Write(writeBytes, 0, 1) 'request analog inputs from Qy@ board
         End If
 
-        SerialPort.Write(writeBytes, 0, 1) 'request analog inputs from Qy@ board
     End Sub
 
     ''' <summary>
@@ -497,5 +531,19 @@ Public Class EtchASketchForm
         If Not SerialPort.IsOpen Then
             MsgBox("Please select a COM port to use the Qy@ board to draw.")
         End If
+
+        If BoardRadioButton.Checked Then
+            BoardDrawTimer.Enabled = True
+        Else
+            BoardDrawTimer.Enabled = False
+        End If
+    End Sub
+
+    Private Sub EtchASketchForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        SerialPort.Close()
+    End Sub
+
+    Private Sub BoardDrawTimer_Tick(sender As Object, e As EventArgs) Handles BoardDrawTimer.Tick
+        BoardDraw()
     End Sub
 End Class
