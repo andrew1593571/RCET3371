@@ -1,10 +1,12 @@
 ﻿Imports System.Linq.Expressions
 
 'Andrew Keller
-'RCET2265
-'Fall 2024
-'Etch-A-Sketch
-'https://github.com/andrew1593571/EtchASketch.git
+'RCET3371
+'Spring 2025
+'Better Etch-A-Sketch
+'https://github.com/andrew1593571/RCET3371.git
+'Modified from Fall 2024 RCET2265 Repo
+'https://github.com/andrew1593571/ComputerFundamentals.git
 
 Public Class EtchASketchForm
 

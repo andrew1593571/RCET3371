@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InformationLabel.Text" xml:space="preserve">
+    <value>Andrew Keller
+RCET3371
+Spring 2025
+Better Etch-A-Sketch
+https://github.com/andrew1593571/RCET3371.git
+Modified from Fall 2024 RCET2265 Repo
+https://github.com/andrew1593571/ComputerFundamentals.git</value>
+  </data>
 </root>

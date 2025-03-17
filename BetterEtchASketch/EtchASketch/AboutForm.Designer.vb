@@ -22,6 +22,7 @@ Partial Class AboutForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AboutForm))
         Me.InformationLabel = New System.Windows.Forms.Label()
         Me.OkButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
@@ -30,14 +31,13 @@ Partial Class AboutForm
         '
         Me.InformationLabel.Location = New System.Drawing.Point(12, 9)
         Me.InformationLabel.Name = "InformationLabel"
-        Me.InformationLabel.Size = New System.Drawing.Size(286, 161)
+        Me.InformationLabel.Size = New System.Drawing.Size(322, 161)
         Me.InformationLabel.TabIndex = 2
-        Me.InformationLabel.Text = "Andrew Keller" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "RCET2265" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Fall 2024" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Etch-A-Sketch" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "https://github.com/andrew15935" &
-    "71/EtchASketch.git"
+        Me.InformationLabel.Text = resources.GetString("InformationLabel.Text")
         '
         'OkButton
         '
-        Me.OkButton.Location = New System.Drawing.Point(175, 176)
+        Me.OkButton.Location = New System.Drawing.Point(193, 176)
         Me.OkButton.Name = "OkButton"
         Me.OkButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.OkButton.Size = New System.Drawing.Size(123, 46)
@@ -49,7 +49,7 @@ Partial Class AboutForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(310, 234)
+        Me.ClientSize = New System.Drawing.Size(328, 234)
         Me.Controls.Add(Me.OkButton)
         Me.Controls.Add(Me.InformationLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
