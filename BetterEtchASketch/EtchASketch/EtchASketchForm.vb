@@ -11,6 +11,11 @@
 Public Class EtchASketchForm
 
     ''' <summary>
+    ''' Stores whether or not the system requested the Qy@ board settings readout
+    ''' </summary>
+    Private queryBoard As Boolean
+
+    ''' <summary>
     ''' Draw a line from (0,0) to (100,100)
     ''' </summary>
     Sub DrawLine()
@@ -265,6 +270,14 @@ Public Class EtchASketchForm
         PenColor(Color.Black)
         StoreBitmap(CreateBitmap())
         DrawingPictureBox.Image = StoreBitmap()
+
+        'initialize Serial Port
+        SerialPortRefreshTimer.Start()
+        SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+        SerialPort.BaudRate = 9600
+        SerialPort.DataBits = 8
+        SerialPort.StopBits = IO.Ports.StopBits.One
+        SerialPort.Parity = IO.Ports.Parity.None
     End Sub
 
     ''' <summary>
@@ -366,4 +379,94 @@ Public Class EtchASketchForm
         AboutForm.Show()
     End Sub
 
+    ''' <summary>
+    ''' When the serial port timer ticks, update the SerialPortComboBox entries with active COM ports
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub SerialPortRefreshTimer_Tick(sender As Object, e As EventArgs) Handles SerialPortRefreshTimer.Tick
+        'If a serial port is not open or the user isnt changing it update the list
+        If Not SerialPort.IsOpen And Not SerialPortComboBox.DroppedDown Then
+            SerialPortComboBox.Items.Clear()
+            For Each sp As String In My.Computer.Ports.SerialPortNames
+                SerialPortComboBox.Items.Add(sp)
+            Next
+            SerialPortComboBox.Text = SerialPort.PortName
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' When the selected value in the COM selection changes, disconnect the COM and reopen the new one.
+    ''' Verify that the Qy@ board is the connected port
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub SerialPortComboBox_SelectedValueChanged(sender As Object, e As EventArgs) Handles SerialPortComboBox.SelectedIndexChanged
+        Dim writeBytes(0) As Byte
+        writeBytes(0) = &HF0
+
+        If Not SerialPortComboBox.Text = SerialPort.PortName Then 'If the port is open and the serial port name does not match the connected
+            If SerialPort.IsOpen Then 'close the port if it is open
+                SerialPort.Close()
+            End If
+
+            SerialPort.PortName = SerialPortComboBox.Text
+            Try 'try opening the new selected port
+                SerialPort.Open()
+                SerialComStatusLabel.Text = $"Connected to {SerialPort.PortName}"
+            Catch ex As Exception
+                MsgBox($"Failed to connect to the Qy@ board on {SerialPort.PortName}.{vbNewLine}{vbNewLine}Please select a valid COM port.")
+                Exit Sub
+            End Try
+
+            'verify that the connected port is the Qy@ board
+            SerialPort.Write(writeBytes, 0, 1)
+            queryBoard = True
+            COMTimeoutTimer.Enabled = True
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Occurs when data is received by the Serial Port
+    ''' Handles data as needed.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub SerialPort_DataReceived(sender As Object, e As IO.Ports.SerialDataReceivedEventArgs) Handles SerialPort.DataReceived
+        Dim numberOfBytes = SerialPort.BytesToRead
+        Dim bytes(numberOfBytes - 1) As Byte
+
+        'MsgBox($"{numberOfBytes} received")
+        SerialPort.Read(bytes, 0, numberOfBytes)
+
+        'If a board query was requested, verify the Qy@ board signature
+        If queryBoard Then
+            queryBoard = False
+            If bytes.Length = 64 Then
+                If Not (bytes(58) = &H51 And bytes(59) = &H79 And bytes(60) = &H40) Then
+                    MsgBox("Incorrect Device. Please select a Qy@ Board.")
+                    SerialPort.Close()
+                    SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+                Else
+                    COMTimeoutTimer.Enabled = False
+                End If
+            Else
+                MsgBox("Incorrect Device. Please select a Qy@ Board.")
+                SerialPort.Close()
+                SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' If the serial port does not respond within specified time, close the port and notify the user
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub COMTimeoutTimer_Tick(sender As Object, e As EventArgs) Handles COMTimeoutTimer.Tick
+        COMTimeoutTimer.Enabled = False
+        MsgBox("Qy@ board not detected on the selected COM port. Please select a different port or verify connection.")
+        SerialPort.Close()
+        SerialComStatusLabel.Text = $"Disconnected from {SerialPort.PortName}"
+    End Sub
 End Class

@@ -48,11 +48,20 @@ Partial Class EtchASketchForm
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.COMToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SerialPortComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.SerialComStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
+        Me.SerialPortRefreshTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.COMTimeoutTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DrawingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         Me.ControlsGroupBox.SuspendLayout()
         CType(Me.PenSizeTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TopMenuStrip.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'DrawingPictureBox
@@ -64,7 +73,7 @@ Partial Class EtchASketchForm
         Me.DrawingPictureBox.Cursor = System.Windows.Forms.Cursors.Cross
         Me.DrawingPictureBox.Location = New System.Drawing.Point(12, 27)
         Me.DrawingPictureBox.Name = "DrawingPictureBox"
-        Me.DrawingPictureBox.Size = New System.Drawing.Size(788, 316)
+        Me.DrawingPictureBox.Size = New System.Drawing.Size(788, 272)
         Me.DrawingPictureBox.TabIndex = 0
         Me.DrawingPictureBox.TabStop = False
         Me.ToolTip.SetToolTip(Me.DrawingPictureBox, "Right Click to Change Colors")
@@ -98,7 +107,7 @@ Partial Class EtchASketchForm
         Me.ControlsGroupBox.Controls.Add(Me.WaveButton)
         Me.ControlsGroupBox.Controls.Add(Me.ClearButton)
         Me.ControlsGroupBox.Controls.Add(Me.ExitButton)
-        Me.ControlsGroupBox.Location = New System.Drawing.Point(12, 349)
+        Me.ControlsGroupBox.Location = New System.Drawing.Point(12, 305)
         Me.ControlsGroupBox.Name = "ControlsGroupBox"
         Me.ControlsGroupBox.Size = New System.Drawing.Size(788, 100)
         Me.ControlsGroupBox.TabIndex = 1
@@ -243,13 +252,64 @@ Partial Class EtchASketchForm
         Me.AboutToolStripMenuItem.Text = "&About"
         Me.AboutToolStripMenuItem.ToolTipText = "About this Program"
         '
+        'StatusStrip
+        '
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.COMToolStripDropDownButton, Me.SerialComStatusLabel})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 408)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(812, 22)
+        Me.StatusStrip.TabIndex = 3
+        Me.StatusStrip.Text = "StatusStrip1"
+        '
+        'COMToolStripDropDownButton
+        '
+        Me.COMToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.COMToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator1, Me.SerialPortComboBox})
+        Me.COMToolStripDropDownButton.Image = Global.EtchASketch.My.Resources.Resources.serial_port
+        Me.COMToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.COMToolStripDropDownButton.Name = "COMToolStripDropDownButton"
+        Me.COMToolStripDropDownButton.Size = New System.Drawing.Size(29, 20)
+        Me.COMToolStripDropDownButton.Text = "COMStatusStripButton"
+        Me.COMToolStripDropDownButton.ToolTipText = "Change the COM port of the Qy@ Board"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(178, 6)
+        '
+        'SerialPortComboBox
+        '
+        Me.SerialPortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.SerialPortComboBox.Name = "SerialPortComboBox"
+        Me.SerialPortComboBox.Size = New System.Drawing.Size(121, 23)
+        Me.SerialPortComboBox.ToolTipText = "Change the active COM port"
+        '
+        'SerialComStatusLabel
+        '
+        Me.SerialComStatusLabel.Name = "SerialComStatusLabel"
+        Me.SerialComStatusLabel.Size = New System.Drawing.Size(108, 17)
+        Me.SerialComStatusLabel.Text = "Disconnected from"
+        Me.SerialComStatusLabel.ToolTipText = "Current COM Port"
+        '
+        'SerialPort
+        '
+        '
+        'SerialPortRefreshTimer
+        '
+        Me.SerialPortRefreshTimer.Interval = 500
+        '
+        'COMTimeoutTimer
+        '
+        Me.COMTimeoutTimer.Interval = 2000
+        '
         'EtchASketchForm
         '
         Me.AcceptButton = Me.WaveButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ClearButton
-        Me.ClientSize = New System.Drawing.Size(812, 461)
+        Me.ClientSize = New System.Drawing.Size(812, 430)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.Controls.Add(Me.ControlsGroupBox)
         Me.Controls.Add(Me.DrawingPictureBox)
@@ -264,6 +324,8 @@ Partial Class EtchASketchForm
         CType(Me.PenSizeTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -294,4 +356,12 @@ Partial Class EtchASketchForm
     Friend WithEvents PenColorTopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DrawWaveformToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StatusStrip As StatusStrip
+    Friend WithEvents SerialComStatusLabel As ToolStripStatusLabel
+    Friend WithEvents COMToolStripDropDownButton As ToolStripDropDownButton
+    Friend WithEvents SerialPortComboBox As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents SerialPort As IO.Ports.SerialPort
+    Friend WithEvents SerialPortRefreshTimer As Timer
+    Friend WithEvents COMTimeoutTimer As Timer
 End Class
