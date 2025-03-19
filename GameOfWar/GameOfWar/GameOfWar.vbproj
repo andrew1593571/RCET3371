@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="CardGameClasses\DeckOfCards.vb" />
     <Compile Include="CardGameClasses\PlayingCard.vb" />
+    <Compile Include="CardGameClasses\WarGameLogic.vb" />
     <Compile Include="GameOfWarForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +101,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GameOfWarForm.resx">
+      <DependentUpon>GameOfWarForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
