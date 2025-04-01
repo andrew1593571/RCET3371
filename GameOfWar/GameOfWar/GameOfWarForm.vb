@@ -66,8 +66,8 @@ Public Class GameOfWarForm
         PlayerOneRemainingLabel.Text = $"Remaining: {warGame.playerOneRemaining} Cards"
         PlayerTwoRemainingLabel.Text = $"Remaining: {warGame.playerTwoRemaining} Cards"
 
-        PlayerOneRoundsWonLabel.Text = $"Rounds Won: {0}"
-        PlayerTwoRoundsWonLabel.Text = $"Rounds Won: {0}"
+        PlayerOneRoundsWonLabel.Text = $"Rounds Won: {warGame.PlayerOneRoundsWon}"
+        PlayerTwoRoundsWonLabel.Text = $"Rounds Won: {warGame.PlayerTwoRoundsWon}"
 
         If warGame.RoundsPlayed = 0 Then
             PlayerOneLastCardLabel.Text = $"Last Card: -"

@@ -18,6 +18,10 @@ Public Class WarGameLogic
 
     Private _playerTwoCard As PlayingCard
 
+    Private _playerOneRoundsWon As Integer
+
+    Private _playerTwoRoundsWon As Integer
+
     Private _roundsplayed As Integer
 
     Private _gameOver As Boolean
@@ -25,6 +29,26 @@ Public Class WarGameLogic
     Private _winner As Integer
 
     Private _roundWinner As Integer
+
+    ''' <summary>
+    ''' Returns the number of rounds PlayerOne has won
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property PlayerOneRoundsWon As Integer
+        Get
+            Return _playerOneRoundsWon
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Returns the number of rounds PlayerTwo has won
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property PlayerTwoRoundsWon As Integer
+        Get
+            Return _playerTwoRoundsWon
+        End Get
+    End Property
 
     ''' <summary>
     ''' If the game has ended, the winner is returned. Else 0 is returned.
@@ -132,6 +156,7 @@ Public Class WarGameLogic
             Next
         End If
         _roundWinner = 1
+        _playerOneRoundsWon += 1
     End Sub
 
     ''' <summary>
@@ -146,6 +171,7 @@ Public Class WarGameLogic
             Next
         End If
         _roundWinner = 2
+        _playerTwoRoundsWon += 1
     End Sub
 
     ''' <summary>
@@ -215,5 +241,7 @@ Public Class WarGameLogic
         Loop While deck.Remaining <> 0
 
         _roundsplayed = 0
+        _playerOneRoundsWon = 0
+        _playerTwoRoundsWon = 0
     End Sub
 End Class
