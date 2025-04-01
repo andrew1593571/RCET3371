@@ -34,11 +34,7 @@ Public Class WarGameLogic
     ''' <returns></returns>
     Public ReadOnly Property Winner() As Integer
         Get
-            If _gameOver Then
-                Return _winner
-            Else
-                Return 0
-            End If
+            Return _winner
         End Get
     End Property
 
@@ -135,8 +131,8 @@ Public Class WarGameLogic
     ''' When player two wins a round, put both player's cards into player two's deck with any cards currently on the table.
     ''' </summary>
     Private Sub PlayerTwoWin()
-        _playerTwoDeck.Enqueue(_playerOneCard)
         _playerTwoDeck.Enqueue(_playerTwoCard)
+        _playerTwoDeck.Enqueue(_playerOneCard)
         If _table.Count <> 0 Then
             For i = 1 To _table.Count
                 _playerTwoDeck.Enqueue(_table.Dequeue)

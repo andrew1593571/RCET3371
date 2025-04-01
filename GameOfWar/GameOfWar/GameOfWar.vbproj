@@ -123,6 +123,11 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\CardBack.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CardBack.jpeg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
