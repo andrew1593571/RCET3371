@@ -15,11 +15,12 @@ Public Class GameOfWarForm
         Dim blackBrush As New SolidBrush(Color.Black)
         Dim whiteBrush As New SolidBrush(Color.White)
         Dim font As New Font(Me.Font.Name, 2.5, Me.Font.Style)
+        Dim gameOverFont As New Font(Me.Font.Name, 6, Me.Font.Style)
         Dim scaleX!, scaleY!
         Dim cardBack As Image = My.Resources.ResourceManager.GetObject("CardBack")
         Dim table As Queue(Of PlayingCard)
         Dim tableX As Integer = 70
-        Dim gameOverRectangle As New Rectangle(30, 30, 40, 20)
+        Dim gameOverRectangle As New Rectangle(10, 30, 80, 20)
 
         table = warGame.Table
 
@@ -52,7 +53,12 @@ Public Class GameOfWarForm
 
         If warGame.GameOver Then
             g.FillRectangle(whiteBrush, gameOverRectangle)
-            g.DrawString("Game Over", font, blackBrush, gameOverRectangle)
+            Select Case warGame.Winner
+                Case 1
+                    g.DrawString("Player One Wins!", gameOverFont, blackBrush, gameOverRectangle)
+                Case 2
+                    g.DrawString("Player Two Wins!", gameOverFont, blackBrush, gameOverRectangle)
+            End Select
         End If
 
         blackBrush.Dispose()
@@ -97,7 +103,7 @@ Public Class GameOfWarForm
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click
+    Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click, StartTopMenuItem.Click
         If gameInProgress Then
             MsgBox($"A Game at round {warGame.RoundsPlayed} is currently in progress.")
         Else
@@ -113,7 +119,7 @@ Public Class GameOfWarForm
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub PlayButton_Click(sender As Object, e As EventArgs) Handles PlayButton.Click
+    Private Sub PlayButton_Click(sender As Object, e As EventArgs) Handles PlayButton.Click, PlayTopMenuItem.Click
         If gameInProgress Then
             warGame.PlayRound()
             UpdateLabels()
@@ -128,5 +134,9 @@ Public Class GameOfWarForm
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         Me.Close()
+    End Sub
+
+    Private Sub AboutTopMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
+        AboutForm.Show()
     End Sub
 End Class

@@ -22,8 +22,10 @@ Partial Class GameOfWarForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TablePictureBox = New System.Windows.Forms.PictureBox()
         Me.PlayerControlsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.ExitButton = New System.Windows.Forms.Button()
         Me.PlayButton = New System.Windows.Forms.Button()
         Me.StartButton = New System.Windows.Forms.Button()
         Me.PlayerOneGroupBox = New System.Windows.Forms.GroupBox()
@@ -37,12 +39,19 @@ Partial Class GameOfWarForm
         Me.GameGroupBox = New System.Windows.Forms.GroupBox()
         Me.LastWinnerLabel = New System.Windows.Forms.Label()
         Me.RoundsLabel = New System.Windows.Forms.Label()
-        Me.ExitButton = New System.Windows.Forms.Button()
+        Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me.GameTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlayTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.TablePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PlayerControlsGroupBox.SuspendLayout()
         Me.PlayerOneGroupBox.SuspendLayout()
         Me.PlayerTwoGroupBox.SuspendLayout()
         Me.GameGroupBox.SuspendLayout()
+        Me.TopMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'TablePictureBox
@@ -50,11 +59,12 @@ Partial Class GameOfWarForm
         Me.TablePictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TablePictureBox.Location = New System.Drawing.Point(12, 76)
+        Me.TablePictureBox.Location = New System.Drawing.Point(12, 91)
         Me.TablePictureBox.Name = "TablePictureBox"
-        Me.TablePictureBox.Size = New System.Drawing.Size(632, 461)
+        Me.TablePictureBox.Size = New System.Drawing.Size(632, 446)
         Me.TablePictureBox.TabIndex = 0
         Me.TablePictureBox.TabStop = False
+        Me.ToolTip.SetToolTip(Me.TablePictureBox, "Game Table")
         '
         'PlayerControlsGroupBox
         '
@@ -68,6 +78,16 @@ Partial Class GameOfWarForm
         Me.PlayerControlsGroupBox.TabIndex = 1
         Me.PlayerControlsGroupBox.TabStop = False
         '
+        'ExitButton
+        '
+        Me.ExitButton.Location = New System.Drawing.Point(194, 19)
+        Me.ExitButton.Name = "ExitButton"
+        Me.ExitButton.Size = New System.Drawing.Size(88, 39)
+        Me.ExitButton.TabIndex = 2
+        Me.ExitButton.Text = "E&xit"
+        Me.ToolTip.SetToolTip(Me.ExitButton, "Quit the game")
+        Me.ExitButton.UseVisualStyleBackColor = True
+        '
         'PlayButton
         '
         Me.PlayButton.Location = New System.Drawing.Point(6, 19)
@@ -75,6 +95,7 @@ Partial Class GameOfWarForm
         Me.PlayButton.Size = New System.Drawing.Size(88, 39)
         Me.PlayButton.TabIndex = 1
         Me.PlayButton.Text = "&Play Round"
+        Me.ToolTip.SetToolTip(Me.PlayButton, "Play Next Round")
         Me.PlayButton.UseVisualStyleBackColor = True
         '
         'StartButton
@@ -84,6 +105,7 @@ Partial Class GameOfWarForm
         Me.StartButton.Size = New System.Drawing.Size(88, 39)
         Me.StartButton.TabIndex = 0
         Me.StartButton.Text = "&Start Game"
+        Me.ToolTip.SetToolTip(Me.StartButton, "Start New Game")
         Me.StartButton.UseVisualStyleBackColor = True
         '
         'PlayerOneGroupBox
@@ -172,7 +194,7 @@ Partial Class GameOfWarForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GameGroupBox.Controls.Add(Me.LastWinnerLabel)
         Me.GameGroupBox.Controls.Add(Me.RoundsLabel)
-        Me.GameGroupBox.Location = New System.Drawing.Point(12, 12)
+        Me.GameGroupBox.Location = New System.Drawing.Point(12, 27)
         Me.GameGroupBox.Name = "GameGroupBox"
         Me.GameGroupBox.Size = New System.Drawing.Size(632, 58)
         Me.GameGroupBox.TabIndex = 4
@@ -196,14 +218,46 @@ Partial Class GameOfWarForm
         Me.RoundsLabel.TabIndex = 0
         Me.RoundsLabel.Text = "Rounds Played: 0"
         '
-        'ExitButton
+        'TopMenuStrip
         '
-        Me.ExitButton.Location = New System.Drawing.Point(194, 19)
-        Me.ExitButton.Name = "ExitButton"
-        Me.ExitButton.Size = New System.Drawing.Size(88, 39)
-        Me.ExitButton.TabIndex = 2
-        Me.ExitButton.Text = "E&xit"
-        Me.ExitButton.UseVisualStyleBackColor = True
+        Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GameTopMenuItem, Me.HelpTopMenuItem})
+        Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.TopMenuStrip.Name = "TopMenuStrip"
+        Me.TopMenuStrip.Size = New System.Drawing.Size(656, 24)
+        Me.TopMenuStrip.TabIndex = 5
+        Me.TopMenuStrip.Text = "MenuStrip1"
+        '
+        'GameTopMenuItem
+        '
+        Me.GameTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartTopMenuItem, Me.PlayTopMenuItem})
+        Me.GameTopMenuItem.Name = "GameTopMenuItem"
+        Me.GameTopMenuItem.Size = New System.Drawing.Size(50, 20)
+        Me.GameTopMenuItem.Text = "&Game"
+        '
+        'StartTopMenuItem
+        '
+        Me.StartTopMenuItem.Name = "StartTopMenuItem"
+        Me.StartTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StartTopMenuItem.Text = "&Start Game"
+        '
+        'PlayTopMenuItem
+        '
+        Me.PlayTopMenuItem.Name = "PlayTopMenuItem"
+        Me.PlayTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlayTopMenuItem.Text = "&Play Round"
+        '
+        'HelpTopMenuItem
+        '
+        Me.HelpTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutTopMenuItem})
+        Me.HelpTopMenuItem.Name = "HelpTopMenuItem"
+        Me.HelpTopMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpTopMenuItem.Text = "&Help"
+        '
+        'AboutTopMenuItem
+        '
+        Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutTopMenuItem.Text = "&About"
         '
         'GameOfWarForm
         '
@@ -215,6 +269,7 @@ Partial Class GameOfWarForm
         Me.Controls.Add(Me.PlayerOneGroupBox)
         Me.Controls.Add(Me.PlayerControlsGroupBox)
         Me.Controls.Add(Me.TablePictureBox)
+        Me.Controls.Add(Me.TopMenuStrip)
         Me.Name = "GameOfWarForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Game of War"
@@ -226,7 +281,10 @@ Partial Class GameOfWarForm
         Me.PlayerTwoGroupBox.PerformLayout()
         Me.GameGroupBox.ResumeLayout(False)
         Me.GameGroupBox.PerformLayout()
+        Me.TopMenuStrip.ResumeLayout(False)
+        Me.TopMenuStrip.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -246,4 +304,11 @@ Partial Class GameOfWarForm
     Friend WithEvents LastWinnerLabel As Label
     Friend WithEvents RoundsLabel As Label
     Friend WithEvents ExitButton As Button
+    Friend WithEvents TopMenuStrip As MenuStrip
+    Friend WithEvents GameTopMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpTopMenuItem As ToolStripMenuItem
+    Friend WithEvents StartTopMenuItem As ToolStripMenuItem
+    Friend WithEvents PlayTopMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutTopMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolTip As ToolTip
 End Class

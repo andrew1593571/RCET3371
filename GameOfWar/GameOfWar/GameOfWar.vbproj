@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.Designer.vb">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CardGameClasses\DeckOfCards.vb" />
     <Compile Include="CardGameClasses\PlayingCard.vb" />
     <Compile Include="CardGameClasses\WarGameLogic.vb" />
@@ -99,8 +105,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SplashForm.Designer.vb">
+      <DependentUpon>SplashForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SplashForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameOfWarForm.resx">
       <DependentUpon>GameOfWarForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -284,6 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\QS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back_cards-07.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
