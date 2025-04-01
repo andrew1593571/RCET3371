@@ -12,13 +12,14 @@ Public Class GameOfWarForm
 
     Sub UpdateGraphics()
         Dim g As Graphics = TablePictureBox.CreateGraphics
-        Dim pen As New Pen(Color.Black)
-        Dim brush As New SolidBrush(Color.Black)
+        Dim blackBrush As New SolidBrush(Color.Black)
+        Dim whiteBrush As New SolidBrush(Color.White)
         Dim font As New Font(Me.Font.Name, 2.5, Me.Font.Style)
         Dim scaleX!, scaleY!
         Dim cardBack As Image = My.Resources.ResourceManager.GetObject("CardBack")
         Dim table As Queue(Of PlayingCard)
         Dim tableX As Integer = 70
+        Dim gameOverRectangle As New Rectangle(30, 30, 40, 20)
 
         table = warGame.Table
 
@@ -27,8 +28,8 @@ Public Class GameOfWarForm
         TablePictureBox.Refresh()
 
         g.ScaleTransform(scaleX, scaleY)
-        g.DrawString("Player One", font, brush, New Rectangle(40, 0, 20, 5))
-        g.DrawString("Player Two", font, brush, New Rectangle(40, 95, 20, 5))
+        g.DrawString("Player One", font, blackBrush, New Rectangle(40, 0, 20, 5))
+        g.DrawString("Player Two", font, blackBrush, New Rectangle(40, 95, 20, 5))
 
         If warGame.playerOneRemaining <> 0 Then
             g.DrawImage(cardBack, New Rectangle(10, 5, 20, 40))
@@ -37,13 +38,24 @@ Public Class GameOfWarForm
             g.DrawImage(cardBack, New Rectangle(10, 55, 20, 40))
         End If
 
+        If warGame.RoundsPlayed <> 0 Then
+            g.DrawImage(My.Resources.ResourceManager.GetObject(warGame.PlayerOneCard.ShortName), New Rectangle(40, 5, 20, 40))
+            g.DrawImage(My.Resources.ResourceManager.GetObject(warGame.PlayerTwoCard.ShortName), New Rectangle(40, 55, 20, 40))
+        End If
+
         If table.Count <> 0 Then
             For i = 1 To table.Count
-                g.DrawImage(cardBack, New Rectangle(tableX, 30, 20, 40))
+                g.DrawImage(My.Resources.ResourceManager.GetObject(table.Dequeue.ShortName), New Rectangle(tableX, 30, 20, 40))
                 tableX += 5
             Next
         End If
 
+        If warGame.GameOver Then
+            g.FillRectangle(whiteBrush, gameOverRectangle)
+            g.DrawString("Game Over", font, blackBrush, gameOverRectangle)
+        End If
+
+        blackBrush.Dispose()
         g.Dispose()
     End Sub
 
@@ -112,5 +124,9 @@ Public Class GameOfWarForm
         Else
             MsgBox("Please start a new game.")
         End If
+    End Sub
+
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+        Me.Close()
     End Sub
 End Class

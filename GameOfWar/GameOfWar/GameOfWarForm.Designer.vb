@@ -37,6 +37,7 @@ Partial Class GameOfWarForm
         Me.GameGroupBox = New System.Windows.Forms.GroupBox()
         Me.LastWinnerLabel = New System.Windows.Forms.Label()
         Me.RoundsLabel = New System.Windows.Forms.Label()
+        Me.ExitButton = New System.Windows.Forms.Button()
         CType(Me.TablePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PlayerControlsGroupBox.SuspendLayout()
         Me.PlayerOneGroupBox.SuspendLayout()
@@ -51,18 +52,19 @@ Partial Class GameOfWarForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TablePictureBox.Location = New System.Drawing.Point(12, 76)
         Me.TablePictureBox.Name = "TablePictureBox"
-        Me.TablePictureBox.Size = New System.Drawing.Size(538, 461)
+        Me.TablePictureBox.Size = New System.Drawing.Size(632, 461)
         Me.TablePictureBox.TabIndex = 0
         Me.TablePictureBox.TabStop = False
         '
         'PlayerControlsGroupBox
         '
         Me.PlayerControlsGroupBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PlayerControlsGroupBox.Controls.Add(Me.ExitButton)
         Me.PlayerControlsGroupBox.Controls.Add(Me.PlayButton)
         Me.PlayerControlsGroupBox.Controls.Add(Me.StartButton)
-        Me.PlayerControlsGroupBox.Location = New System.Drawing.Point(350, 543)
+        Me.PlayerControlsGroupBox.Location = New System.Drawing.Point(352, 543)
         Me.PlayerControlsGroupBox.Name = "PlayerControlsGroupBox"
-        Me.PlayerControlsGroupBox.Size = New System.Drawing.Size(200, 71)
+        Me.PlayerControlsGroupBox.Size = New System.Drawing.Size(292, 71)
         Me.PlayerControlsGroupBox.TabIndex = 1
         Me.PlayerControlsGroupBox.TabStop = False
         '
@@ -72,7 +74,7 @@ Partial Class GameOfWarForm
         Me.PlayButton.Name = "PlayButton"
         Me.PlayButton.Size = New System.Drawing.Size(88, 39)
         Me.PlayButton.TabIndex = 1
-        Me.PlayButton.Text = "Play Round"
+        Me.PlayButton.Text = "&Play Round"
         Me.PlayButton.UseVisualStyleBackColor = True
         '
         'StartButton
@@ -81,7 +83,7 @@ Partial Class GameOfWarForm
         Me.StartButton.Name = "StartButton"
         Me.StartButton.Size = New System.Drawing.Size(88, 39)
         Me.StartButton.TabIndex = 0
-        Me.StartButton.Text = "Start Game"
+        Me.StartButton.Text = "&Start Game"
         Me.StartButton.UseVisualStyleBackColor = True
         '
         'PlayerOneGroupBox
@@ -166,12 +168,13 @@ Partial Class GameOfWarForm
         '
         'GameGroupBox
         '
-        Me.GameGroupBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GameGroupBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GameGroupBox.Controls.Add(Me.LastWinnerLabel)
         Me.GameGroupBox.Controls.Add(Me.RoundsLabel)
         Me.GameGroupBox.Location = New System.Drawing.Point(12, 12)
         Me.GameGroupBox.Name = "GameGroupBox"
-        Me.GameGroupBox.Size = New System.Drawing.Size(538, 58)
+        Me.GameGroupBox.Size = New System.Drawing.Size(632, 58)
         Me.GameGroupBox.TabIndex = 4
         Me.GameGroupBox.TabStop = False
         '
@@ -193,11 +196,20 @@ Partial Class GameOfWarForm
         Me.RoundsLabel.TabIndex = 0
         Me.RoundsLabel.Text = "Rounds Played: 0"
         '
+        'ExitButton
+        '
+        Me.ExitButton.Location = New System.Drawing.Point(194, 19)
+        Me.ExitButton.Name = "ExitButton"
+        Me.ExitButton.Size = New System.Drawing.Size(88, 39)
+        Me.ExitButton.TabIndex = 2
+        Me.ExitButton.Text = "E&xit"
+        Me.ExitButton.UseVisualStyleBackColor = True
+        '
         'GameOfWarForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(562, 626)
+        Me.ClientSize = New System.Drawing.Size(656, 626)
         Me.Controls.Add(Me.GameGroupBox)
         Me.Controls.Add(Me.PlayerTwoGroupBox)
         Me.Controls.Add(Me.PlayerOneGroupBox)
@@ -233,4 +245,5 @@ Partial Class GameOfWarForm
     Friend WithEvents GameGroupBox As GroupBox
     Friend WithEvents LastWinnerLabel As Label
     Friend WithEvents RoundsLabel As Label
+    Friend WithEvents ExitButton As Button
 End Class

@@ -97,7 +97,14 @@ Public Class WarGameLogic
     ''' <returns></returns>
     Public ReadOnly Property Table As Queue(Of PlayingCard)
         Get
-            Return _table
+            Dim _duplicateTable As New Queue(Of PlayingCard)
+            Dim card As PlayingCard
+            For i = 1 To _table.Count
+                card = _table.Dequeue
+                _duplicateTable.Enqueue(card)
+                _table.Enqueue(card)
+            Next
+            Return _duplicateTable
         End Get
     End Property
 
