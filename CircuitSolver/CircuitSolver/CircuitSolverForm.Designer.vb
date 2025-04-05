@@ -206,19 +206,20 @@ Partial Class CircuitSolverForm
         Me.FrequencyGroupBox.Location = New System.Drawing.Point(6, 18)
         Me.FrequencyGroupBox.Name = "FrequencyGroupBox"
         Me.FrequencyGroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.FrequencyGroupBox.TabIndex = 7
+        Me.FrequencyGroupBox.TabIndex = 0
         Me.FrequencyGroupBox.TabStop = False
         Me.FrequencyGroupBox.Text = "Frequency"
         '
         'FrequencyComboBox
         '
         Me.FrequencyComboBox.ContextMenuStrip = Me.ContextMenuStrip
+        Me.FrequencyComboBox.Cursor = System.Windows.Forms.Cursors.Default
         Me.FrequencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.FrequencyComboBox.FormattingEnabled = True
         Me.FrequencyComboBox.Items.AddRange(New Object() {"Hz", "KHz", "MHz", "GHz"})
-        Me.FrequencyComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.FrequencyComboBox.Location = New System.Drawing.Point(102, 15)
         Me.FrequencyComboBox.Name = "FrequencyComboBox"
-        Me.FrequencyComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.FrequencyComboBox.Size = New System.Drawing.Size(50, 21)
         Me.FrequencyComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.FrequencyComboBox, "Engineering notation for the frequency")
         '
@@ -227,7 +228,7 @@ Partial Class CircuitSolverForm
         Me.FrequencyTextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.FrequencyTextBox.Location = New System.Drawing.Point(6, 15)
         Me.FrequencyTextBox.Name = "FrequencyTextBox"
-        Me.FrequencyTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.FrequencyTextBox.Size = New System.Drawing.Size(90, 20)
         Me.FrequencyTextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.FrequencyTextBox, "Frequency of the generator")
         '
@@ -239,7 +240,7 @@ Partial Class CircuitSolverForm
         Me.RWGroupBox.Location = New System.Drawing.Point(6, 318)
         Me.RWGroupBox.Name = "RWGroupBox"
         Me.RWGroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.RWGroupBox.TabIndex = 6
+        Me.RWGroupBox.TabIndex = 7
         Me.RWGroupBox.TabStop = False
         Me.RWGroupBox.Text = "L1 - Winding"
         '
@@ -249,9 +250,9 @@ Partial Class CircuitSolverForm
         Me.RWComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.RWComboBox.FormattingEnabled = True
         Me.RWComboBox.Items.AddRange(New Object() {"mΩ", "Ω", "kΩ", "MΩ"})
-        Me.RWComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.RWComboBox.Location = New System.Drawing.Point(102, 15)
         Me.RWComboBox.Name = "RWComboBox"
-        Me.RWComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.RWComboBox.Size = New System.Drawing.Size(50, 21)
         Me.RWComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.RWComboBox, "Engineering Notation of L1 Winding")
         '
@@ -260,7 +261,7 @@ Partial Class CircuitSolverForm
         Me.RWTextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.RWTextBox.Location = New System.Drawing.Point(6, 15)
         Me.RWTextBox.Name = "RWTextBox"
-        Me.RWTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.RWTextBox.Size = New System.Drawing.Size(90, 20)
         Me.RWTextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.RWTextBox, "Winding resistance of L1")
         '
@@ -272,7 +273,7 @@ Partial Class CircuitSolverForm
         Me.L1GroupBox.Location = New System.Drawing.Point(6, 276)
         Me.L1GroupBox.Name = "L1GroupBox"
         Me.L1GroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.L1GroupBox.TabIndex = 5
+        Me.L1GroupBox.TabIndex = 6
         Me.L1GroupBox.TabStop = False
         Me.L1GroupBox.Text = "L1"
         '
@@ -282,9 +283,9 @@ Partial Class CircuitSolverForm
         Me.L1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.L1ComboBox.FormattingEnabled = True
         Me.L1ComboBox.Items.AddRange(New Object() {"H", "mH", "µH", "nH", "pH"})
-        Me.L1ComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.L1ComboBox.Location = New System.Drawing.Point(102, 15)
         Me.L1ComboBox.Name = "L1ComboBox"
-        Me.L1ComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.L1ComboBox.Size = New System.Drawing.Size(50, 21)
         Me.L1ComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.L1ComboBox, "Engineering notation of L1")
         '
@@ -293,7 +294,7 @@ Partial Class CircuitSolverForm
         Me.L1TextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.L1TextBox.Location = New System.Drawing.Point(6, 15)
         Me.L1TextBox.Name = "L1TextBox"
-        Me.L1TextBox.Size = New System.Drawing.Size(100, 20)
+        Me.L1TextBox.Size = New System.Drawing.Size(90, 20)
         Me.L1TextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.L1TextBox, "Inductance of L1")
         '
@@ -305,7 +306,7 @@ Partial Class CircuitSolverForm
         Me.C2GroupBox.Location = New System.Drawing.Point(6, 235)
         Me.C2GroupBox.Name = "C2GroupBox"
         Me.C2GroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.C2GroupBox.TabIndex = 4
+        Me.C2GroupBox.TabIndex = 5
         Me.C2GroupBox.TabStop = False
         Me.C2GroupBox.Text = "C2"
         '
@@ -315,9 +316,9 @@ Partial Class CircuitSolverForm
         Me.C2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.C2ComboBox.FormattingEnabled = True
         Me.C2ComboBox.Items.AddRange(New Object() {"F", "mF", "µF", "nF", "pF"})
-        Me.C2ComboBox.Location = New System.Drawing.Point(112, 14)
+        Me.C2ComboBox.Location = New System.Drawing.Point(102, 14)
         Me.C2ComboBox.Name = "C2ComboBox"
-        Me.C2ComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.C2ComboBox.Size = New System.Drawing.Size(50, 21)
         Me.C2ComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.C2ComboBox, "Engineering notation of C2")
         '
@@ -326,7 +327,7 @@ Partial Class CircuitSolverForm
         Me.C2TextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.C2TextBox.Location = New System.Drawing.Point(6, 14)
         Me.C2TextBox.Name = "C2TextBox"
-        Me.C2TextBox.Size = New System.Drawing.Size(100, 20)
+        Me.C2TextBox.Size = New System.Drawing.Size(90, 20)
         Me.C2TextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.C2TextBox, "Capacitance of C2")
         '
@@ -338,7 +339,7 @@ Partial Class CircuitSolverForm
         Me.C1GroupBox.Location = New System.Drawing.Point(6, 193)
         Me.C1GroupBox.Name = "C1GroupBox"
         Me.C1GroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.C1GroupBox.TabIndex = 3
+        Me.C1GroupBox.TabIndex = 4
         Me.C1GroupBox.TabStop = False
         Me.C1GroupBox.Text = "C1"
         '
@@ -348,9 +349,9 @@ Partial Class CircuitSolverForm
         Me.C1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.C1ComboBox.FormattingEnabled = True
         Me.C1ComboBox.Items.AddRange(New Object() {"F", "mF", "µF", "nF", "pF"})
-        Me.C1ComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.C1ComboBox.Location = New System.Drawing.Point(102, 15)
         Me.C1ComboBox.Name = "C1ComboBox"
-        Me.C1ComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.C1ComboBox.Size = New System.Drawing.Size(50, 21)
         Me.C1ComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.C1ComboBox, "Engineering notation of C1")
         '
@@ -359,7 +360,7 @@ Partial Class CircuitSolverForm
         Me.C1TextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.C1TextBox.Location = New System.Drawing.Point(6, 15)
         Me.C1TextBox.Name = "C1TextBox"
-        Me.C1TextBox.Size = New System.Drawing.Size(100, 20)
+        Me.C1TextBox.Size = New System.Drawing.Size(90, 20)
         Me.C1TextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.C1TextBox, "Capacitance of C1")
         '
@@ -371,7 +372,7 @@ Partial Class CircuitSolverForm
         Me.R1GroupBox.Location = New System.Drawing.Point(6, 151)
         Me.R1GroupBox.Name = "R1GroupBox"
         Me.R1GroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.R1GroupBox.TabIndex = 2
+        Me.R1GroupBox.TabIndex = 3
         Me.R1GroupBox.TabStop = False
         Me.R1GroupBox.Text = "R1"
         '
@@ -381,9 +382,9 @@ Partial Class CircuitSolverForm
         Me.R1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.R1ComboBox.FormattingEnabled = True
         Me.R1ComboBox.Items.AddRange(New Object() {"mΩ", "Ω", "kΩ", "MΩ"})
-        Me.R1ComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.R1ComboBox.Location = New System.Drawing.Point(102, 15)
         Me.R1ComboBox.Name = "R1ComboBox"
-        Me.R1ComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.R1ComboBox.Size = New System.Drawing.Size(50, 21)
         Me.R1ComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.R1ComboBox, "Engineering notation of R1")
         '
@@ -392,7 +393,7 @@ Partial Class CircuitSolverForm
         Me.R1TextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.R1TextBox.Location = New System.Drawing.Point(6, 15)
         Me.R1TextBox.Name = "R1TextBox"
-        Me.R1TextBox.Size = New System.Drawing.Size(100, 20)
+        Me.R1TextBox.Size = New System.Drawing.Size(90, 20)
         Me.R1TextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.R1TextBox, "Resistance of R1")
         '
@@ -404,7 +405,7 @@ Partial Class CircuitSolverForm
         Me.RGenGroupBox.Location = New System.Drawing.Point(6, 105)
         Me.RGenGroupBox.Name = "RGenGroupBox"
         Me.RGenGroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.RGenGroupBox.TabIndex = 1
+        Me.RGenGroupBox.TabIndex = 2
         Me.RGenGroupBox.TabStop = False
         Me.RGenGroupBox.Text = "Rgen"
         Me.ToolTip.SetToolTip(Me.RGenGroupBox, "Resistance of the generator")
@@ -415,9 +416,9 @@ Partial Class CircuitSolverForm
         Me.RGenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.RGenComboBox.FormattingEnabled = True
         Me.RGenComboBox.Items.AddRange(New Object() {"mΩ", "Ω", "kΩ", "MΩ"})
-        Me.RGenComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.RGenComboBox.Location = New System.Drawing.Point(102, 15)
         Me.RGenComboBox.Name = "RGenComboBox"
-        Me.RGenComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.RGenComboBox.Size = New System.Drawing.Size(50, 21)
         Me.RGenComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.RGenComboBox, "Engineering Notation of Rgen")
         '
@@ -426,7 +427,7 @@ Partial Class CircuitSolverForm
         Me.RGenTextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.RGenTextBox.Location = New System.Drawing.Point(6, 15)
         Me.RGenTextBox.Name = "RGenTextBox"
-        Me.RGenTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.RGenTextBox.Size = New System.Drawing.Size(90, 20)
         Me.RGenTextBox.TabIndex = 0
         '
         'VGenGroupBox
@@ -437,7 +438,7 @@ Partial Class CircuitSolverForm
         Me.VGenGroupBox.Location = New System.Drawing.Point(6, 59)
         Me.VGenGroupBox.Name = "VGenGroupBox"
         Me.VGenGroupBox.Size = New System.Drawing.Size(162, 40)
-        Me.VGenGroupBox.TabIndex = 0
+        Me.VGenGroupBox.TabIndex = 1
         Me.VGenGroupBox.TabStop = False
         Me.VGenGroupBox.Text = "Vgen"
         '
@@ -447,9 +448,9 @@ Partial Class CircuitSolverForm
         Me.VGenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.VGenComboBox.FormattingEnabled = True
         Me.VGenComboBox.Items.AddRange(New Object() {"mVp", "Vp", "mV", "V"})
-        Me.VGenComboBox.Location = New System.Drawing.Point(112, 15)
+        Me.VGenComboBox.Location = New System.Drawing.Point(102, 15)
         Me.VGenComboBox.Name = "VGenComboBox"
-        Me.VGenComboBox.Size = New System.Drawing.Size(40, 21)
+        Me.VGenComboBox.Size = New System.Drawing.Size(50, 21)
         Me.VGenComboBox.TabIndex = 1
         Me.ToolTip.SetToolTip(Me.VGenComboBox, "Engineering notation and peak vs RMS for Vgen")
         '
@@ -458,7 +459,7 @@ Partial Class CircuitSolverForm
         Me.VGenTextBox.ContextMenuStrip = Me.ContextMenuStrip
         Me.VGenTextBox.Location = New System.Drawing.Point(6, 15)
         Me.VGenTextBox.Name = "VGenTextBox"
-        Me.VGenTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.VGenTextBox.Size = New System.Drawing.Size(90, 20)
         Me.VGenTextBox.TabIndex = 0
         Me.ToolTip.SetToolTip(Me.VGenTextBox, "Voltage of the generator")
         '
@@ -1234,6 +1235,9 @@ Partial Class CircuitSolverForm
         '
         'SchematicPictureBox
         '
+        Me.SchematicPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SchematicPictureBox.BackgroundImage = Global.CircuitSolver.My.Resources.Resources.CircuitSchematic
         Me.SchematicPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.SchematicPictureBox.ContextMenuStrip = Me.ContextMenuStrip
