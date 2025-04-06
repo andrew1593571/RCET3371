@@ -9,7 +9,11 @@ Option Compare Text
 'https://github.com/andrew1593571/RCET3371.git
 
 Public Class CircuitSolverForm
-
+    ''' <summary>
+    ''' verifies and converts all of the input textboxes to an array of doubles. Returns array.
+    ''' 0 is frequency, 1 is Vgen, 2 is Rgen, 3 is R1, 4 is C1, 5 is C2, 6 is L1, 7 is Rw
+    ''' </summary>
+    ''' <returns></returns>
     Function ConvertInputs() As Double()
         Dim _inputs(7) As Double '0 is frequency, 1 is Vgen, 2 is Rgen, 3 is R1, 4 is C1, 5 is C2, 6 is L1, 7 is Rw
         Dim convertError As Boolean
@@ -208,13 +212,107 @@ Public Class CircuitSolverForm
 
     End Function
 
-    Sub calculateValues(_inputs() As Double)
+    ''' <summary>
+    ''' converts radians into degrees
+    ''' </summary>
+    ''' <param name="rad"></param>
+    ''' <returns></returns>
+    Function RadToDeg(rad As Double) As Double
+        Return rad * (180 / Math.PI)
+    End Function
 
-    End Sub
+    Function DegToRad(Deg As Double) As Double
+        Return Deg * (Math.PI / 180)
+    End Function
 
-    Private Sub CalculateButton_Click(sender As Object, e As EventArgs) Handles CalculateButton.Click
+    ''' <summary>
+    ''' Returns an array with the real and imaginary components in an array.
+    ''' 0 is real, 1 is imaginary
+    ''' angle is in radians.
+    ''' </summary>
+    ''' <param name="magnitude"></param>
+    ''' <param name="angle"></param>
+    ''' <returns></returns>
+    Function PolarToRectangle(magnitude As Double, angle As Double) As Double()
+        Dim _rectangular(1) As Double
+        _rectangular(0) = magnitude * Math.Cos(angle) 'real component
+        _rectangular(1) = magnitude * Math.Sin(angle) 'imaginary component
+        Return _rectangular
+    End Function
+
+    ''' <summary>
+    ''' Returns an array with the magnitude and angle in radians
+    ''' 0 is magnitude, 1 is angle
+    ''' </summary>
+    ''' <param name="real"></param>
+    ''' <param name="imaginary"></param>
+    ''' <returns></returns>
+    Function RectangleToPolar(real As Double, imaginary As Double) As Double()
+        Dim _polar(1) As Double
+        _polar(0) = Math.Sqrt((real ^ 2) + (imaginary ^ 2))
+        _polar(1) = Math.Atan(imaginary / real)
+        Return _polar
+    End Function
+
+    ''' <summary>
+    ''' Adds x and y together as polar numbers. Returns and array.
+    ''' 0 is real, 1 is imaginary
+    ''' </summary>
+    ''' <param name="x"></param>
+    ''' <param name="y"></param>
+    ''' <returns></returns>
+    Function AddPolar(x() As Double, y() As Double) As Double()
+        Dim sumPolar(1) As Double
+        Dim sumRectangle(1) As Double
+        Dim xRectangle(1) As Double
+        Dim yRectangle(1) As Double
+
+        'Convert both x and y to rectangle
+        xRectangle = PolarToRectangle(x(0), x(1))
+        yRectangle = PolarToRectangle(y(0), y(1))
+
+        'add the rectangle forms together
+        sumRectangle(0) = xRectangle(0) + yRectangle(0)
+        sumRectangle(1) = xRectangle(1) + yRectangle(1)
+
+        'convert the sum to polar
+        sumPolar = RectangleToPolar(sumRectangle(0), sumRectangle(1))
+        Return sumPolar
+    End Function
+
+    ''' <summary>
+    ''' Returns a human-readable string of the polar voltage value.
+    ''' Handles Polar vs rectangular, RMS vs peak
+    ''' </summary>
+    ''' <param name="value"></param>
+    ''' <returns></returns>
+    Function CreateVoltageString(value() As Double) As String
+        Dim voltage As Double
+        Dim designator As String
+
+        If RMSRadioButton.Checked Then
+            voltage = value(0) * 0.707
+            designator = "V"
+        Else
+            voltage = value(0)
+            designator = "Vp"
+        End If
+
+    End Function
+
+    Sub calculateValues()
         Dim inputs(7) As Double '0 is frequency, 1 is Vgen, 2 is Rgen, 3 is R1, 4 is C1, 5 is C2, 6 is L1, 7 is Rw
+        Dim ZCOne(1) As Double '0 is impedance, 1 is angle
         Dim ZCTwo(1) As Double '0 is impedance, 1 is angle
+        Dim ZLOne(1) As Double '0 is impedance, 1 is angle
+        Dim ZParallel(1) As Double
+        Dim ZSeries(1) As Double
+        Dim ROneRGen(1) As Double
+        Dim ZTotal(1) As Double
+        Dim ITotal(1) As Double
+        Dim VParallel(1) As Double
+
+        'NOTE: ALL ANGLES ARE IN RADIANS UNTIL CONVERTED FOR DISPLAY
 
         'convert the inputs
         inputs = ConvertInputs()
@@ -222,21 +320,59 @@ Public Class CircuitSolverForm
         If inputs Is Nothing Then
             Exit Sub
         End If
-        MsgBox(inputs(0))
 
+        'C1 impedance
+        ZCOne(0) = 1 / (2 * Math.PI * inputs(4) * inputs(0))
+        ZCOne(1) = DegToRad(-90)
+
+        'C2 impedance
         ZCTwo(0) = 1 / (2 * Math.PI * inputs(5) * inputs(0))
-        ZCTwo(1) = -90
+        ZCTwo(1) = DegToRad(-90)
+
+        ROneRGen(0) = inputs(2) + inputs(3)
+        ROneRGen(1) = 0
+
+        'L1 impedance
+        ZLOne = RectangleToPolar(inputs(7), 2 * Math.PI * inputs(0) * inputs(6))
+
+        'Parallel impedance
+        ZParallel(0) = (ZLOne(0) * ZCTwo(0)) / (AddPolar(ZLOne, ZCTwo)(0))
+        ZParallel(1) = (ZLOne(1) + ZCTwo(1)) - AddPolar(ZLOne, ZCTwo)(1)
+
+        'series impedance, Rgen+R1+C1
+        ZSeries = AddPolar(ROneRGen, ZCOne)
+        ZTotal = AddPolar(ZSeries, ZParallel)
+
+        'total current
+        ITotal(0) = inputs(1) / ZTotal(0)
+        ITotal(1) = 0 - ZTotal(1)
+
+        MsgBox(ITotal(0) & vbNewLine & RadToDeg(ITotal(1)))
+
+    End Sub
+
+    Private Sub CalculateButton_Click(sender As Object, e As EventArgs) Handles CalculateButton.Click
+        calculateValues()
     End Sub
 
     Private Sub CircuitSolverForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         'set the default input units
-        FrequencyComboBox.SelectedIndex = 0
+        FrequencyComboBox.SelectedIndex = 1
         VGenComboBox.SelectedIndex = 1
         RGenComboBox.SelectedIndex = 1
         R1ComboBox.SelectedIndex = 1
-        RWComboBox.SelectedIndex = 1
+        RWComboBox.SelectedIndex = 2
         C1ComboBox.SelectedIndex = 2
         C2ComboBox.SelectedIndex = 2
-        L1ComboBox.SelectedIndex = 1
+        L1ComboBox.SelectedIndex = 0
+
+        FrequencyTextBox.Text = "5"
+        VGenTextBox.Text = "5"
+        RGenTextBox.Text = "5"
+        R1TextBox.Text = "5"
+        RWTextBox.Text = "500"
+        C1TextBox.Text = "5"
+        C2TextBox.Text = "5"
+        L1TextBox.Text = "5"
     End Sub
 End Class
