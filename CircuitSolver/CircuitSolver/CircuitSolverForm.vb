@@ -362,17 +362,19 @@ Public Class CircuitSolverForm
     End Function
 
     ''' <summary>
-    ''' Returns a human-readable string of the polar impedance value
+    ''' Returns a human-readable string of the polar impedance value.
+    ''' A true in polarForm produces a polar form string.
+    ''' A False in polarForm produces a rectangular form string
     ''' </summary>
     ''' <param name="value"></param>
     ''' <returns></returns>
-    Function CreateImpedanceString(value() As Double) As String
+    Function CreateImpedanceString(value() As Double, polarForm As Boolean) As String
         Dim rectangular(1) As Double
         Dim retString As String
 
         rectangular = PolarToRectangle(value(0), value(1))
 
-        If PolarRadioButton.Checked Then
+        If polarForm Then
             retString = $"{ConvertToEngineering(value(0))}Ω ∠{Math.Round(RadToDeg(value(1)), 3)}°"
         Else
             If rectangular(1) < 0 Then
@@ -387,10 +389,14 @@ Public Class CircuitSolverForm
     ''' <summary>
     ''' Returns a human-readable string of the polar voltage value.
     ''' Handles Polar vs rectangular, RMS vs peak
+    ''' A true in polarForm produces a polar form string.
+    ''' A False in polarForm produces a rectangular form string.
+    ''' A true in RMSVoltage produces results in RMS.
+    ''' A False in RMSVoltage produces results in Vp.
     ''' </summary>
     ''' <param name="value"></param>
     ''' <returns></returns>
-    Function CreateVoltageString(value() As Double) As String
+    Function CreateVoltageString(value() As Double, polarForm As Boolean, RMSVoltage As Boolean) As String
         Dim polar(1) As Double
         Dim rectangular(1) As Double
         Dim designator As String
@@ -398,7 +404,7 @@ Public Class CircuitSolverForm
 
         polar(1) = value(1)
 
-        If RMSRadioButton.Checked Then
+        If RMSVoltage Then
             polar(0) = value(0) * 0.707
             designator = "V"
         Else
@@ -408,7 +414,7 @@ Public Class CircuitSolverForm
 
         rectangular = PolarToRectangle(polar(0), polar(1))
 
-        If PolarRadioButton.Checked Then
+        If polarForm Then
             retString = $"{ConvertToEngineering(polar(0))}{designator} ∠{Math.Round(RadToDeg(polar(1)), 3)}°"
         Else
             If rectangular(0) < 0 Then 'real voltage is negative
@@ -428,10 +434,14 @@ Public Class CircuitSolverForm
     ''' <summary>
     ''' Returns a human-readable string of the polar current value.
     ''' Handles Polar vs rectangular, RMS vs peak
+    ''' A true in polarForm produces a polar form string.
+    ''' A False in polarForm produces a rectangular form string.
+    ''' A true in RMSCurrent produces results in RMS.
+    ''' A False in RMSCurrent produces results in Vp.
     ''' </summary>
     ''' <param name="value"></param>
     ''' <returns></returns>
-    Function CreateCurrentString(value() As Double) As String
+    Function CreateCurrentString(value() As Double, polarForm As Boolean, RMSCurrent As Boolean) As String
         Dim polar(1) As Double
         Dim rectangular(1) As Double
         Dim designator As String
@@ -439,7 +449,7 @@ Public Class CircuitSolverForm
 
         polar(1) = value(1)
 
-        If RMSRadioButton.Checked Then
+        If RMSCurrent Then
             polar(0) = value(0) * 0.707
             designator = "A"
         Else
@@ -449,7 +459,7 @@ Public Class CircuitSolverForm
 
         rectangular = PolarToRectangle(polar(0), polar(1))
 
-        If PolarRadioButton.Checked Then
+        If polarForm Then
             retString = $"{ConvertToEngineering(polar(0))}{designator} ∠{Math.Round(RadToDeg(polar(1)), 3)}°"
         Else
             If rectangular(0) < 0 Then 'real current is negative
@@ -479,7 +489,7 @@ Public Class CircuitSolverForm
         Return retString
     End Function
 
-    Sub calculateValues()
+    Sub calculateValues(Optional saveToFile As Boolean = False)
         Dim inputs(7) As Double '0 is frequency, 1 is Vgen, 2 is Rgen, 3 is R1, 4 is C1, 5 is C2, 6 is L1, 7 is Rw
 
         'impedance variables, 0 is impedance, 1 is angle
@@ -575,32 +585,29 @@ Public Class CircuitSolverForm
         PCTwo = CalculatePower(VParallel, ICTwo)
         PLOne = CalculatePower(VParallel, ILOne)
 
-        'MsgBox(ITotal(0) & vbNewLine & RadToDeg(ITotal(1)))
-        'MsgBox(CreateImpedanceString(ZTotal))
-
         'set all impedance labels in the table
-        TotalImpedanceLabel.Text = CreateImpedanceString(ZTotal)
-        RGenImpedanceLabel.Text = CreateImpedanceString(RGen)
-        R1ImpedanceLabel.Text = CreateImpedanceString(ROne)
-        C1ImpedanceLabel.Text = CreateImpedanceString(ZCOne)
-        C2ImpedanceLabel.Text = CreateImpedanceString(ZCTwo)
-        L1ImpedanceLabel.Text = CreateImpedanceString(ZLOne)
+        TotalImpedanceLabel.Text = CreateImpedanceString(ZTotal, PolarRadioButton.Checked)
+        RGenImpedanceLabel.Text = CreateImpedanceString(RGen, PolarRadioButton.Checked)
+        R1ImpedanceLabel.Text = CreateImpedanceString(ROne, PolarRadioButton.Checked)
+        C1ImpedanceLabel.Text = CreateImpedanceString(ZCOne, PolarRadioButton.Checked)
+        C2ImpedanceLabel.Text = CreateImpedanceString(ZCTwo, PolarRadioButton.Checked)
+        L1ImpedanceLabel.Text = CreateImpedanceString(ZLOne, PolarRadioButton.Checked)
 
         'set all voltage labels in the table
-        L1VoltageLabel.Text = CreateVoltageString(VParallel)
-        C2VoltageLabel.Text = CreateVoltageString(VParallel)
-        C1VoltageLabel.Text = CreateVoltageString(VCOne)
-        R1VoltageLabel.Text = CreateVoltageString(VROne)
-        RGenVoltageLabel.Text = CreateVoltageString(VRGen)
-        TotalVoltageLabel.Text = CreateVoltageString(VTotal)
+        L1VoltageLabel.Text = CreateVoltageString(VParallel, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        C2VoltageLabel.Text = CreateVoltageString(VParallel, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        C1VoltageLabel.Text = CreateVoltageString(VCOne, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        R1VoltageLabel.Text = CreateVoltageString(VROne, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        RGenVoltageLabel.Text = CreateVoltageString(VRGen, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        TotalVoltageLabel.Text = CreateVoltageString(VTotal, PolarRadioButton.Checked, RMSRadioButton.Checked)
 
         'set all current labels in the table
-        TotalCurrentLabel.Text = CreateCurrentString(ITotal)
-        RGenCurrentLabel.Text = CreateCurrentString(ITotal)
-        R1CurrentLabel.Text = CreateCurrentString(ITotal)
-        C1CurrentLabel.Text = CreateCurrentString(ITotal)
-        C2CurrentLabel.Text = CreateCurrentString(ICTwo)
-        L1CurrentLabel.Text = CreateCurrentString(ILOne)
+        TotalCurrentLabel.Text = CreateCurrentString(ITotal, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        RGenCurrentLabel.Text = CreateCurrentString(ITotal, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        R1CurrentLabel.Text = CreateCurrentString(ITotal, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        C1CurrentLabel.Text = CreateCurrentString(ITotal, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        C2CurrentLabel.Text = CreateCurrentString(ICTwo, PolarRadioButton.Checked, RMSRadioButton.Checked)
+        L1CurrentLabel.Text = CreateCurrentString(ILOne, PolarRadioButton.Checked, RMSRadioButton.Checked)
 
         'set all power labels in the table
         TotalPowerLabel.Text = CreatePowerString(PTotal)
@@ -609,6 +616,11 @@ Public Class CircuitSolverForm
         C1PowerLabel.Text = CreatePowerString(PCOne)
         C2PowerLabel.Text = CreatePowerString(PCTwo)
         L1PowerLabel.Text = CreatePowerString(PLOne)
+
+        'save to file in history
+        If saveToFile Then
+
+        End If
     End Sub
 
     Private Sub CalculateButton_Click(sender As Object, e As EventArgs) Handles CalculateButton.Click, CalculateContextMenuItem.Click, CalculateTopMenuItem.Click
