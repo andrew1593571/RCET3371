@@ -696,23 +696,15 @@ Public Class CircuitSolverForm
 
     Private Sub CircuitSolverForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         'set the default input units
-        FrequencyComboBox.SelectedIndex = 1
+        FrequencyComboBox.SelectedIndex = 0
         VGenComboBox.SelectedIndex = 1
         RGenComboBox.SelectedIndex = 1
         R1ComboBox.SelectedIndex = 1
-        RWComboBox.SelectedIndex = 2
+        RWComboBox.SelectedIndex = 1
         C1ComboBox.SelectedIndex = 2
         C2ComboBox.SelectedIndex = 2
-        L1ComboBox.SelectedIndex = 0
+        L1ComboBox.SelectedIndex = 1
 
-        FrequencyTextBox.Text = "5"
-        VGenTextBox.Text = "5"
-        RGenTextBox.Text = "5"
-        R1TextBox.Text = "5"
-        RWTextBox.Text = "500"
-        C1TextBox.Text = "5"
-        C2TextBox.Text = "5"
-        L1TextBox.Text = "5"
     End Sub
 
     ''' <summary>
