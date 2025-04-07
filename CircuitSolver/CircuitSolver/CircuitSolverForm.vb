@@ -725,4 +725,8 @@ Public Class CircuitSolverForm
     Private Sub HistoryTopMenuItem_Click(sender As Object, e As EventArgs) Handles HistoryTopMenuItem.Click, HistoryContextMenuItem.Click
         Process.Start("explorer.exe", My.Application.Info.DirectoryPath)
     End Sub
+
+    Private Sub AboutTopMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
+        AboutForm.Show()
+    End Sub
 End Class

@@ -1216,7 +1216,7 @@ Partial Class CircuitSolverForm
         'AboutTopMenuItem
         '
         Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
-        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutTopMenuItem.Text = "&About"
         '
         'SchematicPictureBox
