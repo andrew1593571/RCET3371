@@ -368,19 +368,24 @@ Public Class CircuitSolverForm
     ''' </summary>
     ''' <param name="value"></param>
     ''' <returns></returns>
-    Function CreateImpedanceString(value() As Double, polarForm As Boolean) As String
+    Function CreateImpedanceString(value() As Double, polarForm As Boolean, Optional ohmSymbol As Boolean = False) As String
         Dim rectangular(1) As Double
         Dim retString As String
+        Dim symbol As String
+
+        If ohmSymbol Then
+            symbol = "Ω"
+        End If
 
         rectangular = PolarToRectangle(value(0), value(1))
 
         If polarForm Then
-            retString = $"{ConvertToEngineering(value(0))}Ω ∠{Math.Round(RadToDeg(value(1)), 3)}°"
+            retString = $"{ConvertToEngineering(value(0))}{symbol} @{Math.Round(RadToDeg(value(1)), 3)}°"
         Else
             If rectangular(1) < 0 Then
-                retString = $"{ConvertToEngineering(rectangular(0))}Ω - j{ConvertToEngineering(rectangular(1))}Ω"
+                retString = $"{ConvertToEngineering(rectangular(0))}{symbol} - j{ConvertToEngineering(rectangular(1))}{symbol}"
             Else
-                retString = $"{ConvertToEngineering(rectangular(0))}Ω + j{ConvertToEngineering(rectangular(1))}Ω"
+                retString = $"{ConvertToEngineering(rectangular(0))}{symbol} + j{ConvertToEngineering(rectangular(1))}{symbol}"
             End If
         End If
         Return retString
@@ -415,7 +420,7 @@ Public Class CircuitSolverForm
         rectangular = PolarToRectangle(polar(0), polar(1))
 
         If polarForm Then
-            retString = $"{ConvertToEngineering(polar(0))}{designator} ∠{Math.Round(RadToDeg(polar(1)), 3)}°"
+            retString = $"{ConvertToEngineering(polar(0))}{designator} @{Math.Round(RadToDeg(polar(1)), 3)}°"
         Else
             If rectangular(0) < 0 Then 'real voltage is negative
                 retString = $"-{ConvertToEngineering(rectangular(0))}{designator} "
@@ -460,7 +465,7 @@ Public Class CircuitSolverForm
         rectangular = PolarToRectangle(polar(0), polar(1))
 
         If polarForm Then
-            retString = $"{ConvertToEngineering(polar(0))}{designator} ∠{Math.Round(RadToDeg(polar(1)), 3)}°"
+            retString = $"{ConvertToEngineering(polar(0))}{designator} @{Math.Round(RadToDeg(polar(1)), 3)}°"
         Else
             If rectangular(0) < 0 Then 'real current is negative
                 retString = $"-{ConvertToEngineering(rectangular(0))}{designator} "
@@ -586,12 +591,12 @@ Public Class CircuitSolverForm
         PLOne = CalculatePower(VParallel, ILOne)
 
         'set all impedance labels in the table
-        TotalImpedanceLabel.Text = CreateImpedanceString(ZTotal, PolarRadioButton.Checked)
-        RGenImpedanceLabel.Text = CreateImpedanceString(RGen, PolarRadioButton.Checked)
-        R1ImpedanceLabel.Text = CreateImpedanceString(ROne, PolarRadioButton.Checked)
-        C1ImpedanceLabel.Text = CreateImpedanceString(ZCOne, PolarRadioButton.Checked)
-        C2ImpedanceLabel.Text = CreateImpedanceString(ZCTwo, PolarRadioButton.Checked)
-        L1ImpedanceLabel.Text = CreateImpedanceString(ZLOne, PolarRadioButton.Checked)
+        TotalImpedanceLabel.Text = CreateImpedanceString(ZTotal, PolarRadioButton.Checked, True)
+        RGenImpedanceLabel.Text = CreateImpedanceString(RGen, PolarRadioButton.Checked, True)
+        R1ImpedanceLabel.Text = CreateImpedanceString(ROne, PolarRadioButton.Checked, True)
+        C1ImpedanceLabel.Text = CreateImpedanceString(ZCOne, PolarRadioButton.Checked, True)
+        C2ImpedanceLabel.Text = CreateImpedanceString(ZCTwo, PolarRadioButton.Checked, True)
+        L1ImpedanceLabel.Text = CreateImpedanceString(ZLOne, PolarRadioButton.Checked, True)
 
         'set all voltage labels in the table
         L1VoltageLabel.Text = CreateVoltageString(VParallel, PolarRadioButton.Checked, RMSRadioButton.Checked)
@@ -619,12 +624,74 @@ Public Class CircuitSolverForm
 
         'save to file in history
         If saveToFile Then
+            'create new history file
+            FileOpen(1, $"SolvedCircuit-{Date.Now.ToString("ddMMMyyyy-hhmmss")}.txt", OpenMode.Output)
 
+            'add file header
+            PrintLine(1, "Circuit Log")
+            PrintLine(1, "Circuit Solver by Andrew Keller")
+            PrintLine(1, "RCET3371 - Spring 2025")
+            PrintLine(1, "https://github.com/andrew1593571/RCET3371.git")
+            PrintLine(1, "")
+            PrintLine(1, $"Date: {Date.Now.ToString("f")}")
+            PrintLine(1, "")
+
+            'Inputs
+            PrintLine(1, $"Frequency: {ConvertToEngineering(inputs(0))}Hz")
+            PrintLine(1, $"Vgen: {VGenTextBox.Text}{VGenComboBox.Text}")
+            PrintLine(1, $"Rgen: {RGenTextBox.Text}{RGenComboBox.Text}")
+            PrintLine(1, $"R1: {R1TextBox.Text}{R1ComboBox.Text}")
+            PrintLine(1, $"C1: {C1TextBox.Text}{C1ComboBox.Text}")
+            PrintLine(1, $"C2: {C2TextBox.Text}{C2ComboBox.Text}")
+            PrintLine(1, $"L1: {L1TextBox.Text}{L1ComboBox.Text}")
+            PrintLine(1, $"Winding: {RWTextBox.Text}{RWComboBox.Text}")
+            PrintLine(1, "")
+            PrintLine(1, "")
+
+            'print polar outputs
+            PrintLine(1, "Outputs: (Polar)")
+            PrintLine(1, "____________________________________________________________________________________________________________")
+            PrintLine(1, "| Component |       Impedance      |        Voltage        |        Current        |         Power         |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|   Total   | {CreateImpedanceString(ZTotal, True).PadRight(20)} | {CreateVoltageString(VTotal, True, False).PadRight(21)} | {CreateCurrentString(ITotal, True, False).PadRight(21)} | {CreatePowerString(PTotal).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|   Rgen    | {CreateImpedanceString(RGen, True).PadRight(20)} | {CreateVoltageString(VRGen, True, False).PadRight(21)} | {CreateCurrentString(ITotal, True, False).PadRight(21)} | {CreatePowerString(PRGen).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    R1     | {CreateImpedanceString(ROne, True).PadRight(20)} | {CreateVoltageString(VROne, True, False).PadRight(21)} | {CreateCurrentString(ITotal, True, False).PadRight(21)} | {CreatePowerString(PROne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    C1     | {CreateImpedanceString(ZCOne, True).PadRight(20)} | {CreateVoltageString(VCOne, True, False).PadRight(21)} | {CreateCurrentString(ITotal, True, False).PadRight(21)} | {CreatePowerString(PCOne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    C2     | {CreateImpedanceString(ZCTwo, True).PadRight(20)} | {CreateVoltageString(VParallel, True, False).PadRight(21)} | {CreateCurrentString(ICTwo, True, False).PadRight(21)} | {CreatePowerString(PCTwo).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    L1     | {CreateImpedanceString(ZLOne, True).PadRight(20)} | {CreateVoltageString(VParallel, True, False).PadRight(21)} | {CreateCurrentString(ILOne, True, False).PadRight(21)} | {CreatePowerString(PLOne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, "")
+            PrintLine(1, "")
+
+            'print Rectangular outputs
+            PrintLine(1, "Outputs: (Rectangular)")
+            PrintLine(1, "________________________________________________________________________________________________________________________")
+            PrintLine(1, "| Component |         Impedance        |          Voltage          |          Current          |         Power         |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|   Total   | {CreateImpedanceString(ZTotal, False).PadRight(24)} | {CreateVoltageString(VTotal, False, False).PadRight(25)} | {CreateCurrentString(ITotal, False, False).PadRight(25)} | {CreatePowerString(PTotal).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|   Rgen    | {CreateImpedanceString(RGen, False).PadRight(24)} | {CreateVoltageString(VRGen, False, False).PadRight(25)} | {CreateCurrentString(ITotal, False, False).PadRight(25)} | {CreatePowerString(PRGen).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    R1     | {CreateImpedanceString(ROne, False).PadRight(24)} | {CreateVoltageString(VROne, False, False).PadRight(25)} | {CreateCurrentString(ITotal, False, False).PadRight(25)} | {CreatePowerString(PROne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    C1     | {CreateImpedanceString(ZCOne, False).PadRight(24)} | {CreateVoltageString(VCOne, False, False).PadRight(25)} | {CreateCurrentString(ITotal, False, False).PadRight(25)} | {CreatePowerString(PCOne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    C2     | {CreateImpedanceString(ZCTwo, False).PadRight(24)} | {CreateVoltageString(VParallel, False, False).PadRight(25)} | {CreateCurrentString(ICTwo, False, False).PadRight(25)} | {CreatePowerString(PCTwo).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+            PrintLine(1, $"|    L1     | {CreateImpedanceString(ZLOne, False).PadRight(24)} | {CreateVoltageString(VParallel, False, False).PadRight(25)} | {CreateCurrentString(ILOne, False, False).PadRight(25)} | {CreatePowerString(PLOne).PadRight(21)} |")
+            PrintLine(1, "------------------------------------------------------------------------------------------------------------------------")
+
+            FileClose(1)
         End If
     End Sub
 
     Private Sub CalculateButton_Click(sender As Object, e As EventArgs) Handles CalculateButton.Click, CalculateContextMenuItem.Click, CalculateTopMenuItem.Click
-        calculateValues()
+        calculateValues(True)
     End Sub
 
     Private Sub CircuitSolverForm_Load(sender As Object, e As EventArgs) Handles Me.Load
