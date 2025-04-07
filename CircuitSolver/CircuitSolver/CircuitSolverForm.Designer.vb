@@ -26,7 +26,6 @@ Partial Class CircuitSolverForm
         Me.InputsGroupBox = New System.Windows.Forms.GroupBox()
         Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CalculateContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistoryContextToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.HistoryContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutContextToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -94,7 +93,7 @@ Partial Class CircuitSolverForm
         Me.RGenPowerLabel = New System.Windows.Forms.Label()
         Me.TotalImpedanceLabel = New System.Windows.Forms.Label()
         Me.ControlsGroupBox = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ExitButton = New System.Windows.Forms.Button()
         Me.CalculateButton = New System.Windows.Forms.Button()
         Me.PeakRMSGroupBox = New System.Windows.Forms.GroupBox()
         Me.RMSRadioButton = New System.Windows.Forms.RadioButton()
@@ -105,7 +104,6 @@ Partial Class CircuitSolverForm
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculateTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistoryTopToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.HistoryTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitTopToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -154,21 +152,15 @@ Partial Class CircuitSolverForm
         '
         'ContextMenuStrip
         '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculateContextMenuItem, Me.ResetContextMenuItem, Me.HistoryContextToolStripSeparator, Me.HistoryContextMenuItem, Me.AboutContextToolStripSeparator, Me.AboutContextMenuItem, Me.ExitContextMenuItem})
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculateContextMenuItem, Me.HistoryContextToolStripSeparator, Me.HistoryContextMenuItem, Me.AboutContextToolStripSeparator, Me.AboutContextMenuItem, Me.ExitContextMenuItem})
         Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(181, 126)
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(181, 104)
         '
         'CalculateContextMenuItem
         '
         Me.CalculateContextMenuItem.Name = "CalculateContextMenuItem"
         Me.CalculateContextMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CalculateContextMenuItem.Text = "&Calculate"
-        '
-        'ResetContextMenuItem
-        '
-        Me.ResetContextMenuItem.Name = "ResetContextMenuItem"
-        Me.ResetContextMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ResetContextMenuItem.Text = "&Reset"
         '
         'HistoryContextToolStripSeparator
         '
@@ -544,7 +536,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L1PowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.L1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.L1PowerLabel.Location = New System.Drawing.Point(468, 205)
         Me.L1PowerLabel.Name = "L1PowerLabel"
         Me.L1PowerLabel.Size = New System.Drawing.Size(111, 36)
@@ -559,7 +551,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L1CurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.L1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.L1CurrentLabel.Location = New System.Drawing.Point(352, 205)
         Me.L1CurrentLabel.Name = "L1CurrentLabel"
         Me.L1CurrentLabel.Size = New System.Drawing.Size(109, 36)
@@ -574,7 +566,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L1VoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.L1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.L1VoltageLabel.Location = New System.Drawing.Point(236, 205)
         Me.L1VoltageLabel.Name = "L1VoltageLabel"
         Me.L1VoltageLabel.Size = New System.Drawing.Size(109, 36)
@@ -589,7 +581,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L1ImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.L1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.L1ImpedanceLabel.Location = New System.Drawing.Point(120, 205)
         Me.L1ImpedanceLabel.Name = "L1ImpedanceLabel"
         Me.L1ImpedanceLabel.Size = New System.Drawing.Size(109, 36)
@@ -604,7 +596,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C2PowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C2PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C2PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C2PowerLabel.Location = New System.Drawing.Point(468, 171)
         Me.C2PowerLabel.Name = "C2PowerLabel"
         Me.C2PowerLabel.Size = New System.Drawing.Size(111, 33)
@@ -619,7 +611,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C2CurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C2CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C2CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C2CurrentLabel.Location = New System.Drawing.Point(352, 171)
         Me.C2CurrentLabel.Name = "C2CurrentLabel"
         Me.C2CurrentLabel.Size = New System.Drawing.Size(109, 33)
@@ -634,7 +626,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C2VoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C2VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C2VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C2VoltageLabel.Location = New System.Drawing.Point(236, 171)
         Me.C2VoltageLabel.Name = "C2VoltageLabel"
         Me.C2VoltageLabel.Size = New System.Drawing.Size(109, 33)
@@ -649,7 +641,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C2ImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C2ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C2ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C2ImpedanceLabel.Location = New System.Drawing.Point(120, 171)
         Me.C2ImpedanceLabel.Name = "C2ImpedanceLabel"
         Me.C2ImpedanceLabel.Size = New System.Drawing.Size(109, 33)
@@ -664,7 +656,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C1PowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1PowerLabel.Location = New System.Drawing.Point(468, 137)
         Me.C1PowerLabel.Name = "C1PowerLabel"
         Me.C1PowerLabel.Size = New System.Drawing.Size(111, 33)
@@ -679,7 +671,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C1CurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1CurrentLabel.Location = New System.Drawing.Point(352, 137)
         Me.C1CurrentLabel.Name = "C1CurrentLabel"
         Me.C1CurrentLabel.Size = New System.Drawing.Size(109, 33)
@@ -694,7 +686,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C1VoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1VoltageLabel.Location = New System.Drawing.Point(236, 137)
         Me.C1VoltageLabel.Name = "C1VoltageLabel"
         Me.C1VoltageLabel.Size = New System.Drawing.Size(109, 33)
@@ -709,7 +701,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.C1ImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.C1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1ImpedanceLabel.Location = New System.Drawing.Point(120, 137)
         Me.C1ImpedanceLabel.Name = "C1ImpedanceLabel"
         Me.C1ImpedanceLabel.Size = New System.Drawing.Size(109, 33)
@@ -724,7 +716,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.R1PowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.R1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.R1PowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.R1PowerLabel.Location = New System.Drawing.Point(468, 103)
         Me.R1PowerLabel.Name = "R1PowerLabel"
         Me.R1PowerLabel.Size = New System.Drawing.Size(111, 33)
@@ -739,7 +731,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.R1CurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.R1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.R1CurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.R1CurrentLabel.Location = New System.Drawing.Point(352, 103)
         Me.R1CurrentLabel.Name = "R1CurrentLabel"
         Me.R1CurrentLabel.Size = New System.Drawing.Size(109, 33)
@@ -754,7 +746,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.R1VoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.R1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.R1VoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.R1VoltageLabel.Location = New System.Drawing.Point(236, 103)
         Me.R1VoltageLabel.Name = "R1VoltageLabel"
         Me.R1VoltageLabel.Size = New System.Drawing.Size(109, 33)
@@ -769,7 +761,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.R1ImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.R1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.R1ImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.R1ImpedanceLabel.Location = New System.Drawing.Point(120, 103)
         Me.R1ImpedanceLabel.Name = "R1ImpedanceLabel"
         Me.R1ImpedanceLabel.Size = New System.Drawing.Size(109, 33)
@@ -784,7 +776,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TotalPowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.TotalPowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalPowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalPowerLabel.Location = New System.Drawing.Point(468, 35)
         Me.TotalPowerLabel.Name = "TotalPowerLabel"
         Me.TotalPowerLabel.Size = New System.Drawing.Size(111, 33)
@@ -799,7 +791,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TotalCurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.TotalCurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalCurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalCurrentLabel.Location = New System.Drawing.Point(352, 35)
         Me.TotalCurrentLabel.Name = "TotalCurrentLabel"
         Me.TotalCurrentLabel.Size = New System.Drawing.Size(109, 33)
@@ -814,7 +806,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TotalVoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.TotalVoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalVoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalVoltageLabel.Location = New System.Drawing.Point(236, 35)
         Me.TotalVoltageLabel.Name = "TotalVoltageLabel"
         Me.TotalVoltageLabel.Size = New System.Drawing.Size(109, 33)
@@ -983,7 +975,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RGenImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.RGenImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RGenImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RGenImpedanceLabel.Location = New System.Drawing.Point(120, 69)
         Me.RGenImpedanceLabel.Name = "RGenImpedanceLabel"
         Me.RGenImpedanceLabel.Size = New System.Drawing.Size(109, 33)
@@ -998,7 +990,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RGenVoltageLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.RGenVoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RGenVoltageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RGenVoltageLabel.Location = New System.Drawing.Point(236, 69)
         Me.RGenVoltageLabel.Name = "RGenVoltageLabel"
         Me.RGenVoltageLabel.Size = New System.Drawing.Size(109, 33)
@@ -1013,7 +1005,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RGenCurrentLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.RGenCurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RGenCurrentLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RGenCurrentLabel.Location = New System.Drawing.Point(352, 69)
         Me.RGenCurrentLabel.Name = "RGenCurrentLabel"
         Me.RGenCurrentLabel.Size = New System.Drawing.Size(109, 33)
@@ -1028,7 +1020,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RGenPowerLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.RGenPowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RGenPowerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RGenPowerLabel.Location = New System.Drawing.Point(468, 69)
         Me.RGenPowerLabel.Name = "RGenPowerLabel"
         Me.RGenPowerLabel.Size = New System.Drawing.Size(111, 33)
@@ -1043,7 +1035,7 @@ Partial Class CircuitSolverForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TotalImpedanceLabel.ContextMenuStrip = Me.ContextMenuStrip
-        Me.TotalImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TotalImpedanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TotalImpedanceLabel.Location = New System.Drawing.Point(120, 35)
         Me.TotalImpedanceLabel.Name = "TotalImpedanceLabel"
         Me.TotalImpedanceLabel.Size = New System.Drawing.Size(109, 33)
@@ -1056,7 +1048,7 @@ Partial Class CircuitSolverForm
         '
         Me.ControlsGroupBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ControlsGroupBox.ContextMenuStrip = Me.ContextMenuStrip
-        Me.ControlsGroupBox.Controls.Add(Me.Button2)
+        Me.ControlsGroupBox.Controls.Add(Me.ExitButton)
         Me.ControlsGroupBox.Controls.Add(Me.CalculateButton)
         Me.ControlsGroupBox.Controls.Add(Me.PeakRMSGroupBox)
         Me.ControlsGroupBox.Controls.Add(Me.PolarRectangleGroupBox)
@@ -1067,17 +1059,17 @@ Partial Class CircuitSolverForm
         Me.ControlsGroupBox.TabStop = False
         Me.ControlsGroupBox.Text = "Controls"
         '
-        'Button2
+        'ExitButton
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.ContextMenuStrip = Me.ContextMenuStrip
-        Me.Button2.Location = New System.Drawing.Point(460, 19)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(125, 65)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "E&xit"
-        Me.ToolTip.SetToolTip(Me.Button2, "Exit the Circuit Solver")
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.ExitButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ExitButton.ContextMenuStrip = Me.ContextMenuStrip
+        Me.ExitButton.Location = New System.Drawing.Point(460, 19)
+        Me.ExitButton.Name = "ExitButton"
+        Me.ExitButton.Size = New System.Drawing.Size(125, 65)
+        Me.ExitButton.TabIndex = 4
+        Me.ExitButton.Text = "E&xit"
+        Me.ToolTip.SetToolTip(Me.ExitButton, "Exit the Circuit Solver")
+        Me.ExitButton.UseVisualStyleBackColor = True
         '
         'CalculateButton
         '
@@ -1181,7 +1173,7 @@ Partial Class CircuitSolverForm
         '
         'FileTopMenuItem
         '
-        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculateTopMenuItem, Me.ResetTopMenuItem, Me.HistoryTopToolStripSeparator, Me.HistoryTopMenuItem, Me.ExitTopToolStripSeparator, Me.ExitTopMenuItem})
+        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculateTopMenuItem, Me.HistoryTopToolStripSeparator, Me.HistoryTopMenuItem, Me.ExitTopToolStripSeparator, Me.ExitTopMenuItem})
         Me.FileTopMenuItem.Name = "FileTopMenuItem"
         Me.FileTopMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileTopMenuItem.Text = "&File"
@@ -1191,12 +1183,6 @@ Partial Class CircuitSolverForm
         Me.CalculateTopMenuItem.Name = "CalculateTopMenuItem"
         Me.CalculateTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CalculateTopMenuItem.Text = "&Calculate"
-        '
-        'ResetTopMenuItem
-        '
-        Me.ResetTopMenuItem.Name = "ResetTopMenuItem"
-        Me.ResetTopMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ResetTopMenuItem.Text = "&Reset"
         '
         'HistoryTopToolStripSeparator
         '
@@ -1361,12 +1347,11 @@ Partial Class CircuitSolverForm
     Friend WithEvents RMSRadioButton As RadioButton
     Friend WithEvents PeakRadioButton As RadioButton
     Friend WithEvents RectangularRadioButton As RadioButton
-    Friend WithEvents Button2 As Button
+    Friend WithEvents ExitButton As Button
     Friend WithEvents TopMenuStrip As MenuStrip
     Friend WithEvents FileTopMenuItem As ToolStripMenuItem
     Friend WithEvents HelpTopMenuItem As ToolStripMenuItem
     Friend WithEvents CalculateTopMenuItem As ToolStripMenuItem
-    Friend WithEvents ResetTopMenuItem As ToolStripMenuItem
     Friend WithEvents HistoryTopToolStripSeparator As ToolStripSeparator
     Friend WithEvents HistoryTopMenuItem As ToolStripMenuItem
     Friend WithEvents ExitTopToolStripSeparator As ToolStripSeparator
@@ -1374,7 +1359,6 @@ Partial Class CircuitSolverForm
     Friend WithEvents AboutTopMenuItem As ToolStripMenuItem
     Friend WithEvents ContextMenuStrip As ContextMenuStrip
     Friend WithEvents CalculateContextMenuItem As ToolStripMenuItem
-    Friend WithEvents ResetContextMenuItem As ToolStripMenuItem
     Friend WithEvents HistoryContextToolStripSeparator As ToolStripSeparator
     Friend WithEvents HistoryContextMenuItem As ToolStripMenuItem
     Friend WithEvents AboutContextToolStripSeparator As ToolStripSeparator
