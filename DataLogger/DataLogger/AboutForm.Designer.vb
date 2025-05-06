@@ -22,7 +22,6 @@ Partial Class AboutForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AboutForm))
         Me.InformationLabel = New System.Windows.Forms.Label()
         Me.OkButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
@@ -33,7 +32,8 @@ Partial Class AboutForm
         Me.InformationLabel.Name = "InformationLabel"
         Me.InformationLabel.Size = New System.Drawing.Size(322, 161)
         Me.InformationLabel.TabIndex = 2
-        Me.InformationLabel.Text = resources.GetString("InformationLabel.Text")
+        Me.InformationLabel.Text = "Andrew Keller" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "RCET3371" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Spring 2025" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Data Logger" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "https://github.com/andrew15935" &
+    "71/RCET3371.git"
         '
         'OkButton
         '

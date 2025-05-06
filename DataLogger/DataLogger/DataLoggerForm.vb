@@ -1,4 +1,8 @@
-﻿'Andrew Keller
+﻿Option Explicit On
+Option Strict On
+
+
+'Andrew Keller
 'RCET3371
 'Spring 2025
 'Data Logger
@@ -12,16 +16,21 @@ Public Class DataLoggerForm
     Private queryBoard As Boolean
 
     ''' <summary>
+    ''' Stores the received data value as the appropriate integer value
+    ''' </summary>
+    Private receivedDataQueue As New Queue(Of Integer)
+
+    ''' <summary>
     ''' Draw a line from (0,0) to (100,100)
     ''' </summary>
     Sub DrawLine()
-        Dim g As Graphics = Graphics.FromImage(StoreBitmap())
-        Dim pen As New Pen(Color.Blue, PenSize())
+        'Dim g As Graphics = Graphics.FromImage(StoreBitmap())
+        'Dim pen As New Pen(Color.Blue, PenSize())
 
-        g.DrawLine(pen, 0, 0, 100, 100)
+        'g.DrawLine(pen, 0, 0, 100, 100)
 
-        g.Dispose()
-        GraphPictureBox.Image = StoreBitmap()
+        'g.Dispose()
+        'GraphPictureBox.Image = StoreBitmap()
     End Sub
 
 
@@ -55,6 +64,31 @@ Public Class DataLoggerForm
         Return _size
     End Function
 
+    Sub UpdateTrace()
+        Dim traceArray As Integer()
+        traceArray = receivedDataQueue.ToArray
+
+        Dim g As Graphics = GraphPictureBox.CreateGraphics()
+        Dim heightScale As Single, widthScale As Single
+        Dim pen As New Pen(Color.Black, 10)
+
+        GraphPictureBox.Refresh()
+
+        heightScale = CSng(GraphPictureBox.Height / 1023)
+        widthScale = CSng(GraphPictureBox.Width / receivedDataQueue.Count)
+
+        g.ScaleTransform(widthScale, heightScale)
+
+        g.DrawLine(pen, receivedDataQueue.Count, traceArray(0), receivedDataQueue.Count, traceArray(0))
+
+        For i = 1 To traceArray.Length - 1
+            g.DrawRectangle(pen, i - 1, traceArray(i - 1), i, traceArray(i))
+        Next
+
+        g.Dispose()
+        pen.Dispose()
+    End Sub
+
     ''' <summary>
     ''' Draws a straight line from the start x and y to the end x and y
     ''' </summary>
@@ -63,50 +97,14 @@ Public Class DataLoggerForm
     ''' <param name="endX"></param>
     ''' <param name="endY"></param>
     Sub DrawLine(startX As Integer, startY As Integer, endX As Integer, endY As Integer)
-        Dim g As Graphics = Graphics.FromImage(StoreBitmap())
-        Dim pen As New Pen(TraceColor(), PenSize())
+        'Dim g As Graphics = Graphics.FromImage(StoreBitmap())
+        'Dim pen As New Pen(TraceColor(), PenSize())
 
-        g.DrawLine(pen, startX, startY, endX, endY)
+        'g.DrawLine(pen, startX, startY, endX, endY)
 
-        g.Dispose()
-        GraphPictureBox.Image = StoreBitmap()
+        'g.Dispose()
+        'GraphPictureBox.Image = StoreBitmap()
     End Sub
-
-    ''' <summary>
-    ''' creates an empty bitmap with the correct size for the DrawingPictureBox
-    ''' </summary>
-    ''' <returns></returns>
-    Function CreateBitmap() As Image
-        Dim bmp As New Bitmap(GraphPictureBox.Width, GraphPictureBox.Height)
-        Dim g As Graphics = Graphics.FromImage(bmp)
-
-        g.Clear(GraphPictureBox.BackColor)
-
-        g.Dispose()
-        Return bmp
-    End Function
-
-    ''' <summary>
-    ''' Stores the bitmap to be drawn on. If not provided with a new image, the bitmap will return the existing
-    ''' </summary>
-    ''' <param name="image"></param>
-    ''' <returns></returns>
-    Function StoreBitmap(Optional image As Image = Nothing) As Image
-        If Me.InvokeRequired Then
-            Return Me.Invoke(Sub() StoreBitmap(image))
-        End If
-
-        Static bmp As Bitmap
-
-        If image Is Nothing Then
-            Return bmp
-        Else
-            bmp = New Bitmap(image)
-            Return bmp
-
-        End If
-
-    End Function
 
     '______Event Handlers Below Here______
 
@@ -136,8 +134,6 @@ Public Class DataLoggerForm
     ''' <param name="e"></param>
     Private Sub GraphicsExampleForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         TraceColor(Color.Black)
-        StoreBitmap(CreateBitmap())
-        GraphPictureBox.Image = StoreBitmap()
 
         'initialize Serial Port
         SerialPortRefreshTimer.Start()
@@ -146,32 +142,9 @@ Public Class DataLoggerForm
         SerialPort.DataBits = 8
         SerialPort.StopBits = IO.Ports.StopBits.One
         SerialPort.Parity = IO.Ports.Parity.None
-    End Sub
 
-    ''' <summary>
-    ''' overwrites the existing bitmap with a blank bitmap
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ClearScreen(sender As Object, e As EventArgs) Handles SaveButton.Click, ClearTopMenuItem.Click
-        GraphPictureBox.Image = StoreBitmap(CreateBitmap())
-    End Sub
-
-    ''' <summary>
-    ''' Sets the background color of the picturebox
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ChangeBackgroundColor(sender As Object, e As EventArgs) Handles BackgroundColorContextMenuItem.Click, BackgroundColorTopMenuItem.Click
-        ColorDialog.ShowDialog()
-        Dim g As Graphics = Graphics.FromImage(StoreBitmap())
-        Dim brush As New SolidBrush(ColorDialog.Color)
-        Dim rect As New Rectangle(0, 0, GraphPictureBox.Width, GraphPictureBox.Height)
-
-        g.FillRectangle(brush, rect)
-
-        g.Dispose()
-        GraphPictureBox.Image = StoreBitmap()
+        SampleTimer.Interval = 1000 \ SampleRateTrackBar.Value
+        SampleTimer.Stop()
     End Sub
 
     ''' <summary>
@@ -187,23 +160,8 @@ Public Class DataLoggerForm
         'opens the SaveFileDialog
         SaveFileDialog.ShowDialog()
 
-        StoreBitmap().Save(SaveFileDialog.FileName)
+        'StoreBitmap().Save(SaveFileDialog.FileName)
 
-    End Sub
-
-    ''' <summary>
-    ''' Scales the current bitmap when the form size is changed
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub GraphicsExampleForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        If Me.Visible Then
-
-            Dim newbmp As New Bitmap(StoreBitmap(), GraphPictureBox.Width, GraphPictureBox.Height)
-
-            GraphPictureBox.Image = StoreBitmap(newbmp)
-
-        End If
     End Sub
 
     ''' <summary>
@@ -299,16 +257,13 @@ Public Class DataLoggerForm
             End If
 
         Else
-            ''if not querying board, interpret analog input data
+            'if not querying board, interpret analog input data
 
-            'oldBoardX = boardX
-            'oldBoardY = boardY
-            'Try
-            '    boardX = (readBytes(0) * 4)
-            '    boardY = (readBytes(2) * 4) 'analog 2 value
-            'Catch ex As Exception
+            Try
+                receivedDataQueue.Enqueue((readBytes(0) * 4))
+            Catch ex As Exception
 
-            'End Try
+            End Try
 
         End If
         If SerialPort.IsOpen Then
@@ -331,5 +286,19 @@ Public Class DataLoggerForm
 
     Private Sub DataLoggerForm_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
         SerialPort.Close()
+    End Sub
+
+    Private Sub SampleRateTrackBar_Scroll(sender As Object, e As EventArgs) Handles SampleRateTrackBar.Scroll
+        SampleTimer.Interval = 1000 \ SampleRateTrackBar.Value
+    End Sub
+
+    Private Sub SampleTimer_Tick(sender As Object, e As EventArgs) Handles SampleTimer.Tick
+        If receivedDataQueue.Count > 0 Then
+            UpdateTrace()
+        End If
+    End Sub
+
+    Private Sub StartStopButton_Click(sender As Object, e As EventArgs) Handles StartStopButton.Click
+        SampleTimer.Start()
     End Sub
 End Class

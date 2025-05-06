@@ -27,7 +27,18 @@ Partial Class DataLoggerForm
         Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ColorContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackgroundColorContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SaveContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.OpenSaveLocationContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExitContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.GraphGroupBox = New System.Windows.Forms.GroupBox()
+        Me.SecondsRadioButton = New System.Windows.Forms.RadioButton()
+        Me.AllTimeRadioButton = New System.Windows.Forms.RadioButton()
+        Me.CurrentSampleRateLabel = New System.Windows.Forms.Label()
         Me.SampleRateLabel = New System.Windows.Forms.Label()
         Me.SampleRateTrackBar = New System.Windows.Forms.TrackBar()
         Me.StartStopButton = New System.Windows.Forms.Button()
@@ -39,6 +50,7 @@ Partial Class DataLoggerForm
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackgroundColorTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PenColorTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,31 +62,19 @@ Partial Class DataLoggerForm
         Me.COMToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.SerialPortComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.SerialComStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.SavePathLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
         Me.SerialPortRefreshTimer = New System.Windows.Forms.Timer(Me.components)
         Me.COMTimeoutTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SampleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.CurrentSampleRateLabel = New System.Windows.Forms.Label()
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.GraphGroupBox = New System.Windows.Forms.GroupBox()
-        Me.AllTimeRadioButton = New System.Windows.Forms.RadioButton()
-        Me.SecondsRadioButton = New System.Windows.Forms.RadioButton()
-        Me.ContextToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SaveContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ContextToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenSaveLocationContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExitContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SavePathLabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ExitTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GraphPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         Me.ControlsGroupBox.SuspendLayout()
+        Me.GraphGroupBox.SuspendLayout()
         CType(Me.SampleRateTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TopMenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
-        Me.GraphGroupBox.SuspendLayout()
         Me.SuspendLayout()
         '
         'GraphPictureBox
@@ -111,6 +111,45 @@ Partial Class DataLoggerForm
         Me.BackgroundColorContextMenuItem.Text = "Background Color"
         Me.BackgroundColorContextMenuItem.ToolTipText = "Change the Background Color"
         '
+        'ContextToolStripSeparator1
+        '
+        Me.ContextToolStripSeparator1.Name = "ContextToolStripSeparator1"
+        Me.ContextToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
+        '
+        'SaveContextMenuItem
+        '
+        Me.SaveContextMenuItem.Name = "SaveContextMenuItem"
+        Me.SaveContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SaveContextMenuItem.Text = "Save"
+        '
+        'OpenContextMenuItem
+        '
+        Me.OpenContextMenuItem.Name = "OpenContextMenuItem"
+        Me.OpenContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenContextMenuItem.Text = "Open"
+        '
+        'ContextToolStripSeparator2
+        '
+        Me.ContextToolStripSeparator2.Name = "ContextToolStripSeparator2"
+        Me.ContextToolStripSeparator2.Size = New System.Drawing.Size(176, 6)
+        '
+        'OpenSaveLocationContextMenuItem
+        '
+        Me.OpenSaveLocationContextMenuItem.Name = "OpenSaveLocationContextMenuItem"
+        Me.OpenSaveLocationContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenSaveLocationContextMenuItem.Text = "Open Save Location"
+        '
+        'ContextToolStripSeparator3
+        '
+        Me.ContextToolStripSeparator3.Name = "ContextToolStripSeparator3"
+        Me.ContextToolStripSeparator3.Size = New System.Drawing.Size(176, 6)
+        '
+        'ExitContextMenuItem
+        '
+        Me.ExitContextMenuItem.Name = "ExitContextMenuItem"
+        Me.ExitContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ExitContextMenuItem.Text = "Exit"
+        '
         'ControlsGroupBox
         '
         Me.ControlsGroupBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -127,6 +166,52 @@ Partial Class DataLoggerForm
         Me.ControlsGroupBox.Size = New System.Drawing.Size(788, 100)
         Me.ControlsGroupBox.TabIndex = 1
         Me.ControlsGroupBox.TabStop = False
+        '
+        'GraphGroupBox
+        '
+        Me.GraphGroupBox.Controls.Add(Me.SecondsRadioButton)
+        Me.GraphGroupBox.Controls.Add(Me.AllTimeRadioButton)
+        Me.GraphGroupBox.Location = New System.Drawing.Point(140, 19)
+        Me.GraphGroupBox.Name = "GraphGroupBox"
+        Me.GraphGroupBox.Size = New System.Drawing.Size(114, 75)
+        Me.GraphGroupBox.TabIndex = 6
+        Me.GraphGroupBox.TabStop = False
+        Me.GraphGroupBox.Text = "Graph Time"
+        Me.ToolTip.SetToolTip(Me.GraphGroupBox, "Sets the time scale axis of the graph")
+        '
+        'SecondsRadioButton
+        '
+        Me.SecondsRadioButton.AutoSize = True
+        Me.SecondsRadioButton.Location = New System.Drawing.Point(7, 43)
+        Me.SecondsRadioButton.Name = "SecondsRadioButton"
+        Me.SecondsRadioButton.Size = New System.Drawing.Size(105, 17)
+        Me.SecondsRadioButton.TabIndex = 1
+        Me.SecondsRadioButton.TabStop = True
+        Me.SecondsRadioButton.Text = "Last 30 Seconds"
+        Me.ToolTip.SetToolTip(Me.SecondsRadioButton, "Sets the graph time scale to the last 30 seconds")
+        Me.SecondsRadioButton.UseVisualStyleBackColor = True
+        '
+        'AllTimeRadioButton
+        '
+        Me.AllTimeRadioButton.AutoSize = True
+        Me.AllTimeRadioButton.Location = New System.Drawing.Point(7, 20)
+        Me.AllTimeRadioButton.Name = "AllTimeRadioButton"
+        Me.AllTimeRadioButton.Size = New System.Drawing.Size(62, 17)
+        Me.AllTimeRadioButton.TabIndex = 0
+        Me.AllTimeRadioButton.TabStop = True
+        Me.AllTimeRadioButton.Text = "All Time"
+        Me.ToolTip.SetToolTip(Me.AllTimeRadioButton, "Sets the graph time scale to all recorded time")
+        Me.AllTimeRadioButton.UseVisualStyleBackColor = True
+        '
+        'CurrentSampleRateLabel
+        '
+        Me.CurrentSampleRateLabel.Location = New System.Drawing.Point(3, 74)
+        Me.CurrentSampleRateLabel.Name = "CurrentSampleRateLabel"
+        Me.CurrentSampleRateLabel.Size = New System.Drawing.Size(131, 17)
+        Me.CurrentSampleRateLabel.TabIndex = 5
+        Me.CurrentSampleRateLabel.Text = "10 samples/s"
+        Me.CurrentSampleRateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip.SetToolTip(Me.CurrentSampleRateLabel, "The current data sample rate")
         '
         'SampleRateLabel
         '
@@ -149,7 +234,7 @@ Partial Class DataLoggerForm
         Me.SampleRateTrackBar.TabStop = False
         Me.SampleRateTrackBar.TickFrequency = 10
         Me.ToolTip.SetToolTip(Me.SampleRateTrackBar, "Adjusts the samples taken every second")
-        Me.SampleRateTrackBar.Value = 1
+        Me.SampleRateTrackBar.Value = 10
         '
         'StartStopButton
         '
@@ -205,16 +290,22 @@ Partial Class DataLoggerForm
         'OpenTopMenuItem
         '
         Me.OpenTopMenuItem.Name = "OpenTopMenuItem"
-        Me.OpenTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenTopMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.OpenTopMenuItem.Text = "&Open"
         Me.OpenTopMenuItem.ToolTipText = "Open an Image File"
         '
         'SaveTopMenuItem
         '
         Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
-        Me.SaveTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveTopMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.SaveTopMenuItem.Text = "&Save"
         Me.SaveTopMenuItem.ToolTipText = "Save the Current Screen as a BMP"
+        '
+        'ExitTopMenuItem
+        '
+        Me.ExitTopMenuItem.Name = "ExitTopMenuItem"
+        Me.ExitTopMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.ExitTopMenuItem.Text = "E&xit"
         '
         'EditToolStripMenuItem
         '
@@ -226,21 +317,21 @@ Partial Class DataLoggerForm
         'BackgroundColorTopMenuItem
         '
         Me.BackgroundColorTopMenuItem.Name = "BackgroundColorTopMenuItem"
-        Me.BackgroundColorTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BackgroundColorTopMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.BackgroundColorTopMenuItem.Text = "&Background Color"
         Me.BackgroundColorTopMenuItem.ToolTipText = "Change the Background Color"
         '
         'PenColorTopMenuItem
         '
         Me.PenColorTopMenuItem.Name = "PenColorTopMenuItem"
-        Me.PenColorTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PenColorTopMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.PenColorTopMenuItem.Text = "&Trace Color"
         Me.PenColorTopMenuItem.ToolTipText = "Change the Pen Color"
         '
         'ClearTopMenuItem
         '
         Me.ClearTopMenuItem.Name = "ClearTopMenuItem"
-        Me.ClearTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearTopMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.ClearTopMenuItem.Text = "&Clear"
         '
         'HelpTopMenuItem
@@ -253,7 +344,7 @@ Partial Class DataLoggerForm
         'AboutTopMenuItem
         '
         Me.AboutTopMenuItem.Name = "AboutTopMenuItem"
-        Me.AboutTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutTopMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.AboutTopMenuItem.Text = "&About"
         Me.AboutTopMenuItem.ToolTipText = "About this Program"
         '
@@ -291,6 +382,12 @@ Partial Class DataLoggerForm
         Me.SerialComStatusLabel.Text = "Disconnected from"
         Me.SerialComStatusLabel.ToolTipText = "Current COM Port"
         '
+        'SavePathLabel
+        '
+        Me.SavePathLabel.Name = "SavePathLabel"
+        Me.SavePathLabel.Size = New System.Drawing.Size(104, 17)
+        Me.SavePathLabel.Text = "Current Save Path:"
+        '
         'SerialPort
         '
         '
@@ -306,106 +403,9 @@ Partial Class DataLoggerForm
         '
         Me.SampleTimer.Interval = 5
         '
-        'CurrentSampleRateLabel
-        '
-        Me.CurrentSampleRateLabel.Location = New System.Drawing.Point(3, 74)
-        Me.CurrentSampleRateLabel.Name = "CurrentSampleRateLabel"
-        Me.CurrentSampleRateLabel.Size = New System.Drawing.Size(131, 17)
-        Me.CurrentSampleRateLabel.TabIndex = 5
-        Me.CurrentSampleRateLabel.Text = "__ samples/s"
-        Me.CurrentSampleRateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.ToolTip.SetToolTip(Me.CurrentSampleRateLabel, "The current data sample rate")
-        '
         'OpenFileDialog
         '
         Me.OpenFileDialog.FileName = "OpenFileDialog1"
-        '
-        'GraphGroupBox
-        '
-        Me.GraphGroupBox.Controls.Add(Me.SecondsRadioButton)
-        Me.GraphGroupBox.Controls.Add(Me.AllTimeRadioButton)
-        Me.GraphGroupBox.Location = New System.Drawing.Point(140, 19)
-        Me.GraphGroupBox.Name = "GraphGroupBox"
-        Me.GraphGroupBox.Size = New System.Drawing.Size(114, 75)
-        Me.GraphGroupBox.TabIndex = 6
-        Me.GraphGroupBox.TabStop = False
-        Me.GraphGroupBox.Text = "Graph Time"
-        Me.ToolTip.SetToolTip(Me.GraphGroupBox, "Sets the time scale axis of the graph")
-        '
-        'AllTimeRadioButton
-        '
-        Me.AllTimeRadioButton.AutoSize = True
-        Me.AllTimeRadioButton.Location = New System.Drawing.Point(7, 20)
-        Me.AllTimeRadioButton.Name = "AllTimeRadioButton"
-        Me.AllTimeRadioButton.Size = New System.Drawing.Size(62, 17)
-        Me.AllTimeRadioButton.TabIndex = 0
-        Me.AllTimeRadioButton.TabStop = True
-        Me.AllTimeRadioButton.Text = "All Time"
-        Me.ToolTip.SetToolTip(Me.AllTimeRadioButton, "Sets the graph time scale to all recorded time")
-        Me.AllTimeRadioButton.UseVisualStyleBackColor = True
-        '
-        'SecondsRadioButton
-        '
-        Me.SecondsRadioButton.AutoSize = True
-        Me.SecondsRadioButton.Location = New System.Drawing.Point(7, 43)
-        Me.SecondsRadioButton.Name = "SecondsRadioButton"
-        Me.SecondsRadioButton.Size = New System.Drawing.Size(105, 17)
-        Me.SecondsRadioButton.TabIndex = 1
-        Me.SecondsRadioButton.TabStop = True
-        Me.SecondsRadioButton.Text = "Last 30 Seconds"
-        Me.ToolTip.SetToolTip(Me.SecondsRadioButton, "Sets the graph time scale to the last 30 seconds")
-        Me.SecondsRadioButton.UseVisualStyleBackColor = True
-        '
-        'ContextToolStripSeparator1
-        '
-        Me.ContextToolStripSeparator1.Name = "ContextToolStripSeparator1"
-        Me.ContextToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
-        '
-        'SaveContextMenuItem
-        '
-        Me.SaveContextMenuItem.Name = "SaveContextMenuItem"
-        Me.SaveContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.SaveContextMenuItem.Text = "Save"
-        '
-        'OpenContextMenuItem
-        '
-        Me.OpenContextMenuItem.Name = "OpenContextMenuItem"
-        Me.OpenContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.OpenContextMenuItem.Text = "Open"
-        '
-        'ContextToolStripSeparator2
-        '
-        Me.ContextToolStripSeparator2.Name = "ContextToolStripSeparator2"
-        Me.ContextToolStripSeparator2.Size = New System.Drawing.Size(176, 6)
-        '
-        'ContextToolStripSeparator3
-        '
-        Me.ContextToolStripSeparator3.Name = "ContextToolStripSeparator3"
-        Me.ContextToolStripSeparator3.Size = New System.Drawing.Size(176, 6)
-        '
-        'OpenSaveLocationContextMenuItem
-        '
-        Me.OpenSaveLocationContextMenuItem.Name = "OpenSaveLocationContextMenuItem"
-        Me.OpenSaveLocationContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.OpenSaveLocationContextMenuItem.Text = "Open Save Location"
-        '
-        'ExitContextMenuItem
-        '
-        Me.ExitContextMenuItem.Name = "ExitContextMenuItem"
-        Me.ExitContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.ExitContextMenuItem.Text = "Exit"
-        '
-        'SavePathLabel
-        '
-        Me.SavePathLabel.Name = "SavePathLabel"
-        Me.SavePathLabel.Size = New System.Drawing.Size(104, 17)
-        Me.SavePathLabel.Text = "Current Save Path:"
-        '
-        'ExitTopMenuItem
-        '
-        Me.ExitTopMenuItem.Name = "ExitTopMenuItem"
-        Me.ExitTopMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ExitTopMenuItem.Text = "E&xit"
         '
         'DataLoggerForm
         '
@@ -426,13 +426,13 @@ Partial Class DataLoggerForm
         Me.ContextMenuStrip.ResumeLayout(False)
         Me.ControlsGroupBox.ResumeLayout(False)
         Me.ControlsGroupBox.PerformLayout()
+        Me.GraphGroupBox.ResumeLayout(False)
+        Me.GraphGroupBox.PerformLayout()
         CType(Me.SampleRateTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
         Me.StatusStrip.ResumeLayout(False)
         Me.StatusStrip.PerformLayout()
-        Me.GraphGroupBox.ResumeLayout(False)
-        Me.GraphGroupBox.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
