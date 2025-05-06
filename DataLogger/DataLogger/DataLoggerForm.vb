@@ -20,6 +20,8 @@ Public Class DataLoggerForm
     ''' </summary>
     Private receivedDataQueue As New Queue(Of Integer)
 
+    Private currentValue As Integer
+
     ''' <summary>
     ''' Draw a line from (0,0) to (100,100)
     ''' </summary>
@@ -70,7 +72,9 @@ Public Class DataLoggerForm
 
         Dim g As Graphics = GraphPictureBox.CreateGraphics()
         Dim heightScale As Single, widthScale As Single
-        Dim pen As New Pen(Color.Black, 10)
+        Dim averaging As Integer = receivedDataQueue.Count \ 100
+        Dim pen As New Pen(Color.Black, 5)
+        Dim lastX As Integer, lastY As Integer
 
         GraphPictureBox.Refresh()
 
@@ -80,9 +84,18 @@ Public Class DataLoggerForm
         g.ScaleTransform(widthScale, heightScale)
 
         g.DrawLine(pen, receivedDataQueue.Count, traceArray(0), receivedDataQueue.Count, traceArray(0))
+        lastX = 0
+        lastY = traceArray(0)
 
         For i = 1 To traceArray.Length - 1
-            g.DrawRectangle(pen, i - 1, traceArray(i - 1), i, traceArray(i))
+            Try
+                g.DrawLine(pen, lastX, lastY, i, traceArray(i))
+            Catch ex As Exception
+
+            End Try
+            lastX = i
+            lastY = traceArray(i)
+            i += averaging
         Next
 
         g.Dispose()
@@ -260,7 +273,7 @@ Public Class DataLoggerForm
             'if not querying board, interpret analog input data
 
             Try
-                receivedDataQueue.Enqueue((readBytes(0) * 4))
+                currentValue = (readBytes(0) * 4)
             Catch ex As Exception
 
             End Try
@@ -289,10 +302,12 @@ Public Class DataLoggerForm
     End Sub
 
     Private Sub SampleRateTrackBar_Scroll(sender As Object, e As EventArgs) Handles SampleRateTrackBar.Scroll
+        CurrentSampleRateLabel.Text = $"{SampleRateTrackBar.Value} samples/s"
         SampleTimer.Interval = 1000 \ SampleRateTrackBar.Value
     End Sub
 
     Private Sub SampleTimer_Tick(sender As Object, e As EventArgs) Handles SampleTimer.Tick
+        receivedDataQueue.Enqueue(currentValue)
         If receivedDataQueue.Count > 0 Then
             UpdateTrace()
         End If

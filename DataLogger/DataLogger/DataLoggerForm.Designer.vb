@@ -186,7 +186,6 @@ Partial Class DataLoggerForm
         Me.SecondsRadioButton.Name = "SecondsRadioButton"
         Me.SecondsRadioButton.Size = New System.Drawing.Size(105, 17)
         Me.SecondsRadioButton.TabIndex = 1
-        Me.SecondsRadioButton.TabStop = True
         Me.SecondsRadioButton.Text = "Last 30 Seconds"
         Me.ToolTip.SetToolTip(Me.SecondsRadioButton, "Sets the graph time scale to the last 30 seconds")
         Me.SecondsRadioButton.UseVisualStyleBackColor = True
@@ -194,6 +193,7 @@ Partial Class DataLoggerForm
         'AllTimeRadioButton
         '
         Me.AllTimeRadioButton.AutoSize = True
+        Me.AllTimeRadioButton.Checked = True
         Me.AllTimeRadioButton.Location = New System.Drawing.Point(7, 20)
         Me.AllTimeRadioButton.Name = "AllTimeRadioButton"
         Me.AllTimeRadioButton.Size = New System.Drawing.Size(62, 17)
