@@ -25,13 +25,7 @@ Partial Class DataLoggerForm
         Me.components = New System.ComponentModel.Container()
         Me.GraphPictureBox = New System.Windows.Forms.PictureBox()
         Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ColorContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BackgroundColorContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenSaveLocationContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlsGroupBox = New System.Windows.Forms.GroupBox()
@@ -48,13 +42,9 @@ Partial Class DataLoggerForm
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BackgroundColorTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PenColorTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClearTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
@@ -93,61 +83,25 @@ Partial Class DataLoggerForm
         '
         'ContextMenuStrip
         '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorContextMenuItem, Me.BackgroundColorContextMenuItem, Me.ContextToolStripSeparator1, Me.SaveContextMenuItem, Me.OpenContextMenuItem, Me.ContextToolStripSeparator2, Me.OpenSaveLocationContextMenuItem, Me.ContextToolStripSeparator3, Me.ExitContextMenuItem})
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveContextMenuItem, Me.ContextToolStripSeparator3, Me.ExitContextMenuItem})
         Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(180, 154)
-        '
-        'ColorContextMenuItem
-        '
-        Me.ColorContextMenuItem.Name = "ColorContextMenuItem"
-        Me.ColorContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.ColorContextMenuItem.Text = "Color"
-        Me.ColorContextMenuItem.ToolTipText = "Change the Pen Color"
-        '
-        'BackgroundColorContextMenuItem
-        '
-        Me.BackgroundColorContextMenuItem.Name = "BackgroundColorContextMenuItem"
-        Me.BackgroundColorContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.BackgroundColorContextMenuItem.Text = "Background Color"
-        Me.BackgroundColorContextMenuItem.ToolTipText = "Change the Background Color"
-        '
-        'ContextToolStripSeparator1
-        '
-        Me.ContextToolStripSeparator1.Name = "ContextToolStripSeparator1"
-        Me.ContextToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(99, 54)
         '
         'SaveContextMenuItem
         '
         Me.SaveContextMenuItem.Name = "SaveContextMenuItem"
-        Me.SaveContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SaveContextMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.SaveContextMenuItem.Text = "Save"
-        '
-        'OpenContextMenuItem
-        '
-        Me.OpenContextMenuItem.Name = "OpenContextMenuItem"
-        Me.OpenContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.OpenContextMenuItem.Text = "Open"
-        '
-        'ContextToolStripSeparator2
-        '
-        Me.ContextToolStripSeparator2.Name = "ContextToolStripSeparator2"
-        Me.ContextToolStripSeparator2.Size = New System.Drawing.Size(176, 6)
-        '
-        'OpenSaveLocationContextMenuItem
-        '
-        Me.OpenSaveLocationContextMenuItem.Name = "OpenSaveLocationContextMenuItem"
-        Me.OpenSaveLocationContextMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.OpenSaveLocationContextMenuItem.Text = "Open Save Location"
         '
         'ContextToolStripSeparator3
         '
         Me.ContextToolStripSeparator3.Name = "ContextToolStripSeparator3"
-        Me.ContextToolStripSeparator3.Size = New System.Drawing.Size(176, 6)
+        Me.ContextToolStripSeparator3.Size = New System.Drawing.Size(95, 6)
         '
         'ExitContextMenuItem
         '
         Me.ExitContextMenuItem.Name = "ExitContextMenuItem"
-        Me.ExitContextMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ExitContextMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.ExitContextMenuItem.Text = "Exit"
         '
         'ControlsGroupBox
@@ -273,7 +227,7 @@ Partial Class DataLoggerForm
         '
         'TopMenuStrip
         '
-        Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTopMenuItem, Me.EditToolStripMenuItem, Me.HelpTopMenuItem})
+        Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTopMenuItem, Me.HelpTopMenuItem})
         Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.TopMenuStrip.Name = "TopMenuStrip"
         Me.TopMenuStrip.Size = New System.Drawing.Size(812, 24)
@@ -282,57 +236,29 @@ Partial Class DataLoggerForm
         '
         'FileTopMenuItem
         '
-        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenTopMenuItem, Me.SaveTopMenuItem, Me.ExitTopMenuItem})
+        Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartTopMenuItem, Me.SaveTopMenuItem, Me.ExitTopMenuItem})
         Me.FileTopMenuItem.Name = "FileTopMenuItem"
         Me.FileTopMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileTopMenuItem.Text = "&File"
         '
-        'OpenTopMenuItem
+        'StartTopMenuItem
         '
-        Me.OpenTopMenuItem.Name = "OpenTopMenuItem"
-        Me.OpenTopMenuItem.Size = New System.Drawing.Size(103, 22)
-        Me.OpenTopMenuItem.Text = "&Open"
-        Me.OpenTopMenuItem.ToolTipText = "Open an Image File"
+        Me.StartTopMenuItem.Name = "StartTopMenuItem"
+        Me.StartTopMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.StartTopMenuItem.Text = "S&tart"
         '
         'SaveTopMenuItem
         '
         Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
-        Me.SaveTopMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.SaveTopMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.SaveTopMenuItem.Text = "&Save"
         Me.SaveTopMenuItem.ToolTipText = "Save the Current Screen as a BMP"
         '
         'ExitTopMenuItem
         '
         Me.ExitTopMenuItem.Name = "ExitTopMenuItem"
-        Me.ExitTopMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.ExitTopMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.ExitTopMenuItem.Text = "E&xit"
-        '
-        'EditToolStripMenuItem
-        '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackgroundColorTopMenuItem, Me.PenColorTopMenuItem, Me.ClearTopMenuItem})
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "&Edit"
-        '
-        'BackgroundColorTopMenuItem
-        '
-        Me.BackgroundColorTopMenuItem.Name = "BackgroundColorTopMenuItem"
-        Me.BackgroundColorTopMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.BackgroundColorTopMenuItem.Text = "&Background Color"
-        Me.BackgroundColorTopMenuItem.ToolTipText = "Change the Background Color"
-        '
-        'PenColorTopMenuItem
-        '
-        Me.PenColorTopMenuItem.Name = "PenColorTopMenuItem"
-        Me.PenColorTopMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.PenColorTopMenuItem.Text = "&Trace Color"
-        Me.PenColorTopMenuItem.ToolTipText = "Change the Pen Color"
-        '
-        'ClearTopMenuItem
-        '
-        Me.ClearTopMenuItem.Name = "ClearTopMenuItem"
-        Me.ClearTopMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.ClearTopMenuItem.Text = "&Clear"
         '
         'HelpTopMenuItem
         '
@@ -444,23 +370,16 @@ Partial Class DataLoggerForm
     Friend WithEvents ExitButton As Button
     Friend WithEvents ColorDialog As ColorDialog
     Friend WithEvents ContextMenuStrip As ContextMenuStrip
-    Friend WithEvents ColorContextMenuItem As ToolStripMenuItem
-    Friend WithEvents BackgroundColorContextMenuItem As ToolStripMenuItem
     Friend WithEvents StartStopButton As Button
     Friend WithEvents SaveFileDialog As SaveFileDialog
     Friend WithEvents TopMenuStrip As MenuStrip
     Friend WithEvents FileTopMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenTopMenuItem As ToolStripMenuItem
     Friend WithEvents SaveTopMenuItem As ToolStripMenuItem
     Friend WithEvents HelpTopMenuItem As ToolStripMenuItem
     Friend WithEvents SampleRateLabel As Label
     Friend WithEvents SampleRateTrackBar As TrackBar
     Friend WithEvents AboutTopMenuItem As ToolStripMenuItem
     Friend WithEvents ToolTip As ToolTip
-    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BackgroundColorTopMenuItem As ToolStripMenuItem
-    Friend WithEvents PenColorTopMenuItem As ToolStripMenuItem
-    Friend WithEvents ClearTopMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents SerialComStatusLabel As ToolStripStatusLabel
     Friend WithEvents COMToolStripDropDownButton As ToolStripDropDownButton
@@ -474,13 +393,10 @@ Partial Class DataLoggerForm
     Friend WithEvents GraphGroupBox As GroupBox
     Friend WithEvents SecondsRadioButton As RadioButton
     Friend WithEvents AllTimeRadioButton As RadioButton
-    Friend WithEvents ContextToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents SaveContextMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenContextMenuItem As ToolStripMenuItem
-    Friend WithEvents ContextToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents OpenSaveLocationContextMenuItem As ToolStripMenuItem
     Friend WithEvents ContextToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ExitContextMenuItem As ToolStripMenuItem
     Friend WithEvents SavePathLabel As ToolStripStatusLabel
     Friend WithEvents ExitTopMenuItem As ToolStripMenuItem
+    Friend WithEvents StartTopMenuItem As ToolStripMenuItem
 End Class

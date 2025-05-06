@@ -126,7 +126,7 @@ Public Class DataLoggerForm
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click, ExitTopMenuItem.Click, ExitContextMenuItem.Click
         Me.Close()
     End Sub
 
@@ -135,7 +135,7 @@ Public Class DataLoggerForm
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ChangePenColor(sender As Object, e As EventArgs) Handles ColorContextMenuItem.Click, PenColorTopMenuItem.Click
+    Private Sub ChangePenColor(sender As Object, e As EventArgs)
         ColorDialog.ShowDialog()
         TraceColor(ColorDialog.Color)
     End Sub
@@ -313,7 +313,11 @@ Public Class DataLoggerForm
         End If
     End Sub
 
-    Private Sub StartStopButton_Click(sender As Object, e As EventArgs) Handles StartStopButton.Click
+    Private Sub StartStopButton_Click(sender As Object, e As EventArgs) Handles StartStopButton.Click, StartTopMenuItem.Click
         SampleTimer.Start()
+    End Sub
+
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click, SaveTopMenuItem.Click, SaveContextMenuItem.Click
+
     End Sub
 End Class
