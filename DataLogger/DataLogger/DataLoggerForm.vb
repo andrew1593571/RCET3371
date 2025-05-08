@@ -66,17 +66,17 @@ Public Class DataLoggerForm
         Return _size
     End Function
 
-    Sub UpdateTrace()
+    ''' <summary>
+    ''' Updates the graph for all recorded time.
+    ''' </summary>
+    Sub UpdateTraceAllTime()
         Dim traceArray As Integer()
         traceArray = receivedDataQueue.ToArray
 
         Dim g As Graphics = GraphPictureBox.CreateGraphics()
         Dim heightScale As Single, widthScale As Single
-        Dim averaging As Integer = receivedDataQueue.Count \ 100
         Dim pen As New Pen(Color.Black, 5)
         Dim lastX As Integer, lastY As Integer
-
-        GraphPictureBox.Refresh()
 
         heightScale = CSng(GraphPictureBox.Height / 1023)
         widthScale = CSng(GraphPictureBox.Width / receivedDataQueue.Count)
@@ -89,14 +89,59 @@ Public Class DataLoggerForm
 
         For i = 1 To traceArray.Length - 1
             Try
+                g.FillRectangle(Brushes.White, lastX, 0, i - lastX, 1023)
                 g.DrawLine(pen, lastX, lastY, i, traceArray(i))
+
             Catch ex As Exception
 
             End Try
             lastX = i
             lastY = traceArray(i)
-            i += averaging
         Next
+
+        g.Dispose()
+        pen.Dispose()
+    End Sub
+
+    ''' <summary>
+    ''' Shows the last 30 seconds on the graph
+    ''' </summary>
+    Sub UpdateTraceThirty()
+        Dim traceArray As Integer()
+        traceArray = receivedDataQueue.ToArray
+
+        Dim g As Graphics = GraphPictureBox.CreateGraphics()
+        Dim heightScale As Single, widthScale As Single
+        Dim pen As New Pen(Color.Black, 5)
+        Dim lastX As Integer, lastY As Integer
+        Dim lastThirty As Integer = SampleRateTrackBar.Value * 30
+        Dim xCount As Integer = 0
+
+
+        If traceArray.Length > lastThirty Then
+            heightScale = CSng(GraphPictureBox.Height / 1023)
+            widthScale = CSng(GraphPictureBox.Width / lastThirty)
+
+            g.ScaleTransform(widthScale, heightScale)
+
+            g.DrawLine(pen, receivedDataQueue.Count, traceArray(0), receivedDataQueue.Count, traceArray(0))
+            lastX = xCount
+            lastY = traceArray(0)
+
+            For i = traceArray.Length - lastThirty To traceArray.Length - 1
+                Try
+                    g.FillRectangle(Brushes.White, lastX, 0, xCount, 1023)
+                    g.DrawLine(pen, lastX, lastY, xCount, traceArray(i))
+                Catch ex As Exception
+
+                End Try
+                lastX = i
+                lastY = traceArray(i)
+                xCount += 1
+            Next
+        Else
+            UpdateTraceAllTime()
+        End If
 
         g.Dispose()
         pen.Dispose()
@@ -309,7 +354,11 @@ Public Class DataLoggerForm
     Private Sub SampleTimer_Tick(sender As Object, e As EventArgs) Handles SampleTimer.Tick
         receivedDataQueue.Enqueue(currentValue)
         If receivedDataQueue.Count > 0 Then
-            UpdateTrace()
+            If AllTimeRadioButton.Checked Then
+                UpdateTraceAllTime()
+            Else
+                UpdateTraceThirty()
+            End If
         End If
     End Sub
 
@@ -319,5 +368,9 @@ Public Class DataLoggerForm
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click, SaveTopMenuItem.Click, SaveContextMenuItem.Click
 
+    End Sub
+
+    Private Sub AllTimeRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AllTimeRadioButton.CheckedChanged
+        GraphPictureBox.Refresh()
     End Sub
 End Class
