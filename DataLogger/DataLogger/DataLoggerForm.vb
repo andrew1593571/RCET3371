@@ -1,5 +1,8 @@
 ﻿Option Explicit On
 Option Strict On
+Imports System.IO
+
+
 
 
 'Andrew Keller
@@ -23,48 +26,14 @@ Public Class DataLoggerForm
     Private currentValue As Integer
 
     ''' <summary>
-    ''' Draw a line from (0,0) to (100,100)
+    ''' Set to true when a valid file path has been provided by the user
     ''' </summary>
-    Sub DrawLine()
-        'Dim g As Graphics = Graphics.FromImage(StoreBitmap())
-        'Dim pen As New Pen(Color.Blue, PenSize())
-
-        'g.DrawLine(pen, 0, 0, 100, 100)
-
-        'g.Dispose()
-        'GraphPictureBox.Image = StoreBitmap()
-    End Sub
-
+    Private saveToFile As Boolean
 
     ''' <summary>
-    ''' Stores the trace color for all of the graphics tools
+    ''' stores the save folder path
     ''' </summary>
-    ''' <param name="newColor"></param>
-    ''' <returns></returns>
-    Function TraceColor(Optional newColor As Color = Nothing) As Color
-        Static _color As Color
-
-        If newColor <> Nothing Then
-            _color = newColor
-        End If
-
-        Return _color
-    End Function
-
-    ''' <summary>
-    ''' Stores the pen size for all of the graphics tools.
-    ''' </summary>
-    ''' <param name="newSize"></param>
-    ''' <returns></returns>
-    Function PenSize(Optional newSize As Single = 0) As Single
-        Static _size As Single
-
-        If newSize <> 0 Then
-            _size = newSize
-        End If
-
-        Return _size
-    End Function
+    Private folderPath As String
 
     ''' <summary>
     ''' Updates the graph for all recorded time.
@@ -135,7 +104,7 @@ Public Class DataLoggerForm
                 Catch ex As Exception
 
                 End Try
-                lastX = i
+                lastX = xCount
                 lastY = traceArray(i)
                 xCount += 1
             Next
@@ -145,23 +114,6 @@ Public Class DataLoggerForm
 
         g.Dispose()
         pen.Dispose()
-    End Sub
-
-    ''' <summary>
-    ''' Draws a straight line from the start x and y to the end x and y
-    ''' </summary>
-    ''' <param name="startX"></param>
-    ''' <param name="startY"></param>
-    ''' <param name="endX"></param>
-    ''' <param name="endY"></param>
-    Sub DrawLine(startX As Integer, startY As Integer, endX As Integer, endY As Integer)
-        'Dim g As Graphics = Graphics.FromImage(StoreBitmap())
-        'Dim pen As New Pen(TraceColor(), PenSize())
-
-        'g.DrawLine(pen, startX, startY, endX, endY)
-
-        'g.Dispose()
-        'GraphPictureBox.Image = StoreBitmap()
     End Sub
 
     '______Event Handlers Below Here______
@@ -176,22 +128,11 @@ Public Class DataLoggerForm
     End Sub
 
     ''' <summary>
-    ''' Changes the pen color with a dialog
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ChangePenColor(sender As Object, e As EventArgs)
-        ColorDialog.ShowDialog()
-        TraceColor(ColorDialog.Color)
-    End Sub
-
-    ''' <summary>
     ''' Creates an empty bitmap and sets the pen to black when the form loads
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub GraphicsExampleForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        TraceColor(Color.Black)
+    Private Sub DataLoggerForm_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'initialize Serial Port
         SerialPortRefreshTimer.Start()
@@ -210,15 +151,17 @@ Public Class DataLoggerForm
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub SaveTopMenuItem_Click(sender As Object, e As EventArgs) Handles SaveTopMenuItem.Click
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click, SaveTopMenuItem.Click, SaveContextMenuItem.Click
 
-        SaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-        SaveFileDialog.FileName = $"Untitled-{DateTime.Today.Now.ToString("yyMMddhhmmss")}.bmp"
+        SaveFolderDialog.RootFolder = Environment.SpecialFolder.MyDocuments
 
-        'opens the SaveFileDialog
-        SaveFileDialog.ShowDialog()
+        'opens the SaveFolderDialog
+        If SaveFolderDialog.ShowDialog() = DialogResult.OK Then
+            saveToFile = True
+            folderPath = SaveFolderDialog.SelectedPath
+            SavePathLabel.Text = $"Current Save Path: {folderPath}"
+        End If
 
-        'StoreBitmap().Save(SaveFileDialog.FileName)
 
     End Sub
 
@@ -292,7 +235,11 @@ Public Class DataLoggerForm
         writeBytes(0) = &H53 'request analog inputs 1 and 2
         Console.WriteLine($"{numberOfBytes} received")
         'MsgBox($"{numberOfBytes} received")
-        SerialPort.Read(readBytes, 0, numberOfBytes)
+        Try
+            SerialPort.Read(readBytes, 0, numberOfBytes)
+        Catch ex As Exception
+
+        End Try
 
         'If a board query was requested, verify the Qy@ board signature
         If queryBoard Then
@@ -353,6 +300,17 @@ Public Class DataLoggerForm
 
     Private Sub SampleTimer_Tick(sender As Object, e As EventArgs) Handles SampleTimer.Tick
         receivedDataQueue.Enqueue(currentValue)
+        If saveToFile Then
+            Try
+                FileOpen(1, $"{folderPath}\DataLog-{DateTime.Today.Now.ToString("yyMMddhh")}.log", OpenMode.Append)
+                Write(1, "$$AN1")
+                Write(1, currentValue)
+                WriteLine(1, DateTime.Today.Now.ToString("yyyymmddhhmmssfff"))
+                FileClose(1)
+            Catch ex As Exception
+
+            End Try
+        End If
         If receivedDataQueue.Count > 0 Then
             If AllTimeRadioButton.Checked Then
                 UpdateTraceAllTime()
@@ -364,10 +322,6 @@ Public Class DataLoggerForm
 
     Private Sub StartStopButton_Click(sender As Object, e As EventArgs) Handles StartStopButton.Click, StartTopMenuItem.Click
         SampleTimer.Start()
-    End Sub
-
-    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click, SaveTopMenuItem.Click, SaveContextMenuItem.Click
-
     End Sub
 
     Private Sub AllTimeRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AllTimeRadioButton.CheckedChanged

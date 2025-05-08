@@ -39,7 +39,6 @@ Partial Class DataLoggerForm
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ColorDialog = New System.Windows.Forms.ColorDialog()
-        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,7 +56,7 @@ Partial Class DataLoggerForm
         Me.SerialPortRefreshTimer = New System.Windows.Forms.Timer(Me.components)
         Me.COMTimeoutTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SampleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveFolderDialog = New System.Windows.Forms.FolderBrowserDialog()
         CType(Me.GraphPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         Me.ControlsGroupBox.SuspendLayout()
@@ -211,7 +210,7 @@ Partial Class DataLoggerForm
         Me.SaveButton.Size = New System.Drawing.Size(128, 75)
         Me.SaveButton.TabIndex = 2
         Me.SaveButton.Text = "&Save"
-        Me.ToolTip.SetToolTip(Me.SaveButton, "Save the obtained data to File")
+        Me.ToolTip.SetToolTip(Me.SaveButton, "Set save location and begin saving data")
         Me.SaveButton.UseVisualStyleBackColor = True
         '
         'ExitButton
@@ -244,21 +243,23 @@ Partial Class DataLoggerForm
         'StartTopMenuItem
         '
         Me.StartTopMenuItem.Name = "StartTopMenuItem"
-        Me.StartTopMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.StartTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.StartTopMenuItem.Text = "S&tart"
+        Me.StartTopMenuItem.ToolTipText = "Start Data Logging"
         '
         'SaveTopMenuItem
         '
         Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
-        Me.SaveTopMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.SaveTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveTopMenuItem.Text = "&Save"
-        Me.SaveTopMenuItem.ToolTipText = "Save the Current Screen as a BMP"
+        Me.SaveTopMenuItem.ToolTipText = "Set a save location and begin saving new data"
         '
         'ExitTopMenuItem
         '
         Me.ExitTopMenuItem.Name = "ExitTopMenuItem"
-        Me.ExitTopMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.ExitTopMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitTopMenuItem.Text = "E&xit"
+        Me.ExitTopMenuItem.ToolTipText = "Exits the Program"
         '
         'HelpTopMenuItem
         '
@@ -329,10 +330,6 @@ Partial Class DataLoggerForm
         '
         Me.SampleTimer.Interval = 5
         '
-        'OpenFileDialog
-        '
-        Me.OpenFileDialog.FileName = "OpenFileDialog1"
-        '
         'DataLoggerForm
         '
         Me.AcceptButton = Me.StartStopButton
@@ -371,7 +368,6 @@ Partial Class DataLoggerForm
     Friend WithEvents ColorDialog As ColorDialog
     Friend WithEvents ContextMenuStrip As ContextMenuStrip
     Friend WithEvents StartStopButton As Button
-    Friend WithEvents SaveFileDialog As SaveFileDialog
     Friend WithEvents TopMenuStrip As MenuStrip
     Friend WithEvents FileTopMenuItem As ToolStripMenuItem
     Friend WithEvents SaveTopMenuItem As ToolStripMenuItem
@@ -389,7 +385,6 @@ Partial Class DataLoggerForm
     Friend WithEvents COMTimeoutTimer As Timer
     Friend WithEvents SampleTimer As Timer
     Friend WithEvents CurrentSampleRateLabel As Label
-    Friend WithEvents OpenFileDialog As OpenFileDialog
     Friend WithEvents GraphGroupBox As GroupBox
     Friend WithEvents SecondsRadioButton As RadioButton
     Friend WithEvents AllTimeRadioButton As RadioButton
@@ -399,4 +394,5 @@ Partial Class DataLoggerForm
     Friend WithEvents SavePathLabel As ToolStripStatusLabel
     Friend WithEvents ExitTopMenuItem As ToolStripMenuItem
     Friend WithEvents StartTopMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveFolderDialog As FolderBrowserDialog
 End Class
