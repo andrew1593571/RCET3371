@@ -438,8 +438,20 @@ Public Class Qy_BoardComClass
                 Try
                     serialPort.Read(readBytes, 0, 5) 'read the Qy@ board settings out
 
-                    _AN1Current = (readBytes(0) * 4) + (readBytes(1) \ 64)
-                    _AN2Current = (readBytes(2) * 4) + (readBytes(3) \ 64)
+                    If Not _AN1Current = (readBytes(0) * 4) + (readBytes(1) \ 64) Then
+                        _AN1Current = (readBytes(0) * 4) + (readBytes(1) \ 64)
+                        RaiseEvent AN1Changed()
+                    Else
+                        _AN1Current = (readBytes(0) * 4) + (readBytes(1) \ 64)
+                    End If
+
+                    If Not _AN2Current = (readBytes(2) * 4) + (readBytes(3) \ 64) Then
+                        _AN2Current = (readBytes(2) * 4) + (readBytes(3) \ 64)
+                        RaiseEvent AN2Changed()
+                    Else
+                        _AN2Current = (readBytes(2) * 4) + (readBytes(3) \ 64)
+                    End If
+
                     digitalInput = CInt(readBytes(4))
 
                     'check digital input eight
@@ -570,7 +582,6 @@ Public Class Qy_BoardComClass
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub disconnectTimer_Tick(sender As Object, e As EventArgs) Handles disconnectTimer.Tick
-        MsgBox("Test")
         If Not serialPort.IsOpen Then
             disconnectTimer.Stop()
             _connected = False
