@@ -40,6 +40,16 @@
         End If
     End Sub
 
+    Sub StartFan()
+        MsgBox("Started Fan")
+        QyBoard.DOutThree = True 'turn on the fan
+        SafetyTimer.Interval = 5000 'turn on the safety checks
+
+        FanDelayTimer.Stop()
+        FanDelayTimer.Start()
+
+    End Sub
+
     Private Sub COMPortSplitButton_ButtonClick(sender As Object, e As EventArgs) Handles COMPortSplitButton.ButtonClick
         COMPortSplitButton.ShowDropDown()
     End Sub
@@ -111,6 +121,9 @@
         End If
     End Sub
 
+    ''' <summary>
+    ''' Heat mode button pressed
+    ''' </summary>
     Private Sub QyBoard_DigitalInputTwoChanged() Handles QyBoard.DigitalInputTwoChanged
         If QyBoard.DInTwo Then
             If heatMode Then
@@ -119,10 +132,14 @@
                 heatMode = True
                 fanMode = False
                 coolMode = False
+                StartFan()
             End If
         End If
     End Sub
 
+    ''' <summary>
+    ''' Fan mode button pressed
+    ''' </summary>
     Private Sub QyBoard_DigitalInputThreeChanged() Handles QyBoard.DigitalInputThreeChanged
         If QyBoard.DInThree Then
             If fanMode Then
@@ -131,10 +148,14 @@
                 heatMode = False
                 fanMode = True
                 coolMode = False
+                StartFan()
             End If
         End If
     End Sub
 
+    ''' <summary>
+    ''' cool mode button pressed
+    ''' </summary>
     Private Sub QyBoard_DigitalInputFourChanged() Handles QyBoard.DigitalInputFourChanged
         If QyBoard.DInFour Then
             If coolMode Then
@@ -143,10 +164,14 @@
                 heatMode = False
                 fanMode = False
                 coolMode = True
+                StartFan()
             End If
         End If
     End Sub
 
+    ''' <summary>
+    ''' interlock tripped
+    ''' </summary>
     Private Sub QyBoard_DigitalInputOneChanged() Handles QyBoard.DigitalInputOneChanged
         If QyBoard.DInOne Then
             QyBoard.DOutOne = False
@@ -155,6 +180,12 @@
         Else
             QyBoard.DOutOne = True
             interlockTripped = True
+            heatMode = False
+            fanMode = False
+            coolMode = False
+            QyBoard.DOutTwo = False
+            QyBoard.DOutThree = False
+            QyBoard.DOutFour = False
             'TODO SAVE TO FILE
         End If
     End Sub
@@ -222,6 +253,35 @@
             ModeLabel.Text = "Fan"
         Else
             ModeLabel.Text = "OFF"
+        End If
+    End Sub
+
+    Private Sub SafetyTimer_Tick(sender As Object, e As EventArgs) Handles SafetyTimer.Tick
+        SafetyTimer.Interval = 120000
+        If QyBoard.DInFive Then
+            heatMode = False
+            coolMode = False
+            fanMode = False
+            noFanError = True 'error with fan
+            QyBoard.DOutTwo = False
+            QyBoard.DOutThree = False
+            QyBoard.DOutFour = False
+            'TODO SAVE TO FILE
+        End If
+    End Sub
+
+    Private Sub FanDelayTimer_Tick(sender As Object, e As EventArgs) Handles FanDelayTimer.Tick
+        FanDelayTimer.Stop()
+        MsgBox("FanDelay")
+        SafetyTimer.Stop()
+        SafetyTimer.Start()
+        If QyBoard.DOutThree Then
+            Select Case True
+                Case heatMode
+                    QyBoard.DOutTwo = True 'turn on the heater
+                Case coolMode
+                    QyBoard.DOutFour = True 'turn on the cooler
+            End Select
         End If
     End Sub
 End Class

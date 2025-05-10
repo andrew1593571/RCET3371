@@ -49,7 +49,8 @@ Partial Class FinalProgram
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RealTimeTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TempUpdateTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.TempSafetyTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.SafetyTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.FanDelayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.HeatToGroupBox.SuspendLayout()
@@ -356,6 +357,13 @@ Partial Class FinalProgram
         '
         Me.TempUpdateTimer.Enabled = True
         '
+        'SafetyTimer
+        '
+        '
+        'FanDelayTimer
+        '
+        Me.FanDelayTimer.Interval = 5000
+        '
         'FinalProgram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -408,5 +416,6 @@ Partial Class FinalProgram
     Friend WithEvents RealTimeTimer As Timer
     Friend WithEvents ErrorMessageLabel As Label
     Friend WithEvents TempUpdateTimer As Timer
-    Friend WithEvents TempSafetyTimer As Timer
+    Friend WithEvents SafetyTimer As Timer
+    Friend WithEvents FanDelayTimer As Timer
 End Class
