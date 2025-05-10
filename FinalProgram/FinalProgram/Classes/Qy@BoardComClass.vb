@@ -32,14 +32,14 @@ Public Class Qy_BoardComClass
     Private _AN1Current As Integer
     Private _AN2Current As Integer
 
-    Private _digitalInOne As Boolean
-    Private _digitalInTwo As Boolean
-    Private _digitalInThree As Boolean
-    Private _digitalInFour As Boolean
-    Private _digitalInFive As Boolean
-    Private _digitalInSix As Boolean
-    Private _digitalInSeven As Boolean
-    Private _digitalInEight As Boolean
+    Private _digitalInOne As Boolean = True
+    Private _digitalInTwo As Boolean = True
+    Private _digitalInThree As Boolean = True
+    Private _digitalInFour As Boolean = True
+    Private _digitalInFive As Boolean = True
+    Private _digitalInSix As Boolean = True
+    Private _digitalInSeven As Boolean = True
+    Private _digitalInEight As Boolean = True
 
     Private _digitalOutOne As Boolean
     Private _digitalOutTwo As Boolean

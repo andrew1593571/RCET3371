@@ -1,4 +1,9 @@
-﻿Public Class FinalProgram
+﻿Option Explicit On
+Option Strict On
+
+Imports Microsoft.VisualBasic.Devices
+
+Public Class FinalProgram
 
     Private WithEvents QyBoard As New Qy_BoardComClass
     Private heatToTemperature As Double
@@ -6,6 +11,7 @@
     Private heatMode As Boolean
     Private fanMode As Boolean
     Private coolMode As Boolean
+    Private unitEnabled As Boolean
     Private interlockTripped As Boolean
     Private notCoolingError As Boolean
     Private notHeatingError As Boolean
@@ -41,13 +47,42 @@
     End Sub
 
     Sub StartFan()
-        MsgBox("Started Fan")
         QyBoard.DOutThree = True 'turn on the fan
-        SafetyTimer.Interval = 5000 'turn on the safety checks
 
-        FanDelayTimer.Stop()
-        FanDelayTimer.Start()
+        If Me.InvokeRequired Then
+            Me.Invoke(New MethodInvoker(Sub() SafetyTimer.Interval = 5000))
+        Else
+            SafetyTimer.Interval = 5000
+        End If
 
+        If Me.InvokeRequired Then
+            Me.Invoke(New MethodInvoker(AddressOf SafetyTimer.Start))
+        Else
+            SafetyTimer.Start()
+        End If
+
+        If Me.InvokeRequired Then
+            Me.Invoke(New MethodInvoker(AddressOf FanDelayTimer.Start))
+        Else
+            FanDelayTimer.Start()
+        End If
+    End Sub
+
+    Sub StopFan()
+        QyBoard.DOutTwo = False
+        QyBoard.DOutFour = False
+
+        If Me.InvokeRequired Then
+            Me.Invoke(New MethodInvoker(AddressOf FanDelayTimer.Start))
+        Else
+            FanDelayTimer.Start()
+        End If
+    End Sub
+
+    Sub SaveToLog(message As String)
+        FileOpen(1, "HVAC_SystemLog.log", OpenMode.Append)
+        PrintLine(1, $"{DateTime.Today.Now.ToString("MM-dd-yyyy HH:mm:ss")} - {message}")
+        FileClose(1)
     End Sub
 
     Private Sub COMPortSplitButton_ButtonClick(sender As Object, e As EventArgs) Handles COMPortSplitButton.ButtonClick
@@ -104,6 +139,8 @@
         CurrentTimeLabel.Text = $"{DateTime.Today.Now.ToString("hh:mm tt")}"
         ErrorMessageLabel.Text = ""
 
+        FanDelayTimer.Stop()
+
     End Sub
 
     Private Sub COMPortComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles COMPortComboBox.SelectedIndexChanged
@@ -128,6 +165,7 @@
         If QyBoard.DInTwo Then
             If heatMode Then
                 heatMode = False
+                StopFan()
             Else
                 heatMode = True
                 fanMode = False
@@ -144,6 +182,7 @@
         If QyBoard.DInThree Then
             If fanMode Then
                 fanMode = False
+                StopFan()
             Else
                 heatMode = False
                 fanMode = True
@@ -160,6 +199,7 @@
         If QyBoard.DInFour Then
             If coolMode Then
                 coolMode = False
+                StopFan()
             Else
                 heatMode = False
                 fanMode = False
@@ -176,17 +216,18 @@
         If QyBoard.DInOne Then
             QyBoard.DOutOne = False
             interlockTripped = False
-            'TODO SAVE TO FILE
+            SaveToLog("Interlock Reset")
         Else
             QyBoard.DOutOne = True
             interlockTripped = True
             heatMode = False
             fanMode = False
             coolMode = False
+            unitEnabled = False
             QyBoard.DOutTwo = False
             QyBoard.DOutThree = False
             QyBoard.DOutFour = False
-            'TODO SAVE TO FILE
+            SaveToLog("Interlock Tripped")
         End If
     End Sub
 
@@ -247,8 +288,18 @@
 
         If heatMode And Not interlockTripped Then
             ModeLabel.Text = "Heat"
+            If homeTemperature <= heatToTemperature And unitEnabled Then
+                QyBoard.DOutTwo = True
+            ElseIf homeTemperature >= heatToTemperature + 2 And unitEnabled Then
+                QyBoard.DOutTwo = False
+            End If
         ElseIf coolMode And Not interlockTripped Then
             ModeLabel.Text = "Cool"
+            If homeTemperature >= coolToTemperature And unitEnabled Then
+                QyBoard.DOutFour = True
+            ElseIf homeTemperature <= coolToTemperature - 2 And unitEnabled Then
+                QyBoard.DOutFour = False
+            End If
         ElseIf fanMode And Not interlockTripped Then
             ModeLabel.Text = "Fan"
         Else
@@ -257,31 +308,94 @@
     End Sub
 
     Private Sub SafetyTimer_Tick(sender As Object, e As EventArgs) Handles SafetyTimer.Tick
+        Dim homeTemperature As Double
+        Dim unitTemperature As Double
+
+        homeTemperature = ((QyBoard.AN1 * (3.3 / 1023)) / 0.66) / 0.01
+        unitTemperature = ((QyBoard.AN2 * (3.3 / 1023)) / 0.66) / 0.01
+
         SafetyTimer.Interval = 120000
-        If QyBoard.DInFive Then
+        If Not QyBoard.DInFive Then
+            SafetyTimer.Stop()
             heatMode = False
             coolMode = False
             fanMode = False
+            unitEnabled = False
             noFanError = True 'error with fan
             QyBoard.DOutTwo = False
             QyBoard.DOutThree = False
             QyBoard.DOutFour = False
-            'TODO SAVE TO FILE
+            SaveToLog("Fan error")
         End If
+
+        Select Case True
+            Case heatMode
+                If homeTemperature >= unitTemperature Then
+                    SafetyTimer.Stop()
+                    heatMode = False
+                    coolMode = False
+                    fanMode = False
+                    unitEnabled = False
+                    notHeatingError = True 'error with heater
+                    QyBoard.DOutTwo = False
+                    QyBoard.DOutThree = False
+                    QyBoard.DOutFour = False
+                    SaveToLog("Heater Error")
+                End If
+            Case coolMode
+                If homeTemperature <= unitTemperature Then
+                    SafetyTimer.Stop()
+                    heatMode = False
+                    coolMode = False
+                    fanMode = False
+                    unitEnabled = False
+                    notCoolingError = True 'error with cooler
+                    QyBoard.DOutTwo = False
+                    QyBoard.DOutThree = False
+                    QyBoard.DOutFour = False
+                    SaveToLog("Cooler Error")
+                End If
+        End Select
+
+
     End Sub
 
     Private Sub FanDelayTimer_Tick(sender As Object, e As EventArgs) Handles FanDelayTimer.Tick
         FanDelayTimer.Stop()
-        MsgBox("FanDelay")
-        SafetyTimer.Stop()
-        SafetyTimer.Start()
+
         If QyBoard.DOutThree Then
             Select Case True
                 Case heatMode
                     QyBoard.DOutTwo = True 'turn on the heater
+                    unitEnabled = True
                 Case coolMode
                     QyBoard.DOutFour = True 'turn on the cooler
+                    unitEnabled = True
+                Case Not fanMode
+                    QyBoard.DOutThree = False 'turn off the fan
+                    unitEnabled = False
+                    SafetyTimer.Stop()
             End Select
         End If
+
+    End Sub
+
+    Private Sub OpenLogLocationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenLogLocationToolStripMenuItem.Click
+        Process.Start("explorer.exe", AppDomain.CurrentDomain.BaseDirectory)
+    End Sub
+
+    Private Sub SaveTopMenuItem_Click(sender As Object, e As EventArgs) Handles SaveTopMenuItem.Click
+        Try
+            FileOpen(1, "HVAC_Settings.txt", OpenMode.Output)
+            Write(1, heatToTemperature)
+            Write(1, coolToTemperature)
+            FileClose(1)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+
     End Sub
 End Class

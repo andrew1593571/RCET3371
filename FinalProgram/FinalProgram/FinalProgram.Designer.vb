@@ -51,6 +51,9 @@ Partial Class FinalProgram
         Me.TempUpdateTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SafetyTimer = New System.Windows.Forms.Timer(Me.components)
         Me.FanDelayTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.SaveTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenLogLocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.HeatToGroupBox.SuspendLayout()
@@ -338,12 +341,14 @@ Partial Class FinalProgram
         '
         'FileToolStripMenuItem
         '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveTopMenuItem, Me.OpenLogLocationToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
         'HelpToolStripMenuItem
         '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
@@ -359,10 +364,30 @@ Partial Class FinalProgram
         '
         'SafetyTimer
         '
+        Me.SafetyTimer.Interval = 10000
         '
         'FanDelayTimer
         '
+        Me.FanDelayTimer.Enabled = True
         Me.FanDelayTimer.Interval = 5000
+        '
+        'SaveTopMenuItem
+        '
+        Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
+        Me.SaveTopMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveTopMenuItem.Text = "&Save Settings"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Text = "&About"
+        '
+        'OpenLogLocationToolStripMenuItem
+        '
+        Me.OpenLogLocationToolStripMenuItem.Name = "OpenLogLocationToolStripMenuItem"
+        Me.OpenLogLocationToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenLogLocationToolStripMenuItem.Text = "&Open Log Location"
         '
         'FinalProgram
         '
@@ -418,4 +443,7 @@ Partial Class FinalProgram
     Friend WithEvents TempUpdateTimer As Timer
     Friend WithEvents SafetyTimer As Timer
     Friend WithEvents FanDelayTimer As Timer
+    Friend WithEvents SaveTopMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenLogLocationToolStripMenuItem As ToolStripMenuItem
 End Class
