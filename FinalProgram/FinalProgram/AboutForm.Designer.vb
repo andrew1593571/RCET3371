@@ -53,6 +53,7 @@ Partial Class AboutForm
         Me.Controls.Add(Me.OkButton)
         Me.Controls.Add(Me.InformationLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AboutForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "About"

@@ -23,6 +23,7 @@ Partial Class FinalProgramForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FinalProgramForm))
         Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.CoolDownButton = New System.Windows.Forms.Button()
@@ -46,14 +47,14 @@ Partial Class FinalProgramForm
         Me.COMPortRefreshTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenLogLocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RealTimeTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TempUpdateTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SafetyTimer = New System.Windows.Forms.Timer(Me.components)
         Me.FanDelayTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.SaveTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenLogLocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.HeatToGroupBox.SuspendLayout()
@@ -346,12 +347,30 @@ Partial Class FinalProgramForm
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
+        'SaveTopMenuItem
+        '
+        Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
+        Me.SaveTopMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.SaveTopMenuItem.Text = "&Save Settings"
+        '
+        'OpenLogLocationToolStripMenuItem
+        '
+        Me.OpenLogLocationToolStripMenuItem.Name = "OpenLogLocationToolStripMenuItem"
+        Me.OpenLogLocationToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.OpenLogLocationToolStripMenuItem.Text = "&Open Log Location"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Text = "&About"
         '
         'RealTimeTimer
         '
@@ -371,25 +390,7 @@ Partial Class FinalProgramForm
         Me.FanDelayTimer.Enabled = True
         Me.FanDelayTimer.Interval = 5000
         '
-        'SaveTopMenuItem
-        '
-        Me.SaveTopMenuItem.Name = "SaveTopMenuItem"
-        Me.SaveTopMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.SaveTopMenuItem.Text = "&Save Settings"
-        '
-        'AboutToolStripMenuItem
-        '
-        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.AboutToolStripMenuItem.Text = "&About"
-        '
-        'OpenLogLocationToolStripMenuItem
-        '
-        Me.OpenLogLocationToolStripMenuItem.Name = "OpenLogLocationToolStripMenuItem"
-        Me.OpenLogLocationToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.OpenLogLocationToolStripMenuItem.Text = "&Open Log Location"
-        '
-        'FinalProgram
+        'FinalProgramForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -397,7 +398,8 @@ Partial Class FinalProgramForm
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.Controls.Add(Me.TableLayoutPanel)
-        Me.Name = "FinalProgram"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "FinalProgramForm"
         Me.Text = "Final Program"
         Me.TableLayoutPanel.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
