@@ -416,6 +416,7 @@ Public Class Qy_BoardComClass
                     'Qy@ board detected, disable the timeout timer, start the disconnect check timer, request status of inputs
                     verificationTimer.Stop()
                     _queryBoard = False
+                    disconnectTimer.Enabled = True
                     disconnectTimer.Start()
                     _connected = True
 
@@ -569,6 +570,7 @@ Public Class Qy_BoardComClass
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub disconnectTimer_Tick(sender As Object, e As EventArgs) Handles disconnectTimer.Tick
+        MsgBox("Test")
         If Not serialPort.IsOpen Then
             disconnectTimer.Stop()
             _connected = False
