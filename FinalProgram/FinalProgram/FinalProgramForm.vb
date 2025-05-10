@@ -3,7 +3,13 @@ Option Strict On
 
 Imports Microsoft.VisualBasic.Devices
 
-Public Class FinalProgram
+'Andrew Keller
+'RCET3371
+'Spring 2025
+'HVAC Controller
+'https://github.com/andrew1593571/RCET3371.git
+
+Public Class FinalProgramForm
 
     Private WithEvents QyBoard As New Qy_BoardComClass
     Private heatToTemperature As Double
@@ -396,6 +402,6 @@ Public Class FinalProgram
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-
+        AboutForm.Show()
     End Sub
 End Class

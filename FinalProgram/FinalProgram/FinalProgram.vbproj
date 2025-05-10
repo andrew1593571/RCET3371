@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{88FF5639-99C9-4328-94E8-649E7924AAEB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FinalProgram.FinalProgram</StartupObject>
+    <StartupObject>FinalProgram.FinalProgramForm</StartupObject>
     <RootNamespace>FinalProgram</RootNamespace>
     <AssemblyName>FinalProgram</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -80,11 +80,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Classes\Qy%40BoardComClass.vb" />
-    <Compile Include="FinalProgram.vb">
+    <Compile Include="FinalProgramForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FinalProgram.Designer.vb">
-      <DependentUpon>FinalProgram.vb</DependentUpon>
+    <Compile Include="FinalProgramForm.Designer.vb">
+      <DependentUpon>FinalProgramForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -100,8 +100,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FinalProgram.resx">
-      <DependentUpon>FinalProgram.vb</DependentUpon>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinalProgramForm.resx">
+      <DependentUpon>FinalProgramForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

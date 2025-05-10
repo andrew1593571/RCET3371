@@ -22,9 +22,44 @@ Partial Class AboutForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AboutForm))
+        Me.InformationLabel = New System.Windows.Forms.Label()
+        Me.OkButton = New System.Windows.Forms.Button()
+        Me.SuspendLayout()
+        '
+        'InformationLabel
+        '
+        Me.InformationLabel.Location = New System.Drawing.Point(12, 9)
+        Me.InformationLabel.Name = "InformationLabel"
+        Me.InformationLabel.Size = New System.Drawing.Size(304, 251)
+        Me.InformationLabel.TabIndex = 2
+        Me.InformationLabel.Text = resources.GetString("InformationLabel.Text")
+        '
+        'OkButton
+        '
+        Me.OkButton.Location = New System.Drawing.Point(193, 264)
+        Me.OkButton.Name = "OkButton"
+        Me.OkButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.OkButton.Size = New System.Drawing.Size(123, 46)
+        Me.OkButton.TabIndex = 3
+        Me.OkButton.Text = "OK"
+        Me.OkButton.UseVisualStyleBackColor = True
+        '
+        'AboutForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "AboutForm"
+        Me.ClientSize = New System.Drawing.Size(328, 322)
+        Me.Controls.Add(Me.OkButton)
+        Me.Controls.Add(Me.InformationLabel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "AboutForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "About"
+        Me.ResumeLayout(False)
+
     End Sub
+
+    Friend WithEvents InformationLabel As Label
+    Friend WithEvents OkButton As Button
 End Class

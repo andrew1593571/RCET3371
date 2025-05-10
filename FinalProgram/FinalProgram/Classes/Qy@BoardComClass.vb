@@ -2,6 +2,12 @@
 Option Explicit On
 Imports System.IO.Ports
 
+'Andrew Keller
+'RCET3371
+'Spring 2025
+'HVAC Controller
+'https://github.com/andrew1593571/RCET3371.git
+
 Public Class Qy_BoardComClass
 
     '######______Event Declarations______######
